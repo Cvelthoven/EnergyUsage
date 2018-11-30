@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "euapplicationsettings.h"
+
+#include <QString>
 
 namespace Ui {
 class MainWindow;
@@ -15,8 +18,22 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    euApplicationSettings *ApplicationSettings;
+
+    void InitializeProgram();
+
 private:
     Ui::MainWindow *ui;
+
+//-----------------------------------------------------------------------------
+//
+//  Application settings
+//  Temp default set
+    QString
+        strAplSetDbServerName = "DatabaseName",
+        strDatabaseServerName = "localhost",
+        strTemp;
+
 };
 
 #endif // MAINWINDOW_H
