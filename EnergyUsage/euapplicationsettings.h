@@ -11,7 +11,7 @@ public:
 //    flrApplicationSettings(QObject *parent);
     euApplicationSettings();
     QString euGetAppSetting(const QString &strSettingName);
-    bool euSetAppSetting(const QString *strSettingName, const QString *strSettingValue);
+    bool euSetAppSetting(const QString &strSettingName, const QString &strSettingValue);
 
 };
 

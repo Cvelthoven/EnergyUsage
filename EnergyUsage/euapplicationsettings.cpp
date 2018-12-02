@@ -3,6 +3,9 @@
 //  flrApplicationSettings
 //
 //  Retrieve and maintain application settings
+//
+//  Location of configuration file linux: home/.config/Cvelthoven
+//
 #include "euapplicationsettings.h"
 
 #include <QCoreApplication>
@@ -51,10 +54,10 @@ QString euApplicationSettings::euGetAppSetting(const QString &strSettingName)
 //
 //  save application setting value
 //
-bool euSetAppSetting(const QString *strSettingName, const QString *strSettingValue)
+bool euApplicationSettings::euSetAppSetting(const QString &strSettingName, const QString &strSettingValue)
 {
 
     QSettings programDefaults;
-    programDefaults.setValue(*strSettingName,*strSettingValue);
-    return(0);
+    programDefaults.setValue(strSettingName,strSettingValue);
+    return(true);
 }
