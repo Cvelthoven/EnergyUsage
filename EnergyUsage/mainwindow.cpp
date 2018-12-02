@@ -55,9 +55,6 @@ void MainWindow::InitializeProgram()
 
     int iStrlen;
 
-    QString
-        strDatabaseServerNameDef = "localhost";
-
     //-----------------------------------------------------------------------------------
     //
     //  Set application name information and create application wide objects
@@ -65,12 +62,18 @@ void MainWindow::InitializeProgram()
 
     //-----------------------------------------------------------------------------------
     //
-    //
-    strDatabaseServerName = ApplicationSettings->euGetAppSetting(strAplSetDbServerName);
+    //  Get datbase configuration
+    strDatabaseServerName = ApplicationSettings->euGetAppSetting(strDatabaseSection, strKeyDbServerName);
     iStrlen = strDatabaseServerName.length();
     if (iStrlen == 0)
     {
-        bOk = ApplicationSettings->euSetAppSetting(strAplSetDbServerName,strDatabaseServerNameDef);
+        bOk = ApplicationSettings->euSetAppSetting(strDatabaseSection,strKeyDbServerName,strDatabaseServerNameDef);
+    }
+    strDatabaseName = ApplicationSettings->euGetAppSetting(strDatabaseSection, strKeyDbName);
+    iStrlen = strDatabaseName.length();
+    if (iStrlen == 0)
+    {
+        bOk = ApplicationSettings->euSetAppSetting(strDatabaseSection,strKeyDbName,strDatabaseNameDef);
     }
 }
 

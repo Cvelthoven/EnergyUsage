@@ -35,11 +35,23 @@ euApplicationSettings::euApplicationSettings()
 //
 //  retrieve application setting value
 //
-QString euApplicationSettings::euGetAppSetting(const QString &strSettingName)
+//  Input:
+//      strSettingSection: section name of the key
+//      strSettingName   : key name
+//  Ouptut:
+//      euGetAppSetting  : value of key if found otherwise and empty string
+//
+QString euApplicationSettings::euGetAppSetting(const QString &strSettingSection, const QString &strSettingName)
 {
 
     QSettings programDefaults;
-    QVariant temp = programDefaults.value(strSettingName);
+
+    if (strSettingSection.size() != 0)
+        strFullKeyPath = strSettingSection + "//" + strSettingName;
+    else
+        strFullKeyPath = strSettingName;
+
+    QVariant temp = programDefaults.value(strFullKeyPath);
     if (temp.isValid())
     {
         QString strSettingValue = temp.toString();
@@ -54,10 +66,14 @@ QString euApplicationSettings::euGetAppSetting(const QString &strSettingName)
 //
 //  save application setting value
 //
-bool euApplicationSettings::euSetAppSetting(const QString &strSettingName, const QString &strSettingValue)
+bool euApplicationSettings::euSetAppSetting(const QString &strSettingSection, const QString &strSettingName, const QString &strSettingValue)
 {
+    if (strSettingSection.size() != 0)
+        strFullKeyPath = strSettingSection + "//" + strSettingName;
+    else
+        strFullKeyPath = strSettingName;
 
     QSettings programDefaults;
-    programDefaults.setValue(strSettingName,strSettingValue);
+    programDefaults.setValue(strFullKeyPath,strSettingValue);
     return(true);
 }

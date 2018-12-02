@@ -10,8 +10,11 @@ class euApplicationSettings
 public:
 //    flrApplicationSettings(QObject *parent);
     euApplicationSettings();
-    QString euGetAppSetting(const QString &strSettingName);
-    bool euSetAppSetting(const QString &strSettingName, const QString &strSettingValue);
+    QString euGetAppSetting(const QString &strSettingSection, const QString &strSettingName);
+    bool euSetAppSetting(const QString &strSettingSection, const QString &strSettingName, const QString &strSettingValue);
+
+private:
+    QString strFullKeyPath;
 
 };
 
