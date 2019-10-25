@@ -32,11 +32,11 @@ private:
     QString
         strDatabaseSection = "Database",            // Database section name
         strKeyDbServerName = "DatabaseServerName",  // Key name with database server name
-        strDatabaseServerNameDef = "localhost",     // Default database server
+        strDatabaseServerNameDef = "cvraspi01",     // Default database server
         strDatabaseServerName,                      // Database server name
         //-------------------------------------------------------------------------------
         strKeyDbName = "DatabaseName",              // Key name with database name
-        strDatabaseNameDef = "vmdevdb01",           // Default database name
+        strDatabaseNameDef = "cvraspi01",           // Default database name
         strDatabaseName,                            // Database name
         //-------------------------------------------------------------------------------
         strTemp;
