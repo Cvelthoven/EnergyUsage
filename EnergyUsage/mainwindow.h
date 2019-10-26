@@ -36,7 +36,7 @@ private:
         strDatabaseServerName,                      // Database server name
         //-------------------------------------------------------------------------------
         strKeyDbName = "DatabaseName",              // Key name with database name
-        strDatabaseNameDef = "cvraspi01",           // Default database name
+        strDatabaseNameDef = "cvraspi01Dev",        // Default database name
         strDatabaseName,                            // Database name
         //-------------------------------------------------------------------------------
         strTemp;
