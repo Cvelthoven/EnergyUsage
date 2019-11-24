@@ -2,9 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "euapplicationsettings.h"
-
 #include <QString>
+
+#include "euapplicationsettings.h"
+#include "eudatabase.h"
+
+
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +27,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    euDatabase *Database;
+
 
 //---------------------------------------------------------------------------------------
 //

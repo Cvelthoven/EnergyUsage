@@ -25,11 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    eudatabase.cpp \
         main.cpp \
         mainwindow.cpp \
     euapplicationsettings.cpp
 
 HEADERS += \
+    eudatabase.h \
         mainwindow.h \
     euapplicationsettings.h
 

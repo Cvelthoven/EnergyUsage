@@ -29,7 +29,15 @@ MainWindow::MainWindow(QWidget *parent) :
     //
     //  Program initialization
     //
+    //-----------------------------------------------------------------------------------
+    //
+    //  Set application name information and create application wide objects
+    ApplicationSettings = new euApplicationSettings();
+    strTemp = ApplicationSettings->euGetAppSetting(strDatabaseSection,strKeyDbServerName);
+
+    Database = new euDatabase;
     InitializeProgram();
+
 
     ui->setupUi(this);
 }
@@ -55,10 +63,6 @@ void MainWindow::InitializeProgram()
 
     int iStrlen;
 
-    //-----------------------------------------------------------------------------------
-    //
-    //  Set application name information and create application wide objects
-    ApplicationSettings = new euApplicationSettings();
 
     //-----------------------------------------------------------------------------------
     //
