@@ -23,7 +23,7 @@ public:
 
     euApplicationSettings *ApplicationSettings;
 
-    void InitializeProgram();
+    bool InitializeProgram();
 
 private:
     Ui::MainWindow *ui;
