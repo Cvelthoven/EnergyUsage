@@ -33,7 +33,15 @@ QString
     //-------------------------------------------------------------------------------
     strKeyDbName = "DatabaseName",              // Key name with database name
     strDatabaseNameDef = "cvraspi01Dev",        // Default database name
-    strDatabaseName;                            // Database name
+    strDatabaseName,                            // Database name
+    //-------------------------------------------------------------------------------
+    strKeyDbUserId = "DatabaseUserId",          // Key name with database UserID
+    strDatabaseUserIdDef = "pi",                // Default database UserID
+    strDatabaseUserId,                          // Database userID
+    //-------------------------------------------------------------------------------
+    strKeyDbPassword = "DatabasePassword",      // Key name with database Password
+    strDatabasePasswordDef = "#NS01fr#LDrz76#", // Default database Password
+    strDatabasePassword;                        // Database password
     //-------------------------------------------------------------------------------
 
     euApplicationSettings *ApplicationSettings;

@@ -15,7 +15,9 @@
 euDatabase::euDatabase()
 {
 
-//    ApplicationSettings = new euApplicationSettings();
+    ApplicationSettings = new euApplicationSettings();
+    euRetrieveConfig();
+
 
 }
 
@@ -66,26 +68,40 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QSt
 bool euDatabase::euRetrieveConfig()
 {
     bool
-        bOK = false;
+        bOK = true;
 
     int iStrlen;
 
     //-----------------------------------------------------------------------------------
     //
     //  Get datbase configuration
-    ApplicationSettings = new euApplicationSettings();
-
     strDatabaseServerName = ApplicationSettings->euGetAppSetting(strDatabaseSection, strKeyDbServerName);
     iStrlen = strDatabaseServerName.length();
     if (iStrlen == 0)
     {
         bOK = ApplicationSettings->euSetAppSetting(strDatabaseSection,strKeyDbServerName,strDatabaseServerNameDef);
+        strDatabaseServerName = strDatabaseServerNameDef;
     }
     strDatabaseName = ApplicationSettings->euGetAppSetting(strDatabaseSection, strKeyDbName);
     iStrlen = strDatabaseName.length();
     if (iStrlen == 0)
     {
         bOK = ApplicationSettings->euSetAppSetting(strDatabaseSection,strKeyDbName,strDatabaseNameDef);
+        strDatabaseName = strDatabaseNameDef;
+    }
+    strDatabaseUserId = ApplicationSettings->euGetAppSetting(strDatabaseSection, strKeyDbUserId);
+    iStrlen = strDatabaseUserId.length();
+    if (iStrlen == 0)
+    {
+        bOK = ApplicationSettings->euSetAppSetting(strDatabaseSection,strKeyDbUserId,strDatabaseUserIdDef);
+        strDatabaseUserId = strDatabaseUserIdDef;
+    }
+    strDatabasePassword = ApplicationSettings->euGetAppSetting(strDatabaseSection, strKeyDbPassword);
+    iStrlen = strDatabasePassword.length();
+    if (iStrlen == 0)
+    {
+        bOK = ApplicationSettings->euSetAppSetting(strDatabaseSection,strKeyDbPassword,strDatabasePasswordDef);
+        strDatabasePassword = strDatabasePasswordDef;
     }
 
 
