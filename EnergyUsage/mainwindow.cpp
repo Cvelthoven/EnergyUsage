@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //-----------------------------------------------------------------------------------
     //
     //  Set application name information and create application wide objects
-    ApplicationSettings = new euApplicationSettings();
+//    ApplicationSettings = new euApplicationSettings();
     //-----------------------------------------------------------------------------------
     //
     // Initialize the program
@@ -40,8 +40,6 @@ MainWindow::MainWindow(QWidget *parent) :
     {
        exit(0);
     }
-    Database = new euDatabase;
-
 
     ui->setupUi(this);
 }
@@ -65,24 +63,12 @@ bool MainWindow::InitializeProgram()
     //  Local variables
     bool bOk = false;
 
-    int iStrlen;
+//---------------------------------------------------------------------------------------
+//
+//  Connect to database
 
+    Database = new euDatabase();
 
-    //-----------------------------------------------------------------------------------
-    //
-    //  Get datbase configuration
-    strDatabaseServerName = ApplicationSettings->euGetAppSetting(strDatabaseSection, strKeyDbServerName);
-    iStrlen = strDatabaseServerName.length();
-    if (iStrlen == 0)
-    {
-        bOk = ApplicationSettings->euSetAppSetting(strDatabaseSection,strKeyDbServerName,strDatabaseServerNameDef);
-    }
-    strDatabaseName = ApplicationSettings->euGetAppSetting(strDatabaseSection, strKeyDbName);
-    iStrlen = strDatabaseName.length();
-    if (iStrlen == 0)
-    {
-        bOk = ApplicationSettings->euSetAppSetting(strDatabaseSection,strKeyDbName,strDatabaseNameDef);
-    }
     return bOk;
 }
 
