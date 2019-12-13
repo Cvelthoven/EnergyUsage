@@ -7,24 +7,31 @@
 
 #include <QMessageBox>
 #include <QSqlDatabase>
+#include <QStandardItemModel>
 #include <QString>
 #include <QStringList>
 
 #include "euapplicationsettings.h"
 
-class euDatabase
+class euDatabase : public QStandardItemModel
 {
+    Q_OBJECT
 
 public:
-    euDatabase();
+    euDatabase(QObject *parent);
     bool euConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);
     bool euRetrieveConfig();
 
 private:
+    QSqlDatabase
+        sdbEnergyUsage;
+
 //---------------------------------------------------------------------------------------
 //
 //  Application settings
 //
+euApplicationSettings *ApplicationSettings;
+
 QString
     strDatabaseSection = "Database",            // Database section name
     strKeyDbServerName = "DatabaseServerName",  // Key name with database server name
@@ -42,15 +49,25 @@ QString
     strKeyDbPassword = "DatabasePassword",      // Key name with database Password
     strDatabasePasswordDef = "#NS01fr#LDrz76#", // Default database Password
     strDatabasePassword;                        // Database password
+
     //-------------------------------------------------------------------------------
+    //
+    //  euGas table names
+QString
+    strTblGasName       = "euGasUsage",
+    strFldGasRecId      = "euGasRecId",
+    strFldDateStart     = "euGasDateStart",
+    strFldTimeStart     = "euGasTimeStart",
+    strFldDateEnd       = "euGasDateEnd",
+    strFldTimeEnd       = "euGasTimeEnd",
+    strFldActualUsage   = "euGasActualUsage",
+    strFldExpectedUsage = "euGasExpectedUsage",
+    strFldResult        = "euGasResult",
+    strFldDegreeDay     = "euGasDegreeDay",
+    strFldPerDegreeDay  = "euGasPerDegreeDay";
 
-    euApplicationSettings *ApplicationSettings;
-
-//    QSqlDatabase
-//        sdbEnergyUsage;
-
-//    QMessageBox
-//        msgBox;
+QStringList
+    stlDbTables;
 
 };
 

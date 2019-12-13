@@ -67,7 +67,7 @@ bool MainWindow::InitializeProgram()
 //
 //  Connect to database
 
-    Database = new euDatabase();
+    Database = new euDatabase(this);
 
     return bOk;
 }

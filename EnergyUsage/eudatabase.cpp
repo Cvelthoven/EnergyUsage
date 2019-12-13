@@ -12,7 +12,12 @@
 #include <QString>
 #include <QStringList>
 
-euDatabase::euDatabase()
+//---------------------------------------------------------------------------------------
+//
+//  Constructor
+//
+euDatabase::euDatabase(QObject *parent)
+    : QStandardItemModel(parent)
 {
 
     ApplicationSettings = new euApplicationSettings();
@@ -31,15 +36,15 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QSt
     QStringList
             stlDbDrivers;
 
-    QSqlDatabase
-        sdbEnergyUsage;
+//    QSqlDatabase
+//        sdbEnergyUsage;
 
     QMessageBox
         msgBox;
 
     //-----------------------------------------------------------------------------------
     //
-    //  Connect to database
+    //  Load Postgresql driver
     //
     stlDbDrivers = QSqlDatabase::drivers();
     if (!stlDbDrivers.contains("QPSQL"))
@@ -49,6 +54,10 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QSt
         return false;
     }
 
+    //-----------------------------------------------------------------------------------
+    //
+    //  Open database
+    //
     sdbEnergyUsage = QSqlDatabase::addDatabase("QPSQL");
     sdbEnergyUsage.setHostName(*strHostName);
     sdbEnergyUsage.setDatabaseName(*strDatabaseName);
@@ -57,6 +66,16 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QSt
     {
         msgBox.setText("Failed to open database");
         msgBox.exec();
+        return false;
+    }
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Check tables
+    //
+    stlDbTables = sdbEnergyUsage.tables();
+    if (!stlDbTables.contains(strTblGasName))
+    {
         return false;
     }
 
