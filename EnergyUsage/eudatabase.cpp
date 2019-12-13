@@ -17,6 +17,7 @@ euDatabase::euDatabase()
 
     ApplicationSettings = new euApplicationSettings();
     euRetrieveConfig();
+    euConnectDB(&strDatabaseName,&strDatabaseServerName,&strDatabaseUserId,&strDatabasePassword);
 
 
 }
@@ -27,8 +28,6 @@ euDatabase::euDatabase()
 //
 bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword)
 {
-    bool bOK = true;
-
     QStringList
             stlDbDrivers;
 
@@ -37,7 +36,6 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QSt
 
     QMessageBox
         msgBox;
-
 
     //-----------------------------------------------------------------------------------
     //
@@ -48,7 +46,7 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QSt
     {
         msgBox.setText("Postgress SQL driver not found");
         msgBox.exec();
-        return bOK;
+        return false;
     }
 
     sdbEnergyUsage = QSqlDatabase::addDatabase("QPSQL");
@@ -59,10 +57,10 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QSt
     {
         msgBox.setText("Failed to open database");
         msgBox.exec();
-        return bOK;
+        return false;
     }
 
-    return bOK;
+    return true;
 }
 
 bool euDatabase::euRetrieveConfig()
