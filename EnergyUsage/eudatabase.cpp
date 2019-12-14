@@ -102,10 +102,40 @@ QString
     //
     //  Build build query of strTblGasName
     strQuery = "CREATE TABLE " + strTblGasName + " (";
-    strQuery.append(strFldGasRecId + " SERIAL, ");
-    strQuery.append(strFldDateStart + " timestamp, ");
+    strQuery.append(strFldGasRecId + " integer NOT NULL, ");
+    strQuery.append(strFldDateStart + " date, ");
+    strQuery.append(strFldTimeStart + " time without time zone,");
+    strQuery.append(strFldDateEnd + "date,");
+    strQuery.append(strFldTimeEnd + " time without time zone,");
+    strQuery.append(strFldActualUsage + " numeric(10,4),");
+    strQuery.append(strFldExpectedUsage + " numeric(10,4),");
+    strQuery.append(strFldResult + " integer,");
+    strQuery.append(strFldDegreeDay + " numeric(8,4),");
+    strQuery.append(strFldPerDegreeDay + " numeric(8,4),");
+    strQuery.append("CONSTRAINT ");
+    strQuery.append('"');
+    strQuery.append("euGasUsage_pkey");
+    strQuery.append('"');
+    strQuery.append(" PRIMARY KEY (");
+    strQuery.append('"');
+    strQuery.append(strFldGasRecId);
+    strQuery.append('"');
+    strQuery.append(");");
 
+//            strTblGasName       = "euGasUsage",
+//            strFldGasRecId      = "euGasRecId",
+//            strFldDateStart     = "euGasDateStart",
+//            strFldTimeStart     = "euGasTimeStart",
+//            strFldDateEnd       = "euGasDateEnd",
+//            strFldTimeEnd       = "euGasTimeEnd",
+//            strFldActualUsage   = "euGasActualUsage",
+//            strFldExpectedUsage = "euGasExpectedUsage",
+//            strFldResult        = "euGasResult",
+//            strFldDegreeDay     = "euGasDegreeDay",
+//            strFldPerDegreeDay  = "euGasPerDegreeDay";
 
+//------------------------------------------------------
+// Postgres table creation query
 //    -- Table: public."euGasUsage"
 
 //    -- DROP TABLE public."euGasUsage";
@@ -117,29 +147,19 @@ QString
 //      "euGasTimeStart" time without time zone,
 //      "euGasDateEnd" date,
 //      "euGasTimeEnd" time without time zone,
-//      "euGasActualUsage" real,
-//      "euGasExpectedUsage" real,
+//      "euGasActualUsage" numeric(10,4),
+//      "euGasExpectedUsage" numeric(10,4),
 //      "euGasResult" integer,
-//      "euGasDegreeDay" real,
-//      "euGasPerDegreeDay" real
+//      "euGasDegreeDay" numeric(8,4),
+//      "euGasPerDegreeDay" numeric(8,4),
+//      CONSTRAINT "euGasUsage_pkey" PRIMARY KEY ("euGasRecId")
 //    )
 //    WITH (
 //      OIDS=FALSE
 //    );
 //    ALTER TABLE public."euGasUsage"
 //      OWNER TO pi;
-
-//    strTblGasName       = "euGasUsage",
-//    strFldGasRecId      = "euGasRecId",
-//    strFldDateStart     = "euGasDateStart",
-//    strFldTimeStart     = "euGasTimeStart",
-//    strFldDateEnd       = "euGasDateEnd",
-//    strFldTimeEnd       = "euGasTimeEnd",
-//    strFldActualUsage   = "euGasActualUsage",
-//    strFldExpectedUsage = "euGasExpectedUsage",
-//    strFldResult        = "euGasResult",
-//    strFldDegreeDay     = "euGasDegreeDay",
-//    strFldPerDegreeDay  = "euGasPerDegreeDay";
+//--------------------------------------------------------
 
 
     return false;
