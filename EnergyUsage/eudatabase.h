@@ -20,6 +20,7 @@ class euDatabase : public QStandardItemModel
 public:
     euDatabase(QObject *parent);
     bool euConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);
+    bool euGasCreateTable();
     bool euRetrieveConfig();
 
 private:

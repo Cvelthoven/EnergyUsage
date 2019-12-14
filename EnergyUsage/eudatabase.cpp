@@ -31,6 +31,8 @@ euDatabase::euDatabase(QObject *parent)
 //
 //  euConnectDB
 //
+//  Connects to the database and verifies that the tables exist or let them be created
+//
 bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword)
 {
     QStringList
@@ -76,12 +78,79 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QSt
     stlDbTables = sdbEnergyUsage.tables();
     if (!stlDbTables.contains(strTblGasName))
     {
-        return false;
+        if (!euGasCreateTable())
+        {
+            return false;
+        }
     }
 
     return true;
 }
 
+//---------------------------------------------------------------------------------------
+//
+//  euGasCreateTable
+//
+//  Creates the table: strTblGasName
+//
+bool euDatabase::euGasCreateTable()
+{
+QString
+    strQuery;
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Build build query of strTblGasName
+    strQuery = "CREATE TABLE " + strTblGasName + " (";
+    strQuery.append(strFldGasRecId + " SERIAL, ");
+    strQuery.append(strFldDateStart + " timestamp, ");
+
+
+//    -- Table: public."euGasUsage"
+
+//    -- DROP TABLE public."euGasUsage";
+
+//    CREATE TABLE public."euGasUsage"
+//    (
+//      "euGasRecId" integer NOT NULL,
+//      "euGasDateStart" date,
+//      "euGasTimeStart" time without time zone,
+//      "euGasDateEnd" date,
+//      "euGasTimeEnd" time without time zone,
+//      "euGasActualUsage" real,
+//      "euGasExpectedUsage" real,
+//      "euGasResult" integer,
+//      "euGasDegreeDay" real,
+//      "euGasPerDegreeDay" real
+//    )
+//    WITH (
+//      OIDS=FALSE
+//    );
+//    ALTER TABLE public."euGasUsage"
+//      OWNER TO pi;
+
+//    strTblGasName       = "euGasUsage",
+//    strFldGasRecId      = "euGasRecId",
+//    strFldDateStart     = "euGasDateStart",
+//    strFldTimeStart     = "euGasTimeStart",
+//    strFldDateEnd       = "euGasDateEnd",
+//    strFldTimeEnd       = "euGasTimeEnd",
+//    strFldActualUsage   = "euGasActualUsage",
+//    strFldExpectedUsage = "euGasExpectedUsage",
+//    strFldResult        = "euGasResult",
+//    strFldDegreeDay     = "euGasDegreeDay",
+//    strFldPerDegreeDay  = "euGasPerDegreeDay";
+
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  euRetrieveConfig
+//
+//  Retrieves the database related application settings
+//
 bool euDatabase::euRetrieveConfig()
 {
     bool
