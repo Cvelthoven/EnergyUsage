@@ -1,3 +1,9 @@
+//---------------------------------------------------------------------------------------
+//
+//  Class euDatabase
+//
+//  This class handles the data interaction with the underlying database
+//
 #ifndef EUDATABASE_H
 #define EUDATABASE_H
 

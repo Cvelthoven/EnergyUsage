@@ -129,7 +129,6 @@ QString
         return false;
     }
 
-
     return true;
 }
 

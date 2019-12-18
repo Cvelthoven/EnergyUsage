@@ -26,12 +26,14 @@ CONFIG += c++11
 
 SOURCES += \
     eudatabase.cpp \
+    eulogfile.cpp \
         main.cpp \
         mainwindow.cpp \
     euapplicationsettings.cpp
 
 HEADERS += \
     eudatabase.h \
+    eulogfile.h \
         mainwindow.h \
     euapplicationsettings.h
 
