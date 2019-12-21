@@ -6,8 +6,7 @@
 
 #include "euapplicationsettings.h"
 #include "eudatabase.h"
-
-
+#include "eulogfile.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,24 +28,14 @@ private:
     Ui::MainWindow *ui;
 
     euDatabase *Database;
-
+    euLogFile *Logfile;
 
 //---------------------------------------------------------------------------------------
 //
 //  Application settings
 //
     QString
-//  Moved to eudatabase.h
-//        strDatabaseSection = "Database",            // Database section name
-//        strKeyDbServerName = "DatabaseServerName",  // Key name with database server name
-//        strDatabaseServerNameDef = "cvraspi01",     // Default database server
-//        strDatabaseServerName,                      // Database server name
-//        //-------------------------------------------------------------------------------
-//        strKeyDbName = "DatabaseName",              // Key name with database name
-//        strDatabaseNameDef = "cvraspi01Dev",        // Default database name
-//        strDatabaseName,                            // Database name
-//        //-------------------------------------------------------------------------------
-        strTemp;
+       strTemp;
 
 };
 

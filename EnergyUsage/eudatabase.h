@@ -27,6 +27,7 @@ public:
     euDatabase(QObject *parent);
     bool euConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);
     bool euGasCreateTable();
+    bool euLogCreateTable();
     bool euRetrieveConfig();
 
 private:
@@ -72,6 +73,17 @@ QString
     strFldResult        = "eu_gas_result",
     strFldDegreeDay     = "eu_gas_degree_day",
     strFldPerDegreeDay  = "eu_gas_per_degree_day";
+
+//-----------------------------------------------------------------------------------
+//
+//  Application logfile database table and field names
+//
+QString
+    strTblNameApplicationLog    = "application_log",
+    strFldAplRecId              = "apl_rec_id",
+    strFldAplApplicationName    = "apl_application_name",
+    strFldAplTimeStamp          = "apl_time_stamp",
+    strFldAplLogMessage         = "apl_log_message";
 
 QStringList
     stlDbTables;

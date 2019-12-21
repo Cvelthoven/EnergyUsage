@@ -16,6 +16,7 @@
 #include "ui_mainwindow.h"
 
 #include "euapplicationsettings.h"
+#include "eulogfile.h"
 
 //---------------------------------------------------------------------------------------
 //
@@ -33,6 +34,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //
     //  Set application name information and create application wide objects
 //    ApplicationSettings = new euApplicationSettings();
+    Logfile = new euLogFile(this);
+
     //-----------------------------------------------------------------------------------
     //
     // Initialize the program
