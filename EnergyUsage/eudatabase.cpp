@@ -6,7 +6,6 @@
 //
 #include "eudatabase.h"
 #include "euapplicationsettings.h"
-#include "eulogfile.h"
 
 #include <QMessageBox>
 #include <QSqlDatabase>

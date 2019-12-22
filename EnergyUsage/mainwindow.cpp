@@ -6,6 +6,7 @@
 //---------------------------------------------------------------------------------------
 //
 //  General include files
+#include <QDateTime>
 #include <QString>
 
 //---------------------------------------------------------------------------------------
@@ -16,7 +17,7 @@
 #include "ui_mainwindow.h"
 
 #include "euapplicationsettings.h"
-#include "eulogfile.h"
+#include "euapplicationlogging.h"
 
 //---------------------------------------------------------------------------------------
 //
@@ -31,14 +32,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //  Program initialization
     //
     //-----------------------------------------------------------------------------------
-    //
-    //  Set application name information and create application wide objects
-//    ApplicationSettings = new euApplicationSettings();
-    Logfile = new euLogFile(this);
-
-    //-----------------------------------------------------------------------------------
-    //
-    // Initialize the program
     if (!InitializeProgram())
     {
        exit(0);
@@ -66,10 +59,14 @@ bool MainWindow::InitializeProgram()
     //  Local variables
     bool bOk = false;
 
-//---------------------------------------------------------------------------------------
-//
-//  Connect to database
-
+    //---------------------------------------------------------------------------------------
+    //
+    //  Start application logging
+    ApplicationLog = new euApplicationLogging(this);
+    //---------------------------------------------------------------------------------------
+    //
+    //  Connect to database
+    QDateTime euStartTime = QDateTime::currentDateTime();
     Database = new euDatabase(this);
 
     return bOk;

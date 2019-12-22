@@ -25,15 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    euapplicationlogging.cpp \
     eudatabase.cpp \
-    eulogfile.cpp \
         main.cpp \
         mainwindow.cpp \
     euapplicationsettings.cpp
 
 HEADERS += \
+    euapplicationlogging.h \
     eudatabase.h \
-    eulogfile.h \
         mainwindow.h \
     euapplicationsettings.h
 

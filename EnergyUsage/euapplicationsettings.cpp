@@ -7,7 +7,6 @@
 //  Location of configuration file linux: home/.config/Cvelthoven
 //
 #include "euapplicationsettings.h"
-#include "eulogfile.h"
 
 #include <QCoreApplication>
 #include <QSettings>

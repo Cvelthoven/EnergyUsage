@@ -5,8 +5,8 @@
 #include <QString>
 
 #include "euapplicationsettings.h"
+#include "euapplicationlogging.h"
 #include "eudatabase.h"
-#include "eulogfile.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,7 +20,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    euApplicationSettings *ApplicationSettings;
+    euApplicationSettings   *ApplicationSettings;
+    euApplicationLogging    *ApplicationLog;
 
     bool InitializeProgram();
 
@@ -28,7 +29,6 @@ private:
     Ui::MainWindow *ui;
 
     euDatabase *Database;
-    euLogFile *Logfile;
 
 //---------------------------------------------------------------------------------------
 //
