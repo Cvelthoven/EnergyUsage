@@ -48,9 +48,9 @@ private:
     //
     QString
         strAppLogTblNameApplicationLog    = "application_log",
-        strAppLogFldAplRecId              = "apl_rec_id",
-        strAppLogFldAplApplicationName    = "apl_application_name",
-        strAppLogFldAplTimeStamp          = "apl_time_stamp",
+        strAppLogFldAplRecId              = "apl_log_rec_id",
+        strAppLogFldAplApplicationName    = "apl_log_application_name",
+        strAppLogFldAplTimeStamp          = "apl_log_time_stamp",
         strAppLogFldAplLogMessage         = "apl_log_message";
 
 };
