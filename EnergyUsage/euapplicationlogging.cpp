@@ -8,6 +8,8 @@
 #include "euapplicationsettings.h"
 
 #include <QMessageBox>
+#include <QSqlDatabase>
+#include <QtSql>
 
 #include <QDebug>
 
@@ -22,15 +24,113 @@ euApplicationLogging::euApplicationLogging(QObject *parent)
     //
     //  Retrieve application logging configuration
     euAplLogingSettings = new euApplicationSettings();
-    euRetrieveLogConfig();
+    RetrieveLogConfig();
+    ConnectDB(&strAppLogDatabaseName, &strAppLogDatabaseServerName, &strAppLogDatabaseUserId, &strAppLogDatabasePassword);
 
 }
+
+
+//---------------------------------------------------------------------------------------
+//
+//  euConnectDB
+//
+//  Connects to the database and verifies that the tables exist or let them be created
+//
+bool euApplicationLogging::ConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword)
+{
+    QStringList
+            stlDbDrivers;
+
+    QMessageBox
+        msgBox;
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Load Postgresql driver
+    //
+    stlDbDrivers = QSqlDatabase::drivers();
+    if (!stlDbDrivers.contains("QPSQL"))
+    {
+        SendWarningMessage("PostgreSql driver", "not found");
+        return false;
+    }
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Open database
+    //
+    sdbAppLogDB = QSqlDatabase::addDatabase("QPSQL");
+    sdbAppLogDB.setHostName(*strHostName);
+    sdbAppLogDB.setDatabaseName(*strDatabaseName);
+    sdbAppLogDB.setPort(-1);
+    if (!sdbAppLogDB.open(*strUserId,*strPassword))
+    {
+        SendWarningMessage(*strDatabaseName, "not found");
+        return false;
+    }
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Check tables
+    //
+    stlAplLogTables = sdbAppLogDB.tables();
+    //
+    //  Check application_log table exists
+    if (!stlAplLogTables.contains(strAppLogTblNameApplicationLog))
+    {
+        if (!LogCreateTable())
+        {
+            SendWarningMessage(strAppLogTblNameApplicationLog, "could not be created");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
+//---------------------------------------------------------------------------------------
+//
+//  euLogCreateTable
+//
+//  Creates the table: application_log
+//
+bool euApplicationLogging::LogCreateTable()
+{
+QString
+    strQuery;
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Build build query of strTblGasName
+    strQuery = "CREATE TABLE " + strAppLogTblNameApplicationLog + " (";
+    strQuery.append(strAppLogFldAplRecId + " SERIAL PRIMARY KEY, ");
+    strQuery.append(strAppLogFldAplApplicationName + " \"char\" NOT NULL, ");
+    strQuery.append(strAppLogFldAplTimeStamp + " timestamp without time zone NOT NULL, ");
+    strQuery.append(strAppLogFldAplLogSeverity + " \"char\" NOT NULL, ");
+    strQuery.append(strAppLogFldAplLogMessage + " \"char\" NOT NULL");
+    strQuery.append(");");
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Create eu_gas_usage table
+    //
+    QSqlQuery qQuery("",sdbAppLogDB);
+    if (!qQuery.exec(strQuery))
+    {
+        qDebug() << sdbAppLogDB.lastError();
+        return false;
+    }
+
+    return true;
+}
+
 
 //---------------------------------------------------------------------------------------
 //
 //  Retrieve application logging configuration
 //
-bool euApplicationLogging::euRetrieveLogConfig()
+bool euApplicationLogging::RetrieveLogConfig()
 {
     bool
         bOK = true;
@@ -122,6 +222,7 @@ bool euApplicationLogging::euRetrieveLogConfig()
         }
     }
 }
+
 
 //---------------------------------------------------------------------------------------
 //

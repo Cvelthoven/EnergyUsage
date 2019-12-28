@@ -77,15 +77,6 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QSt
     //
     stlDbTables = sdbEnergyUsage.tables();
     //
-    //  Check application_log table exists
-    if (!stlDbTables.contains(strTblNameApplicationLog))
-    {
-        if (!euLogCreateTable())
-        {
-            return false;
-        }
-    }
-    //
     //  Check eu_gas_usage table exists
     if (!stlDbTables.contains(strTblGasName))
     {
@@ -139,44 +130,6 @@ QString
 
     return true;
 }
-
-//---------------------------------------------------------------------------------------
-//
-//  euLogCreateTable
-//
-//  Creates the table: application_log
-//
-bool euDatabase::euLogCreateTable()
-{
-QString
-    strQuery;
-
-    //-----------------------------------------------------------------------------------
-    //
-    //  Build build query of strTblGasName
-    strQuery = "CREATE TABLE " + strTblNameApplicationLog + " (";
-    strQuery.append(strFldAplRecId + " SERIAL PRIMARY KEY, ");
-    strQuery.append(strFldAplApplicationName + " \"char\" NOT NULL, ");
-//    strQuery.append(" \"char\" NOT NULL, ");
-    strQuery.append(strFldAplTimeStamp + " timestamp without time zone NOT NULL, ");
-    strQuery.append(strFldAplLogMessage + " \"char\" NOT NULL");
-//    strQuery.append(" \"char\" NOT NULL");
-    strQuery.append(");");
-
-    //-----------------------------------------------------------------------------------
-    //
-    //  Create eu_gas_usage table
-    //
-    QSqlQuery qQuery("",sdbEnergyUsage);
-    if (!qQuery.exec(strQuery))
-    {
-        qDebug() << sdbEnergyUsage.lastError();
-        return false;
-    }
-
-    return true;
-}
-
 
 //---------------------------------------------------------------------------------------
 //

@@ -23,11 +23,15 @@ class euApplicationLogging : public QStandardItemModel
 
 public:
     euApplicationLogging(QObject *parent);
-    bool euRetrieveLogConfig();
+    bool ConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);
+    bool LogCreateTable();
+    bool RetrieveLogConfig();
     void SendWarningMessage(const QString &strMsgPart1, const QString &strMsgPart2);
 
 private:
     euApplicationSettings *euAplLogingSettings;
+
+    QSqlDatabase sdbAppLogDB;
 
     QString
         strAppLogSectionName = "Log",                       // Application logging section name
@@ -60,7 +64,10 @@ private:
         strAppLogFldAplRecId              = "apl_log_rec_id",
         strAppLogFldAplApplicationName    = "apl_log_application_name",
         strAppLogFldAplTimeStamp          = "apl_log_time_stamp",
+        strAppLogFldAplLogSeverity        = "apl_log_severity",
         strAppLogFldAplLogMessage         = "apl_log_message";
+
+    QStringList stlAplLogTables;
 
 };
 
