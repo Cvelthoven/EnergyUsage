@@ -41,22 +41,22 @@ private:
 euApplicationSettings *ApplicationSettings;
 
 QString
-    strDatabaseSection = "Database",            // Database section name
-    strKeyDbServerName = "DatabaseServerName",  // Key name with database server name
-    strDatabaseServerNameDef = "192.168.1.51",  // Default database server
-    strDatabaseServerName,                      // Database server name
+    strDatabaseSection = "AplDatabase",             // Database section name
+    strKeyDbServerName = "AplDatabaseServerName",   // Key name with database server name
+    strDatabaseServerNameDef = "192.168.1.51",      // Default database server
+    strDatabaseServerName,                          // Database server name
     //-------------------------------------------------------------------------------
-    strKeyDbName = "DatabaseName",              // Key name with database name
-    strDatabaseNameDef = "cvraspi01dev",        // Default database name
-    strDatabaseName,                            // Database name
+    strKeyDbName = "AplDatabaseName",               // Key name with database name
+    strDatabaseNameDef = "cvraspi01dev",            // Default database name
+    strDatabaseName,                                // Database name
     //-------------------------------------------------------------------------------
-    strKeyDbUserId = "DatabaseUserId",          // Key name with database UserID
-    strDatabaseUserIdDef = "pi",                // Default database UserID
-    strDatabaseUserId,                          // Database userID
+    strKeyDbUserId = "AplDatabaseUserId",           // Key name with database UserID
+    strDatabaseUserIdDef = "pi",                    // Default database UserID
+    strDatabaseUserId,                              // Database userID
     //-------------------------------------------------------------------------------
-    strKeyDbPassword = "DatabasePassword",      // Key name with database Password
-    strDatabasePasswordDef = "#NS01fr#LDrz76#", // Default database Password
-    strDatabasePassword;                        // Database password
+    strKeyDbPassword = "AplDatabasePassword",       // Key name with database Password
+    strDatabasePasswordDef = "#NS01fr#LDrz76#",     // Default database Password
+    strDatabasePassword;                            // Database password
 
     //-------------------------------------------------------------------------------
     //
