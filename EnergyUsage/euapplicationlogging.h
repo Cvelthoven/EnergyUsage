@@ -23,12 +23,13 @@ class euApplicationLogging : public QStandardItemModel
 
 public:
     euApplicationLogging(QObject *parent);
+
+private:
     bool ConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);
     bool LogCreateTable();
     bool RetrieveLogConfig();
     void SendWarningMessage(const QString &strMsgPart1, const QString &strMsgPart2);
 
-private:
     euApplicationSettings *euAplLogingSettings;
 
     QSqlDatabase sdbAppLogDB;
