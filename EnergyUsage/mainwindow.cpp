@@ -58,15 +58,20 @@ bool MainWindow::InitializeProgram()
     //
     //  Local variables
     bool bOk = false;
+    QString
+        strSeverity     = "info",
+        strMessage      = "Program started";
 
     //---------------------------------------------------------------------------------------
     //
     //  Start application logging
+    QDateTime euStartTime = QDateTime::currentDateTime();
     ApplicationLog = new euApplicationLogging(this);
+    ApplicationLog->WriteLogRecord(&euStartTime,&strSeverity,&strMessage);
+
     //---------------------------------------------------------------------------------------
     //
     //  Connect to database
-    QDateTime euStartTime = QDateTime::currentDateTime();
     Database = new euDatabase(this);
 
     return bOk;

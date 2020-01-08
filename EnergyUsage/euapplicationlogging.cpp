@@ -6,7 +6,9 @@
 //
 #include "euapplicationlogging.h"
 #include "euapplicationsettings.h"
+#include "mainwindow.h"
 
+#include <QCoreApplication>
 #include <QMessageBox>
 #include <QSqlDatabase>
 #include <QtSql>
@@ -105,10 +107,10 @@ QString
     //  Build build query of strTblGasName
     strQuery = "CREATE TABLE " + strAppLogTblNameApplicationLog + " (";
     strQuery.append(strAppLogFldAplRecId + " SERIAL PRIMARY KEY, ");
-    strQuery.append(strAppLogFldAplApplicationName + " \"char\" NOT NULL, ");
+    strQuery.append(strAppLogFldAplApplicationName + " text NOT NULL, ");
     strQuery.append(strAppLogFldAplTimeStamp + " timestamp without time zone NOT NULL, ");
-    strQuery.append(strAppLogFldAplLogSeverity + " \"char\" NOT NULL, ");
-    strQuery.append(strAppLogFldAplLogMessage + " \"char\" NOT NULL");
+    strQuery.append(strAppLogFldAplLogSeverity + " text NOT NULL, ");
+    strQuery.append(strAppLogFldAplLogMessage + " text NOT NULL");
     strQuery.append(");");
 
     //-----------------------------------------------------------------------------------
@@ -238,5 +240,61 @@ void euApplicationLogging::SendWarningMessage(const QString &strMsgPart1, const 
     msgBox.exec();
     qDebug() << strMsgPart1 << ", " << strMsgPart2;
 
+
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  Write a log record
+//INSERT INTO application_log (apl_log_application_name, apl_log_time_stamp, apl_log_severity,apl_log_message) VALUES ('test','1/3/2019 12:38:00.123','info','Program started');
+//
+void euApplicationLogging::WriteLogRecord(const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage)
+{
+    QString strApplicationName = "test",
+            strApplication,
+            strOrganisation;
+
+    QCoreApplication *ApplicationDefinition;
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Retrieve application name
+    //
+
+    strApplication = *ApplicationSettings;
+    WriteLogRecord(&strApplicationName,qdRecTimeStamp,strLogSeverity,strLogMessage);
+
+}
+
+void euApplicationLogging::WriteLogRecord(const QString *strAppName, const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage)
+{
+    QString strQuery,
+            strRecTimeStamp,
+            strTimeStampFormat = "yyyy-MM-dd hh:mm:ss.zzz",
+            strTemp;
+    strQuery = "INSERT INTO " + strAppLogTblNameApplicationLog + " (";
+    // Fields
+    strQuery.append(strAppLogFldAplApplicationName + ", ");
+    strQuery.append(strAppLogFldAplTimeStamp + ", ");
+    strQuery.append(strAppLogFldAplLogSeverity + ", ");
+    strQuery.append(strAppLogFldAplLogMessage + ")");
+    strQuery.append(" VALUES (\'");
+    // Values
+    strQuery.append(strAppName);
+    strQuery.append("\', \'");
+    strTemp = qdRecTimeStamp->toString(strTimeStampFormat);
+    strQuery.append(strTemp);
+    strQuery.append("\', \'");
+    strQuery.append(strLogSeverity);
+    strQuery.append("\', \'");
+    strQuery.append(strLogMessage);
+    strQuery.append("\');");
+
+    // Write record to log database
+    QSqlQuery qQuery("",sdbAppLogDB);
+    if (!qQuery.exec(strQuery))
+    {
+        qDebug() << sdbAppLogDB.lastError();
+    }
 
 }

@@ -7,6 +7,7 @@
 #ifndef EUAPPLICATIONLOGGING_H
 #define EUAPPLICATIONLOGGING_H
 
+#include <QDateTime>
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>
@@ -23,6 +24,8 @@ class euApplicationLogging : public QStandardItemModel
 
 public:
     euApplicationLogging(QObject *parent);
+    void WriteLogRecord(const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage);
+    void WriteLogRecord(const QString *strAppName, const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage);
 
 private:
     bool ConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);

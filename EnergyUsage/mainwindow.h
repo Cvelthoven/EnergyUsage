@@ -30,10 +30,6 @@ private:
 
     euDatabase *Database;
 
-//---------------------------------------------------------------------------------------
-//
-//  Application settings
-//
     QString
        strTemp;
 
