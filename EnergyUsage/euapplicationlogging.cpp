@@ -6,7 +6,7 @@
 //
 #include "euapplicationlogging.h"
 #include "euapplicationsettings.h"
-#include "mainwindow.h"
+#include "energyusage.h"
 
 #include <QCoreApplication>
 #include <QMessageBox>
@@ -240,32 +240,47 @@ void euApplicationLogging::SendWarningMessage(const QString &strMsgPart1, const 
     msgBox.exec();
     qDebug() << strMsgPart1 << ", " << strMsgPart2;
 
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  Write a log record with predefined application name and without timestamp set
+//
+void euApplicationLogging::WriteLogRecord(const QString *strLogSeverity, const QString *strLogMessage)
+{
+    //-----------------------------------------------------------------------------------
+    //
+    //  Get current timestamp
+    //
+    QDateTime LogTime = QDateTime::currentDateTime();
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Retrieve application name and write log record
+    //
+     WriteLogRecord(&strApplicationName,&LogTime,strLogSeverity,strLogMessage);
 
 }
 
 //---------------------------------------------------------------------------------------
 //
-//  Write a log record
-//INSERT INTO application_log (apl_log_application_name, apl_log_time_stamp, apl_log_severity,apl_log_message) VALUES ('test','1/3/2019 12:38:00.123','info','Program started');
+//  Write a log record with predefined application name
 //
 void euApplicationLogging::WriteLogRecord(const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage)
 {
-    QString strApplicationName = "test",
-            strApplication,
-            strOrganisation;
-
-    QCoreApplication *ApplicationDefinition;
 
     //-----------------------------------------------------------------------------------
     //
-    //  Retrieve application name
+    //  Retrieve application name and write log record
     //
-
-    strApplication = *ApplicationSettings;
-    WriteLogRecord(&strApplicationName,qdRecTimeStamp,strLogSeverity,strLogMessage);
+     WriteLogRecord(&strApplicationName,qdRecTimeStamp,strLogSeverity,strLogMessage);
 
 }
 
+//---------------------------------------------------------------------------------------
+//  Write a log record
+//INSERT INTO application_log (apl_log_application_name, apl_log_time_stamp, apl_log_severity,apl_log_message) VALUES ('test','1/3/2019 12:38:00.123','info','Program started');
+//
 void euApplicationLogging::WriteLogRecord(const QString *strAppName, const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage)
 {
     QString strQuery,

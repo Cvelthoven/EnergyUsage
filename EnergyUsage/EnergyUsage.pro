@@ -32,6 +32,7 @@ SOURCES += \
     euapplicationsettings.cpp
 
 HEADERS += \
+    energyusage.h \
     euapplicationlogging.h \
     eudatabase.h \
         mainwindow.h \

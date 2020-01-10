@@ -7,6 +7,7 @@
 //  Location of configuration file linux: home/.config/Cvelthoven
 //
 #include "euapplicationsettings.h"
+#include "energyusage.h"
 
 #include <QCoreApplication>
 #include <QSettings>
@@ -23,9 +24,9 @@ euApplicationSettings::euApplicationSettings()
     //
     //  Set application environment definitions
     //
-    QCoreApplication::setOrganizationName("CVelthoven");
-    QCoreApplication::setOrganizationDomain("CVelthoven.com");
-    QCoreApplication::setApplicationName("EnergyUsage");
+    QCoreApplication::setOrganizationName(strOrganizationName);
+    QCoreApplication::setOrganizationDomain(strOrganizationDomain);
+    QCoreApplication::setApplicationName(strApplicationName);
 
 }
 
