@@ -31,7 +31,9 @@ private:
     euDatabase *Database;
 
     QString
-       strTemp;
+        strTemp,
+        strSeverity,
+        strMessage;
 
 };
 

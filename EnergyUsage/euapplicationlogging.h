@@ -24,6 +24,7 @@ class euApplicationLogging : public QStandardItemModel
 
 public:
     euApplicationLogging(QObject *parent);
+    ~euApplicationLogging();
     void WriteLogRecord(const QString *strLogSeverity, const QString *strLogMessage);
     void WriteLogRecord(const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage);
     void WriteLogRecord(const QString *strAppName, const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage);

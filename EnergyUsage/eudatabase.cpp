@@ -4,7 +4,9 @@
 //
 //  This class handles the data interaction with the underlying database
 //
+#include "energyusage.h"
 #include "eudatabase.h"
+#include "euapplicationlogging.h"
 #include "euapplicationsettings.h"
 
 #include <QMessageBox>
@@ -19,13 +21,13 @@
 //
 //  Constructor
 //
-euDatabase::euDatabase(QObject *parent)
+euDatabase::euDatabase(QObject *parent, euApplicationLogging *ApplicationLog)
     : QStandardItemModel(parent)
 {
 
     ApplicationSettings = new euApplicationSettings();
     euRetrieveConfig();
-    euConnectDB(&strDatabaseName,&strDatabaseServerName,&strDatabaseUserId,&strDatabasePassword);
+    euConnectDB(ApplicationLog,&strDatabaseName,&strDatabaseServerName,&strDatabaseUserId,&strDatabasePassword);
 
 
 }
@@ -36,8 +38,11 @@ euDatabase::euDatabase(QObject *parent)
 //
 //  Connects to the database and verifies that the tables exist or let them be created
 //
-bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword)
+bool euDatabase::euConnectDB(euApplicationLogging *ApplicationLog, QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword)
 {
+    QString
+            strSeverity,
+            strLogMessage;
     QStringList
             stlDbDrivers;
 
@@ -51,8 +56,9 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QSt
     stlDbDrivers = QSqlDatabase::drivers();
     if (!stlDbDrivers.contains("QPSQL"))
     {
-        msgBox.setText("Postgress SQL driver not found");
-        msgBox.exec();
+        strSeverity = "Error";
+        strLogMessage = "No Postgresql driver found";
+        ApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
         return false;
     }
 
@@ -60,15 +66,23 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QSt
     //
     //  Open database
     //
-    sdbEnergyUsage = QSqlDatabase::addDatabase("QPSQL");
+    sdbEnergyUsage = QSqlDatabase::addDatabase("QPSQL","EnergyUsage");
     sdbEnergyUsage.setHostName(*strHostName);
     sdbEnergyUsage.setDatabaseName(*strDatabaseName);
     sdbEnergyUsage.setPort(-1);
     if (!sdbEnergyUsage.open(*strUserId,*strPassword))
     {
-        msgBox.setText("Failed to open database");
-        msgBox.exec();
+        strSeverity = "Error";
+        strLogMessage = "Unable to connect to database: " + *strDatabaseName;
+        ApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
         return false;
+    }
+    else
+    {
+        strSeverity = "Info";
+        strLogMessage = "Connected to database: " + *strDatabaseName;
+        ApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+
     }
 
     //-----------------------------------------------------------------------------------

@@ -18,14 +18,15 @@
 #include <QStringList>
 
 #include "euapplicationsettings.h"
+#include "euapplicationlogging.h"
 
 class euDatabase : public QStandardItemModel
 {
     Q_OBJECT
 
 public:
-    euDatabase(QObject *parent);
-    bool euConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);
+    euDatabase(QObject *parent, euApplicationLogging *ApplicationLog);
+    bool euConnectDB(euApplicationLogging *ApplicationLog, QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);
     bool euGasCreateTable();
     bool euRetrieveConfig();
 

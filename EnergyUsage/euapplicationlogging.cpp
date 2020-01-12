@@ -31,6 +31,15 @@ euApplicationLogging::euApplicationLogging(QObject *parent)
 
 }
 
+//---------------------------------------------------------------------------------------
+//
+//  Destructor including disconnect from logging database
+//
+euApplicationLogging::~euApplicationLogging()
+{
+    sdbAppLogDB.close();
+}
+
 
 //---------------------------------------------------------------------------------------
 //
@@ -61,7 +70,7 @@ bool euApplicationLogging::ConnectDB(QString *strDatabaseName, QString *strHostN
     //
     //  Open database
     //
-    sdbAppLogDB = QSqlDatabase::addDatabase("QPSQL");
+    sdbAppLogDB = QSqlDatabase::addDatabase("QPSQL","ApplicationLog");
     sdbAppLogDB.setHostName(*strHostName);
     sdbAppLogDB.setDatabaseName(*strDatabaseName);
     sdbAppLogDB.setPort(-1);

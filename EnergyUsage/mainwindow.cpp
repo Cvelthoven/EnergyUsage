@@ -16,6 +16,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "energyusage.h"
 #include "euapplicationsettings.h"
 #include "euapplicationlogging.h"
 
@@ -31,14 +32,27 @@ MainWindow::MainWindow(QWidget *parent) :
     //
     //  Program initialization
     //
-    //-----------------------------------------------------------------------------------
     if (!InitializeProgram())
     {
        exit(0);
     }
 
+    //-----------------------------------------------------------------------------------
+    //
+    //  Actual program run
+    //
     ui->setupUi(this);
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Clean up before going exit
+    //
+    strSeverity = "info";
+    strMessage  = "EnergyUsage ended normal";
+    ApplicationLog->WriteLogRecord(&strSeverity,&strMessage);
+    delete ApplicationLog;
 }
+
 //---------------------------------------------------------------------------------------
 //
 //  Proceduce: MainWindow destructor
@@ -58,13 +72,15 @@ bool MainWindow::InitializeProgram()
     //
     //  Local variables
     bool bOk = false;
-    QString
-        strSeverity     = "info",
-        strMessage      = "Program started";
+//    QString
+//        strSeverity     = "info",
+//        strMessage      = "Program started";
 
     //---------------------------------------------------------------------------------------
     //
     //  Start application logging
+    strSeverity = "info";
+    strMessage  = "EnergyUsage started";
     QDateTime euStartTime = QDateTime::currentDateTime();
     ApplicationLog = new euApplicationLogging(this);
     ApplicationLog->WriteLogRecord(&euStartTime,&strSeverity,&strMessage);
@@ -72,7 +88,7 @@ bool MainWindow::InitializeProgram()
     //---------------------------------------------------------------------------------------
     //
     //  Connect to database
-    Database = new euDatabase(this);
+    Database = new euDatabase(this, ApplicationLog);
 
     return bOk;
 }
