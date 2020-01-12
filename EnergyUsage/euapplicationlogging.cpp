@@ -38,6 +38,7 @@ euApplicationLogging::euApplicationLogging(QObject *parent)
 euApplicationLogging::~euApplicationLogging()
 {
     sdbAppLogDB.close();
+
 }
 
 

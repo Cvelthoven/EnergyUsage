@@ -96,6 +96,9 @@ bool euDatabase::euConnectDB(euApplicationLogging *ApplicationLog, QString *strD
     {
         if (!euGasCreateTable())
         {
+            strSeverity = "Error";
+            strLogMessage = "Table: " + strTblGasName + " not found and could not be created";
+            ApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
             return false;
         }
     }

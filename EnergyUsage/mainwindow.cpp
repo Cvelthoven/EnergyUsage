@@ -43,14 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //
     ui->setupUi(this);
 
-    //-----------------------------------------------------------------------------------
-    //
-    //  Clean up before going exit
-    //
-    strSeverity = "info";
-    strMessage  = "EnergyUsage ended normal";
-    ApplicationLog->WriteLogRecord(&strSeverity,&strMessage);
-    delete ApplicationLog;
+
 }
 
 //---------------------------------------------------------------------------------------
@@ -71,15 +64,12 @@ bool MainWindow::InitializeProgram()
     //-----------------------------------------------------------------------------------
     //
     //  Local variables
-    bool bOk = false;
-//    QString
-//        strSeverity     = "info",
-//        strMessage      = "Program started";
+//    bool bOk = false;
 
     //---------------------------------------------------------------------------------------
     //
     //  Start application logging
-    strSeverity = "info";
+    strSeverity = "Info";
     strMessage  = "EnergyUsage started";
     QDateTime euStartTime = QDateTime::currentDateTime();
     ApplicationLog = new euApplicationLogging(this);
@@ -90,6 +80,17 @@ bool MainWindow::InitializeProgram()
     //  Connect to database
     Database = new euDatabase(this, ApplicationLog);
 
-    return bOk;
+    return true;
 }
 
+//---------------------------------------------------------------------------------------
+//
+//  Main menu slot functions
+void MainWindow::on_actionExit_triggered()
+{
+    strSeverity = "Info";
+    strMessage  = "EnergyUsage ended normal";
+    ApplicationLog->WriteLogRecord(&strSeverity,&strMessage);
+    delete ApplicationLog;
+
+}

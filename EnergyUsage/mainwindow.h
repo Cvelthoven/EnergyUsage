@@ -25,6 +25,9 @@ public:
 
     bool InitializeProgram();
 
+private slots:
+    void on_actionExit_triggered();
+
 private:
     Ui::MainWindow *ui;
 
