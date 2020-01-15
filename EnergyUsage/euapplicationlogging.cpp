@@ -27,7 +27,14 @@ euApplicationLogging::euApplicationLogging(QObject *parent)
     //  Retrieve application logging configuration
     euAplLogingSettings = new euApplicationSettings();
     RetrieveLogConfig();
-    ConnectDB(&strAppLogDatabaseName, &strAppLogDatabaseServerName, &strAppLogDatabaseUserId, &strAppLogDatabasePassword);
+    if (ConnectDB(&strAppLogDatabaseName, &strAppLogDatabaseServerName, &strAppLogDatabaseUserId, &strAppLogDatabasePassword))
+    {
+        bDBconnected = true;
+    }
+    else
+    {
+        bDBconnected = false;
+    }
 
 }
 

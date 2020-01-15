@@ -73,12 +73,20 @@ bool MainWindow::InitializeProgram()
     strMessage  = "EnergyUsage started";
     QDateTime euStartTime = QDateTime::currentDateTime();
     ApplicationLog = new euApplicationLogging(this);
+    if (!ApplicationLog->bDBconnected)
+    {
+        exit(0);
+    }
     ApplicationLog->WriteLogRecord(&euStartTime,&strSeverity,&strMessage);
 
     //---------------------------------------------------------------------------------------
     //
     //  Connect to database
     Database = new euDatabase(this, ApplicationLog);
+    if (!Database->bDBconnected)
+    {
+        exit(0);
+    }
 
     return true;
 }
@@ -92,5 +100,6 @@ void MainWindow::on_actionExit_triggered()
     strMessage  = "EnergyUsage ended normal";
     ApplicationLog->WriteLogRecord(&strSeverity,&strMessage);
     delete ApplicationLog;
+    exit(0);
 
 }

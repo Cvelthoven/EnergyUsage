@@ -27,7 +27,14 @@ euDatabase::euDatabase(QObject *parent, euApplicationLogging *ApplicationLog)
 
     ApplicationSettings = new euApplicationSettings();
     euRetrieveConfig();
-    euConnectDB(ApplicationLog,&strDatabaseName,&strDatabaseServerName,&strDatabaseUserId,&strDatabasePassword);
+    if (euConnectDB(ApplicationLog,&strDatabaseName,&strDatabaseServerName,&strDatabaseUserId,&strDatabasePassword))
+    {
+        bDBconnected = true;
+    }
+    else
+    {
+        bDBconnected = false;
+    }
 
 
 }

@@ -30,6 +30,9 @@ public:
     bool euGasCreateTable();
     bool euRetrieveConfig();
 
+    bool
+        bDBconnected;
+
 private:
     QSqlDatabase
         sdbEnergyUsage;
