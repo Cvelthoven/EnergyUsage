@@ -7,6 +7,7 @@
 //
 //  General include files
 #include <QDateTime>
+#include <QFileDialog>
 #include <QString>
 
 //---------------------------------------------------------------------------------------
@@ -94,6 +95,9 @@ bool MainWindow::InitializeProgram()
 //---------------------------------------------------------------------------------------
 //
 //  Main menu slot functions
+//
+//  File -> exit
+//
 void MainWindow::on_actionExit_triggered()
 {
     strSeverity = "Info";
@@ -102,4 +106,15 @@ void MainWindow::on_actionExit_triggered()
     delete ApplicationLog;
     exit(0);
 
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  File -> Open Import -> Gas
+//
+void MainWindow::on_actionGas_triggered()
+{
+    strGasImportFileName = QFileDialog::getOpenFileName(this,tr("Gas metrics import file"));
+    if (strGasImportFileName.length() != 0)
+        strTemp = strGasImportFileName;
 }

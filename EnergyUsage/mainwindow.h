@@ -28,12 +28,15 @@ public:
 private slots:
     void on_actionExit_triggered() __attribute__ ((noreturn));
 
+    void on_actionGas_triggered();
+
 private:
     Ui::MainWindow *ui;
 
     euDatabase *Database;
 
     QString
+        strGasImportFileName,
         strTemp,
         strSeverity,
         strMessage;
