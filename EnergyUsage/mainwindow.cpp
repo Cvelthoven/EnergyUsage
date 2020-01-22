@@ -20,6 +20,7 @@
 #include "energyusage.h"
 #include "euapplicationsettings.h"
 #include "euapplicationlogging.h"
+#include "importmetricsfile.h"
 
 //---------------------------------------------------------------------------------------
 //
@@ -114,7 +115,9 @@ void MainWindow::on_actionExit_triggered()
 //
 void MainWindow::on_actionGas_triggered()
 {
+    strTemp = "gas";
     strGasImportFileName = QFileDialog::getOpenFileName(this,tr("Gas metrics import file"));
     if (strGasImportFileName.length() != 0)
-        strTemp = strGasImportFileName;
+        GasImportFile = new ImportMetricsFile(&strTemp,&strGasImportFileName);
+
 }

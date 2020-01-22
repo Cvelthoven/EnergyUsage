@@ -7,6 +7,7 @@
 #include "euapplicationsettings.h"
 #include "euapplicationlogging.h"
 #include "eudatabase.h"
+#include "importmetricsfile.h"
 
 namespace Ui {
 class MainWindow;
@@ -34,6 +35,8 @@ private:
     Ui::MainWindow *ui;
 
     euDatabase *Database;
+
+    ImportMetricsFile *GasImportFile;
 
     QString
         strGasImportFileName,
