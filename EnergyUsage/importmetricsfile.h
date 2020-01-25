@@ -16,7 +16,11 @@ class ImportMetricsFile
 {
 public:
     ImportMetricsFile();
-    ImportMetricsFile(QString *strMetricType, QString *strImportFileName);
+    ImportMetricsFile(QString *strMetricFileType, QString *strImportFileName);
+
+private:
+    QString
+        strMetricType;
 };
 
 #endif // IMPORTMETRICSFILE_H
