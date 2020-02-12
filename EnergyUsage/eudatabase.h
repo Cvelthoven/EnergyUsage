@@ -29,6 +29,7 @@ public:
     bool euConnectDB(euApplicationLogging *ApplicationLog, QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);
     bool euGasCreateTable();
     bool euRetrieveConfig();
+    int ImportMetricsFile(QString *strMetricFileType, QString *strImportFileName);
 
     bool
         bDBconnected;
@@ -87,6 +88,9 @@ QString
     strFldAplApplicationName    = "apl_application_name",
     strFldAplTimeStamp          = "apl_time_stamp",
     strFldAplLogMessage         = "apl_log_message";
+
+QString
+    strMetricType;
 
 QStringList
     stlDbTables;

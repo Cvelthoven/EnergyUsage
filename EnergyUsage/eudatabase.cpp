@@ -203,3 +203,40 @@ bool euDatabase::euRetrieveConfig()
 
     return(bOK);
 }
+
+//---------------------------------------------------------------------------------------
+//
+//  Open import file
+//
+int euDatabase::ImportMetricsFile(QString *strMetricFileType, QString *strImportFileName)
+{
+    int iTotalLines = 0,
+        iTotalRecords = 0;
+
+    QString
+        strInputLine;
+
+    strMetricType = *strMetricFileType;
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Open imput file
+    //
+    QFile qfiImportFile(*strImportFileName);
+    if (qfiImportFile.open(QIODevice::ReadOnly|QIODevice::Text))
+    {
+        //-------------------------------------------------------------------------------
+        //
+        //  Process file line by line
+        //
+        QTextStream qtsImportFile(&qfiImportFile);
+        //  read header line
+        strInputLine = qtsImportFile.readLine();
+        while (!qtsImportFile.atEnd())
+        {
+            strInputLine = qtsImportFile.readLine();
+            iTotalLines++;
+        }
+    }
+    return(iTotalRecords);
+}

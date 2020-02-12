@@ -27,7 +27,6 @@ CONFIG += c++11
 SOURCES += \
     euapplicationlogging.cpp \
     eudatabase.cpp \
-    importmetricsfile.cpp \
         main.cpp \
         mainwindow.cpp \
     euapplicationsettings.cpp
@@ -36,7 +35,6 @@ HEADERS += \
     energyusage.h \
     euapplicationlogging.h \
     eudatabase.h \
-    importmetricsfile.h \
         mainwindow.h \
     euapplicationsettings.h
 
