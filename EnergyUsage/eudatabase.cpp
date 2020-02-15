@@ -41,6 +41,10 @@ euDatabase::euDatabase(QObject *parent, euApplicationLogging *ApplicationLog)
 
 //---------------------------------------------------------------------------------------
 //
+//  Database create, connect functions
+//
+//---------------------------------------------------------------------------------------
+//
 //  euConnectDB
 //
 //  Connects to the database and verifies that the tables exist or let them be created
@@ -206,6 +210,71 @@ bool euDatabase::euRetrieveConfig()
 
 //---------------------------------------------------------------------------------------
 //
+//  File import functions
+//
+//---------------------------------------------------------------------------------------
+//
+//  Add record
+//
+bool euDatabase::AddRecord(QStringList *stlInputValues)
+{
+int
+    iNbValues;  // Number of values in input stringlist
+
+QString
+    strTemp;
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Get type of record and number of values
+    // "2019-01-01 00:00"
+    //  value in query: 1/3/2019 12:38:00.123
+    iNbValues = stlInputValues->size();
+
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  Open import file
+//
+bool euDatabase::ExtractValuesForLine(QString *strMetricType, QString *strInputLine)
+{
+int
+    iInputStringLength,         // length of the input string
+    iInputStringUsed    = 0,    // position in inputstring
+    iValueCnt           = 0,
+    iValueLength;               // length of the value string
+
+QString
+    strTemp;
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Set metric type in record list
+    //
+    stlRecordValues << *strMetricType;
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  extract sting values out of the inputline
+    //
+    iInputStringLength = strInputLine->size();
+    while (iInputStringUsed < iInputStringLength)
+    {
+        strTemp = strInputLine->section((";"),iValueCnt,iValueCnt);
+        stlRecordValues.append(strTemp);
+        iValueLength = strTemp.size();
+        iInputStringUsed += iValueLength +1;
+        iValueCnt++;
+    }
+    return AddRecord(&stlRecordValues);
+
+}
+
+//---------------------------------------------------------------------------------------
+//
 //  Open import file
 //
 int euDatabase::ImportMetricsFile(QString *strMetricFileType, QString *strImportFileName)
@@ -235,6 +304,7 @@ int euDatabase::ImportMetricsFile(QString *strMetricFileType, QString *strImport
         while (!qtsImportFile.atEnd())
         {
             strInputLine = qtsImportFile.readLine();
+            iTotalRecords = ExtractValuesForLine(strMetricFileType,&strInputLine) + iTotalRecords;
             iTotalLines++;
         }
     }

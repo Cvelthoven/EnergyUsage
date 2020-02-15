@@ -35,6 +35,9 @@ public:
         bDBconnected;
 
 private:
+    bool AddRecord(QStringList *stlInputValues);
+    bool ExtractValuesForLine(QString *strMetricFileType, QString *strInputLine);
+
     QSqlDatabase
         sdbEnergyUsage;
 
@@ -90,10 +93,11 @@ QString
     strFldAplLogMessage         = "apl_log_message";
 
 QString
-    strMetricType;
+    strMetricType;  // metric type indicator (gas, elek, water)
 
 QStringList
-    stlDbTables;
+    stlDbTables,    // list with tables in database
+    stlRecordValues;// list with record values includes metric type
 
 };
 
