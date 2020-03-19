@@ -38,6 +38,8 @@ private:
     bool AddRecord(QStringList *stlInputValues);
     bool ExtractValuesForLine(QString *strMetricFileType, QString *strInputLine);
 
+    int iGasValueNb = 9;// number of expected fields in gas import file
+
     QSqlDatabase
         sdbEnergyUsage;
 

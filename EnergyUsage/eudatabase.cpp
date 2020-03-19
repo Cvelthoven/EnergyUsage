@@ -219,9 +219,15 @@ bool euDatabase::euRetrieveConfig()
 bool euDatabase::AddRecord(QStringList *stlInputValues)
 {
 int
-    iNbValues;  // Number of values in input stringlist
+    iNbValues,  // Number of values in input stringlist
+    iYear,
+    iMonth,
+    iDay,
+    iHour,
+    iMinute;
 
 QString
+    strDateTimeStart,
     strTemp;
 
     //-----------------------------------------------------------------------------------
@@ -230,7 +236,33 @@ QString
     // "2019-01-01 00:00"
     //  value in query: 1/3/2019 12:38:00.123
     iNbValues = stlInputValues->size();
+    if (iNbValues == iGasValueNb)
+    {
+        strTemp = stlInputValues->at(1);
+        strTemp.replace("-",":");
+        strTemp.replace(" ",":");
+        strTemp.replace(":0",":");
+        iYear   = strTemp.section(":",0,0).toInt();
+        iMonth  = strTemp.section(":",1,1).toInt();
+        iDay    = strTemp.section(":",2,2).toInt();
+        iHour   = strTemp.section(":",3,3).toInt();
+        iMinute = strTemp.section(":",4,4).toInt();
+        strDateTimeStart = QString("%1").arg(iMonth);
+        strDateTimeStart.append("/");
+        strTemp = QString("%1").arg(iDay);
+        strDateTimeStart.append(strTemp);
+        strDateTimeStart.append("/");
+        strTemp = QString("%1").arg(iYear);
+        strDateTimeStart.append(strTemp);
+        strDateTimeStart.append(" ");
+        strTemp = QString("%1").arg(iHour);
+        strDateTimeStart.append(strTemp);
+        strDateTimeStart.append(":");
+        strTemp = QString("%1").arg(iMinute);
+        strDateTimeStart.append(strTemp);
+        strDateTimeStart.append(":00.000");
 
+    }
 
     return true;
 }
