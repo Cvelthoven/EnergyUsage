@@ -125,8 +125,8 @@ bool euDatabase::euConnectDB(euApplicationLogging *ApplicationLog, QString *strD
 //
 bool euDatabase::euGasCreateTable()
 {
-QString
-    strQuery;
+    QString
+        strQuery;
 
     //-----------------------------------------------------------------------------------
     //
@@ -218,49 +218,50 @@ bool euDatabase::euRetrieveConfig()
 //
 bool euDatabase::AddRecord(QStringList *stlInputValues)
 {
-int
-    iNbValues,  // Number of values in input stringlist
-    iYear,
-    iMonth,
-    iDay,
-    iHour,
-    iMinute;
+    int
+        iNbValues;  // Number of values in input stringlist
 
-QString
-    strDateTimeStart,
-    strTemp;
+    QString
+        strStartDate,
+        strStartTime,
+        strEndDate,
+        strEndTime,
+        strTemp;
+
+
 
     //-----------------------------------------------------------------------------------
     //
-    //  Get type of record and number of values
-    // "2019-01-01 00:00"
-    //  value in query: 1/3/2019 12:38:00.123
+    //  Get number of values
+    //
     iNbValues = stlInputValues->size();
-    if (iNbValues == iGasValueNb)
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Prepare query for Gas table
+    //
+    if ((stlInputValues->at(0) == "gas")&&(iNbValues == iGasValueNb))
     {
+        //
+        //  Convert timestamps input file to postgress format
+        //
         strTemp = stlInputValues->at(1);
-        strTemp.replace("-",":");
-        strTemp.replace(" ",":");
-        strTemp.replace(":0",":");
-        iYear   = strTemp.section(":",0,0).toInt();
-        iMonth  = strTemp.section(":",1,1).toInt();
-        iDay    = strTemp.section(":",2,2).toInt();
-        iHour   = strTemp.section(":",3,3).toInt();
-        iMinute = strTemp.section(":",4,4).toInt();
-        strDateTimeStart = QString("%1").arg(iMonth);
-        strDateTimeStart.append("/");
-        strTemp = QString("%1").arg(iDay);
-        strDateTimeStart.append(strTemp);
-        strDateTimeStart.append("/");
-        strTemp = QString("%1").arg(iYear);
-        strDateTimeStart.append(strTemp);
-        strDateTimeStart.append(" ");
-        strTemp = QString("%1").arg(iHour);
-        strDateTimeStart.append(strTemp);
-        strDateTimeStart.append(":");
-        strTemp = QString("%1").arg(iMinute);
-        strDateTimeStart.append(strTemp);
-        strDateTimeStart.append(":00.000");
+        ConvertTimeStamp(&strTemp,strStartDate,strStartTime);
+        strTemp = stlInputValues->at(2);
+        ConvertTimeStamp(&strTemp,strEndDate,strEndTime);
+
+        //INSERT INTO application_log (apl_log_application_name, apl_log_time_stamp, apl_log_severity,apl_log_message) VALUES ('test','1/3/2019 12:38:00.123','info','Program started');
+        // eu_gas_usage
+//  database fields
+//        eu_gas_date_start date,
+//        eu_gas_time_start time without time zone,
+//        eu_gas_date_end date,
+//        eu_gas_time_end time without time zone,
+//        eu_gas_actual_usage numeric(10,4),
+//        eu_gas_expected_usage numeric(10,4),
+//        eu_gas_result integer,
+//        eu_gas_degree_day numeric(8,4),
+//        eu_gas_per_degree_day numeric(8,4),
 
     }
 
@@ -273,14 +274,14 @@ QString
 //
 bool euDatabase::ExtractValuesForLine(QString *strMetricType, QString *strInputLine)
 {
-int
-    iInputStringLength,         // length of the input string
-    iInputStringUsed    = 0,    // position in inputstring
-    iValueCnt           = 0,
-    iValueLength;               // length of the value string
+    int
+        iInputStringLength,         // length of the input string
+        iInputStringUsed    = 0,    // position in inputstring
+        iValueCnt           = 0,
+        iValueLength;               // length of the value string
 
-QString
-    strTemp;
+    QString
+        strTemp;
 
     //-----------------------------------------------------------------------------------
     //
@@ -341,4 +342,49 @@ int euDatabase::ImportMetricsFile(QString *strMetricFileType, QString *strImport
         }
     }
     return(iTotalRecords);
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  Convert timestmap format from yyyy-mm-dd hh:mm to (m)m/(d)d/yyyy (h)h:mm:00.000
+//
+void euDatabase::ConvertTimeStamp(QString *strTimeStampIn, QString &strDateOut, QString &strTimeOut)
+{
+    int
+        iYear,
+        iMonth,
+        iDay,
+        iHour,
+        iMinute;
+
+    QString
+        strTemp;
+
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Convert timestmap format from yyyy-mm-dd hh:mm to (m)m/(d)d/yyyy (h)h:mm:00.000
+    //
+    strTemp = *strTimeStampIn;
+    strTemp.replace("-",":");
+    strTemp.replace(" ",":");
+    strTemp.replace(":0",":");
+    iYear   = strTemp.section(":",0,0).toInt();
+    iMonth  = strTemp.section(":",1,1).toInt();
+    iDay    = strTemp.section(":",2,2).toInt();
+    iHour   = strTemp.section(":",3,3).toInt();
+    iMinute = strTemp.section(":",4,4).toInt();
+    strTemp = QString("%1").arg(iMonth);
+    strTemp.append("/");
+    strTemp.append(QString("%1").arg(iDay));
+    strTemp.append("/");
+    strTemp.append(QString("%1").arg(iYear));
+    strDateOut = strTemp;
+
+    strTemp = QString("%1").arg(iHour);
+    strTemp.append(":");
+    strTemp.append(QString("%1").arg(iMinute,2,10,QChar('0')));
+    strTemp.append(":00.000");
+    strTimeOut = strTemp;
+
 }
