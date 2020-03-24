@@ -219,9 +219,11 @@ bool euDatabase::euRetrieveConfig()
 bool euDatabase::AddRecord(QStringList *stlInputValues)
 {
     int
+        iCnt1,
         iNbValues;  // Number of values in input stringlist
 
     QString
+        strQuery,
         strStartDate,
         strStartTime,
         strEndDate,
@@ -249,9 +251,25 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
         ConvertTimeStamp(&strTemp,strStartDate,strStartTime);
         strTemp = stlInputValues->at(2);
         ConvertTimeStamp(&strTemp,strEndDate,strEndTime);
-
-        //INSERT INTO application_log (apl_log_application_name, apl_log_time_stamp, apl_log_severity,apl_log_message) VALUES ('test','1/3/2019 12:38:00.123','info','Program started');
-        // eu_gas_usage
+        strQuery = "INSERT INTO eu_gas_usage (eu_gas_date_start, eu_gas_time_start, eu_gas_date_end, eu_gas_time_end, eu_gas_actual_usage, eu_gas_expected_usage, eu_gas_result, eu_gas_degree_day, eu_gas_per_degree_day) VALUES ('";
+        strQuery.append(strStartDate);
+        strQuery.append("', '");
+        strQuery.append(strStartTime);
+        strQuery.append("', '");
+        strQuery.append(strEndDate);
+        strQuery.append("', '");
+        strQuery.append(strEndTime);
+        for (iCnt1 = 3; iCnt1 < iGasValueNb; iCnt1++)
+        {
+            // skip empty field in input file
+            if (iCnt1 != 6)
+            {
+                strTemp.replace("-",":");
+                strQuery.append("', '");
+                strQuery.append(stlInputValues->at(iCnt1));
+            }
+        }
+        strQuery.append("');");
 //  database fields
 //        eu_gas_date_start date,
 //        eu_gas_time_start time without time zone,
@@ -262,6 +280,17 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
 //        eu_gas_result integer,
 //        eu_gas_degree_day numeric(8,4),
 //        eu_gas_per_degree_day numeric(8,4),
+
+        //-----------------------------------------------------------------------------------
+        //
+        //  Create eu_gas_usage table
+        //
+        QSqlQuery qQuery("",sdbEnergyUsage);
+        if (!qQuery.exec(strQuery))
+        {
+            qDebug() << sdbEnergyUsage.lastError();
+            return false;
+        }
 
     }
 
