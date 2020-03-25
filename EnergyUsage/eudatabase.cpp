@@ -242,7 +242,8 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
     //
     //  Prepare query for Gas table
     //
-    if ((stlInputValues->at(0) == "gas")&&(iNbValues == iGasValueNb))
+    if ((stlInputValues->at(0) == "gas")&&
+        (iNbValues == iGasValueNb))
     {
         //
         //  Convert timestamps input file to postgress format
@@ -251,7 +252,9 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
         ConvertTimeStamp(&strTemp,strStartDate,strStartTime);
         strTemp = stlInputValues->at(2);
         ConvertTimeStamp(&strTemp,strEndDate,strEndTime);
-        strQuery = "INSERT INTO eu_gas_usage (eu_gas_date_start, eu_gas_time_start, eu_gas_date_end, eu_gas_time_end, eu_gas_actual_usage, eu_gas_expected_usage, eu_gas_result, eu_gas_degree_day, eu_gas_per_degree_day) VALUES ('";
+        strQuery = "INSERT INTO eu_gas_usage (eu_gas_date_start, eu_gas_time_start,"
+                    " eu_gas_date_end, eu_gas_time_end, eu_gas_actual_usage, eu_gas_expected_usage,"
+                    " eu_gas_result, eu_gas_degree_day, eu_gas_per_degree_day) VALUES ('";
         strQuery.append(strStartDate);
         strQuery.append("', '");
         strQuery.append(strStartTime);
@@ -264,22 +267,14 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
             // skip empty field in input file
             if (iCnt1 != 6)
             {
-                strTemp.replace("-",":");
                 strQuery.append("', '");
-                strQuery.append(stlInputValues->at(iCnt1));
+                strTemp = stlInputValues->at(iCnt1);
+                strTemp.remove(".");
+                strTemp.replace(",",".");
+                strQuery.append(strTemp);
             }
         }
         strQuery.append("');");
-//  database fields
-//        eu_gas_date_start date,
-//        eu_gas_time_start time without time zone,
-//        eu_gas_date_end date,
-//        eu_gas_time_end time without time zone,
-//        eu_gas_actual_usage numeric(10,4),
-//        eu_gas_expected_usage numeric(10,4),
-//        eu_gas_result integer,
-//        eu_gas_degree_day numeric(8,4),
-//        eu_gas_per_degree_day numeric(8,4),
 
         //-----------------------------------------------------------------------------------
         //
@@ -311,6 +306,9 @@ bool euDatabase::ExtractValuesForLine(QString *strMetricType, QString *strInputL
 
     QString
         strTemp;
+
+    QStringList
+        stlRecordValues;// list with record values includes metric type
 
     //-----------------------------------------------------------------------------------
     //
@@ -403,11 +401,11 @@ void euDatabase::ConvertTimeStamp(QString *strTimeStampIn, QString &strDateOut, 
     iDay    = strTemp.section(":",2,2).toInt();
     iHour   = strTemp.section(":",3,3).toInt();
     iMinute = strTemp.section(":",4,4).toInt();
-    strTemp = QString("%1").arg(iMonth);
+    strTemp = QString("%1").arg(iYear);
+    strTemp.append("/");
+    strTemp.append(QString("%1").arg(iMonth));
     strTemp.append("/");
     strTemp.append(QString("%1").arg(iDay));
-    strTemp.append("/");
-    strTemp.append(QString("%1").arg(iYear));
     strDateOut = strTemp;
 
     strTemp = QString("%1").arg(iHour);

@@ -99,8 +99,7 @@ QString
     strMetricType;  // metric type indicator (gas, elek, water)
 
 QStringList
-    stlDbTables,    // list with tables in database
-    stlRecordValues;// list with record values includes metric type
+    stlDbTables;    // list with tables in database
 
 };
 
