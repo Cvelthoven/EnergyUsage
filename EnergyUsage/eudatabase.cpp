@@ -266,10 +266,7 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
             if (iCnt1 != 6)
             {
                 strQuery.append("', '");
-                strTemp = stlInputValues->at(iCnt1);
-                strTemp.remove(".");
-                strTemp.replace(",",".");
-                strQuery.append(strTemp);
+                strQuery.append(stlInputValues->at(iCnt1));
             }
         }
         strQuery.append("');");
@@ -373,6 +370,7 @@ int euDatabase::ImportMetricsFile(QString *strMetricFileType, QString *strImport
         strInputLine = qtsImportFile.readLine();
         while (!qtsImportFile.atEnd())
         {
+            strInputLine = ReFormatString(&strInputLine);
             iTotalRecords = ExtractValuesForLine(strMetricFileType,&strInputLine) + iTotalRecords;
             iTotalLines++;
             // read next line, when last line of import file it is skipped because this is
@@ -444,5 +442,29 @@ void euDatabase::ConvertTimeStamp(QString *strTimeStampIn, QString &strDateOut, 
     strTemp.append(QString("%1").arg(iMinute,2,10,QChar('0')));
     strTemp.append(":00.000");
     strTimeOut = strTemp;
+
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  Reformats the input string
+//  Removes . in the numeric values
+//  Replaces , with . in the numeric values
+//
+QString euDatabase::ReFormatString(QString *strInputLine)
+{
+    QString
+        strTemp;
+
+    //---------------------------------------------------------------------------------------
+    //
+    //  Reformats the input string
+    //  Removes . in the numeric values
+    //  Replaces , with . in the numeric values
+    strTemp = *strInputLine;
+    strTemp.remove(".");
+    strTemp.replace(",",".");
+
+    return strTemp;
 
 }

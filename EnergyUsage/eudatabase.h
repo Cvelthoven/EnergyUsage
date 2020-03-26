@@ -38,7 +38,7 @@ private:
     bool AddRecord(QStringList *stlInputValues);
     void ConvertTimeStamp(QString *strTimeStampIn, QString &strDateOut, QString &strTimeOut);
     bool ExtractValuesForLine(QString *strMetricFileType, QString *strInputLine);
-
+    QString ReFormatString(QString *strInputLine);
     int iGasValueNb = 9;// number of expected fields in gas import file
 
     QSqlDatabase
