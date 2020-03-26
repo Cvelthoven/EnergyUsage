@@ -26,8 +26,9 @@ euDatabase::euDatabase(QObject *parent, euApplicationLogging *ApplicationLog)
 {
 
     ApplicationSettings = new euApplicationSettings();
+    dbApplicationLog = ApplicationLog;
     euRetrieveConfig();
-    if (euConnectDB(ApplicationLog,&strDatabaseName,&strDatabaseServerName,&strDatabaseUserId,&strDatabasePassword))
+    if (euConnectDB(&strDatabaseName,&strDatabaseServerName,&strDatabaseUserId,&strDatabasePassword))
     {
         bDBconnected = true;
     }
@@ -49,11 +50,8 @@ euDatabase::euDatabase(QObject *parent, euApplicationLogging *ApplicationLog)
 //
 //  Connects to the database and verifies that the tables exist or let them be created
 //
-bool euDatabase::euConnectDB(euApplicationLogging *ApplicationLog, QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword)
+bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword)
 {
-    QString
-            strSeverity,
-            strLogMessage;
     QStringList
             stlDbDrivers;
 
@@ -69,7 +67,7 @@ bool euDatabase::euConnectDB(euApplicationLogging *ApplicationLog, QString *strD
     {
         strSeverity = "Error";
         strLogMessage = "No Postgresql driver found";
-        ApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
         return false;
     }
 
@@ -85,14 +83,14 @@ bool euDatabase::euConnectDB(euApplicationLogging *ApplicationLog, QString *strD
     {
         strSeverity = "Error";
         strLogMessage = "Unable to connect to database: " + *strDatabaseName;
-        ApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
         return false;
     }
     else
     {
         strSeverity = "Info";
         strLogMessage = "Connected to database: " + *strDatabaseName;
-        ApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
 
     }
 
@@ -109,7 +107,7 @@ bool euDatabase::euConnectDB(euApplicationLogging *ApplicationLog, QString *strD
         {
             strSeverity = "Error";
             strLogMessage = "Table: " + strTblGasName + " not found and could not be created";
-            ApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+            dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
             return false;
         }
     }
@@ -283,7 +281,9 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
         QSqlQuery qQuery("",sdbEnergyUsage);
         if (!qQuery.exec(strQuery))
         {
-            qDebug() << sdbEnergyUsage.lastError();
+            strSeverity = "Error";
+            strLogMessage = "Query: " + strQuery + " failed";
+            dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
             return false;
         }
 
@@ -343,7 +343,8 @@ int euDatabase::ImportMetricsFile(QString *strMetricFileType, QString *strImport
         iTotalRecords = 0;
 
     QString
-        strInputLine;
+        strInputLine,
+        strTemp;
 
     strMetricType = *strMetricFileType;
 
@@ -358,15 +359,45 @@ int euDatabase::ImportMetricsFile(QString *strMetricFileType, QString *strImport
         //
         //  Process file line by line
         //
+        strSeverity = "Info";
+        strLogMessage = "Import file: " + *strImportFileName + " succesfully opened";
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+
+        //-------------------------------------------------------------------------------
+        //
+        //  Process file line by line
+        //
         QTextStream qtsImportFile(&qfiImportFile);
-        //  read header line
+        //  read header line and first line with metrics
+        strInputLine = qtsImportFile.readLine();
         strInputLine = qtsImportFile.readLine();
         while (!qtsImportFile.atEnd())
         {
-            strInputLine = qtsImportFile.readLine();
             iTotalRecords = ExtractValuesForLine(strMetricFileType,&strInputLine) + iTotalRecords;
             iTotalLines++;
+            // read next line, when last line of import file it is skipped because this is
+            // a total period row. Invalid for the database
+            strInputLine = qtsImportFile.readLine();
         }
+        qfiImportFile.close();
+
+        //-------------------------------------------------------------------------------
+        //
+        //  Write to application log number of imported records
+        strTemp = QString("%1").arg(iTotalRecords);
+        strSeverity = "Info";
+        strLogMessage = "Total number " + *strMetricFileType + " records added: " + strTemp;
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+    }
+    else
+    {
+        //-------------------------------------------------------------------------------
+        //
+        //  Opening import file failed
+        strSeverity = "Error";
+        strLogMessage = "Failed to open import file: " + *strImportFileName;
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+
     }
     return(iTotalRecords);
 }

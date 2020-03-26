@@ -26,7 +26,7 @@ class euDatabase : public QStandardItemModel
 
 public:
     euDatabase(QObject *parent, euApplicationLogging *ApplicationLog);
-    bool euConnectDB(euApplicationLogging *ApplicationLog, QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);
+    bool euConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);
     bool euGasCreateTable();
     bool euRetrieveConfig();
     int ImportMetricsFile(QString *strMetricFileType, QString *strImportFileName);
@@ -49,6 +49,7 @@ private:
 //  Application settings
 //
 euApplicationSettings *ApplicationSettings;
+euApplicationLogging *dbApplicationLog;
 
 QString
     strDatabaseSection = "AplDatabase",             // Database section name
@@ -96,7 +97,9 @@ QString
     strFldAplLogMessage         = "apl_log_message";
 
 QString
-    strMetricType;  // metric type indicator (gas, elek, water)
+    strMetricType,  // metric type indicator (gas, elek, water)
+    strSeverity,    // severity value in log message
+    strLogMessage;  // application log message
 
 QStringList
     stlDbTables;    // list with tables in database
