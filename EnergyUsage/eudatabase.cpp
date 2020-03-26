@@ -91,7 +91,6 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QSt
         strSeverity = "Info";
         strLogMessage = "Connected to database: " + *strDatabaseName;
         dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
-
     }
 
     //-----------------------------------------------------------------------------------
@@ -141,7 +140,6 @@ bool euDatabase::euGasCreateTable()
     strQuery.append(strFldDegreeDay + " numeric(8,4), ");
     strQuery.append(strFldPerDegreeDay + " numeric(8,4)");
     strQuery.append(");");
-
 
     //-----------------------------------------------------------------------------------
     //
@@ -202,7 +200,6 @@ bool euDatabase::euRetrieveConfig()
         strDatabasePassword = strDatabasePasswordDef;
     }
 
-
     return(bOK);
 }
 
@@ -227,8 +224,6 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
         strEndDate,
         strEndTime,
         strTemp;
-
-
 
     //-----------------------------------------------------------------------------------
     //
@@ -283,7 +278,6 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
             dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
             return false;
         }
-
     }
 
     return true;
@@ -415,7 +409,6 @@ void euDatabase::ConvertTimeStamp(QString *strTimeStampIn, QString &strDateOut, 
 
     QString
         strTemp;
-
 
     //-----------------------------------------------------------------------------------
     //
