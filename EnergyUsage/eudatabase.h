@@ -73,17 +73,17 @@ QString
     //
     //  euGas table names
 QString
-    strTblGasName       = "eu_gas_usage",
-    strFldGasRecId      = "eu_gas_rec_id",
-    strFldDateStart     = "eu_gas_date_start",
-    strFldTimeStart     = "eu_gas_time_start",
-    strFldDateEnd       = "eu_gas_date_end",
-    strFldTimeEnd       = "eu_gas_time_end",
-    strFldActualUsage   = "eu_gas_actual_usage",
-    strFldExpectedUsage = "eu_gas_expected_usage",
-    strFldResult        = "eu_gas_result",
-    strFldDegreeDay     = "eu_gas_degree_day",
-    strFldPerDegreeDay  = "eu_gas_per_degree_day";
+    strTblGasName           = "eu_gas_usage",
+    strFldGasRecId          = "eu_gas_rec_id",
+    strFldGasDateStart      = "eu_gas_date_start",
+    strFldGasTimeStart      = "eu_gas_time_start",
+    strFldGasDateEnd        = "eu_gas_date_end",
+    strFldGasTimeEnd        = "eu_gas_time_end",
+    strFldGasActualUsage    = "eu_gas_actual_usage",
+    strFldGasExpectedUsage  = "eu_gas_expected_usage",
+    strFldGasResult         = "eu_gas_result",
+    strFldGasDegreeDay      = "eu_gas_degree_day",
+    strFldGasPerDegreeDay   = "eu_gas_per_degree_day";
 
 //-----------------------------------------------------------------------------------
 //

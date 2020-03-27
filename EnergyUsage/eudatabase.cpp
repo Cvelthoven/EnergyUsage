@@ -128,18 +128,17 @@ bool euDatabase::euGasCreateTable()
     //-----------------------------------------------------------------------------------
     //
     //  Build build query of strTblGasName
-    strQuery = "CREATE TABLE " + strTblGasName + " (";
-    strQuery.append(strFldGasRecId + " SERIAL PRIMARY KEY, ");
-    strQuery.append(strFldDateStart + " date, ");
-    strQuery.append(strFldTimeStart + " time without time zone, ");
-    strQuery.append(strFldDateEnd + " date, ");
-    strQuery.append(strFldTimeEnd + " time without time zone, ");
-    strQuery.append(strFldActualUsage + " numeric(10,4), ");
-    strQuery.append(strFldExpectedUsage + " numeric(10,4), ");
-    strQuery.append(strFldResult + " integer, ");
-    strQuery.append(strFldDegreeDay + " numeric(8,4), ");
-    strQuery.append(strFldPerDegreeDay + " numeric(8,4)");
-    strQuery.append(");");
+    strQuery = "CREATE TABLE " + strTblGasName + " (" +
+                strFldGasRecId + " SERIAL PRIMARY KEY, " +
+                strFldGasDateStart + " date, " +
+                strFldGasTimeStart + " time without time zone, " +
+                strFldGasDateEnd + " date, " +
+                strFldGasTimeEnd + " time without time zone, " +
+                strFldGasActualUsage + " numeric(10,4), " +
+                strFldGasExpectedUsage + " numeric(10,4), " +
+                strFldGasResult + " integer, " +
+                strFldGasDegreeDay + " numeric(8,4), " +
+                strFldGasPerDegreeDay + " numeric(8,4));";
 
     //-----------------------------------------------------------------------------------
     //
@@ -245,16 +244,13 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
         ConvertTimeStamp(&strTemp,strStartDate,strStartTime);
         strTemp = stlInputValues->at(2);
         ConvertTimeStamp(&strTemp,strEndDate,strEndTime);
-        strQuery = "INSERT INTO eu_gas_usage (eu_gas_date_start, eu_gas_time_start,"
-                    " eu_gas_date_end, eu_gas_time_end, eu_gas_actual_usage, eu_gas_expected_usage,"
-                    " eu_gas_result, eu_gas_degree_day, eu_gas_per_degree_day) VALUES ('";
-        strQuery.append(strStartDate);
-        strQuery.append("', '");
-        strQuery.append(strStartTime);
-        strQuery.append("', '");
-        strQuery.append(strEndDate);
-        strQuery.append("', '");
-        strQuery.append(strEndTime);
+        strQuery = "INSERT INTO " + strTblGasName + " (" +
+                    strFldGasDateStart + ", " + strFldGasTimeStart + ", " +
+                    strFldGasDateEnd + ", " + strFldGasTimeEnd + "," +
+                    strFldGasActualUsage + ", " + strFldGasExpectedUsage + ", " +
+                    strFldGasResult + ", " + strFldGasDegreeDay + ", " + strFldGasPerDegreeDay +
+                    ") VALUES ('" + strStartDate + "', '" + strStartTime + "', '" +
+                    strEndDate +"', '" + strEndTime;
         for (iCnt1 = 3; iCnt1 < iGasValueNb; iCnt1++)
         {
             // skip empty field in input file
@@ -268,7 +264,7 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
 
         //-----------------------------------------------------------------------------------
         //
-        //  Create eu_gas_usage table
+        //  Write record to database
         //
         QSqlQuery qQuery("",sdbEnergyUsage);
         if (!qQuery.exec(strQuery))

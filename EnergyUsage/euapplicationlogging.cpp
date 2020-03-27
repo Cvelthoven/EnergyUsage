@@ -296,14 +296,20 @@ void euApplicationLogging::WriteLogRecord(const QDateTime *qdRecTimeStamp, const
 
 //---------------------------------------------------------------------------------------
 //  Write a log record
-//INSERT INTO application_log (apl_log_application_name, apl_log_time_stamp, apl_log_severity,apl_log_message) VALUES ('test','1/3/2019 12:38:00.123','info','Program started');
 //
-void euApplicationLogging::WriteLogRecord(const QString *strAppName, const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage)
+void euApplicationLogging::WriteLogRecord(const QString *strAppName,
+                                          const QDateTime *qdRecTimeStamp,
+                                          const QString *strLogSeverity,
+                                          const QString *strLogMessage)
 {
     QString strQuery,
             strRecTimeStamp,
             strTimeStampFormat = "yyyy-MM-dd hh:mm:ss.zzz",
             strTemp;
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Build query
     strQuery = "INSERT INTO " + strAppLogTblNameApplicationLog + " (";
     // Fields
     strQuery.append(strAppLogFldAplApplicationName + ", ");
@@ -319,7 +325,14 @@ void euApplicationLogging::WriteLogRecord(const QString *strAppName, const QDate
     strQuery.append("\', \'");
     strQuery.append(strLogSeverity);
     strQuery.append("\', \'");
-    strQuery.append(strLogMessage);
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Reformat possible ' in message to ''
+    //
+    strTemp = *strLogMessage;
+    strTemp.replace(QString("'"),QString("''"));
+    strQuery.append(strTemp);
     strQuery.append("\');");
 
     // Write record to log database
