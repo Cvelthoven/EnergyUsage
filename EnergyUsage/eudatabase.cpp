@@ -37,8 +37,17 @@ euDatabase::euDatabase(QObject *parent, euApplicationLogging *ApplicationLog)
         bDBconnected = false;
     }
 
-
 }
+
+//---------------------------------------------------------------------------------------
+//
+//  Destructor with disconnect from metrics database
+//
+euDatabase::~euDatabase()
+{
+    sdbEnergyUsage.close();
+}
+
 
 //---------------------------------------------------------------------------------------
 //
@@ -50,7 +59,8 @@ euDatabase::euDatabase(QObject *parent, euApplicationLogging *ApplicationLog)
 //
 //  Connects to the database and verifies that the tables exist or let them be created
 //
-bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword)
+bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName,
+                             QString *strUserId, QString *strPassword)
 {
     QStringList
             stlDbDrivers;
@@ -394,7 +404,8 @@ int euDatabase::ImportMetricsFile(QString *strMetricFileType, QString *strImport
 //
 //  Convert timestmap format from yyyy-mm-dd hh:mm to (m)m/(d)d/yyyy (h)h:mm:00.000
 //
-void euDatabase::ConvertTimeStamp(QString *strTimeStampIn, QString &strDateOut, QString &strTimeOut)
+void euDatabase::ConvertTimeStamp(QString *strTimeStampIn, QString &strDateOut,
+                                  QString &strTimeOut)
 {
     int
         iYear,

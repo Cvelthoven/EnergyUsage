@@ -27,7 +27,8 @@ euApplicationLogging::euApplicationLogging(QObject *parent)
     //  Retrieve application logging configuration
     euAplLogingSettings = new euApplicationSettings();
     RetrieveLogConfig();
-    if (ConnectDB(&strAppLogDatabaseName, &strAppLogDatabaseServerName, &strAppLogDatabaseUserId, &strAppLogDatabasePassword))
+    if (ConnectDB(&strAppLogDatabaseName, &strAppLogDatabaseServerName,
+                  &strAppLogDatabaseUserId, &strAppLogDatabasePassword))
     {
         bDBconnected = true;
     }
@@ -55,7 +56,8 @@ euApplicationLogging::~euApplicationLogging()
 //
 //  Connects to the database and verifies that the tables exist or let them be created
 //
-bool euApplicationLogging::ConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword)
+bool euApplicationLogging::ConnectDB(QString *strDatabaseName, QString *strHostName,
+                                     QString *strUserId, QString *strPassword)
 {
     QStringList
             stlDbDrivers;
@@ -122,13 +124,12 @@ QString
     //-----------------------------------------------------------------------------------
     //
     //  Build build query of strTblGasName
-    strQuery = "CREATE TABLE " + strAppLogTblNameApplicationLog + " (";
-    strQuery.append(strAppLogFldAplRecId + " SERIAL PRIMARY KEY, ");
-    strQuery.append(strAppLogFldAplApplicationName + " text NOT NULL, ");
-    strQuery.append(strAppLogFldAplTimeStamp + " timestamp without time zone NOT NULL, ");
-    strQuery.append(strAppLogFldAplLogSeverity + " text NOT NULL, ");
-    strQuery.append(strAppLogFldAplLogMessage + " text NOT NULL");
-    strQuery.append(");");
+    strQuery = "CREATE TABLE " + strAppLogTblNameApplicationLog + " (" +
+                strAppLogFldAplRecId + " SERIAL PRIMARY KEY, " +
+                strAppLogFldAplApplicationName + " text NOT NULL, " +
+                strAppLogFldAplTimeStamp + " timestamp without time zone NOT NULL, " +
+                strAppLogFldAplLogSeverity + " text NOT NULL, " +
+                strAppLogFldAplLogMessage + " text NOT NULL);";
 
     //-----------------------------------------------------------------------------------
     //
@@ -310,21 +311,17 @@ void euApplicationLogging::WriteLogRecord(const QString *strAppName,
     //-----------------------------------------------------------------------------------
     //
     //  Build query
-    strQuery = "INSERT INTO " + strAppLogTblNameApplicationLog + " (";
-    // Fields
-    strQuery.append(strAppLogFldAplApplicationName + ", ");
-    strQuery.append(strAppLogFldAplTimeStamp + ", ");
-    strQuery.append(strAppLogFldAplLogSeverity + ", ");
-    strQuery.append(strAppLogFldAplLogMessage + ")");
-    strQuery.append(" VALUES (\'");
-    // Values
-    strQuery.append(strAppName);
-    strQuery.append("\', \'");
     strTemp = qdRecTimeStamp->toString(strTimeStampFormat);
-    strQuery.append(strTemp);
-    strQuery.append("\', \'");
-    strQuery.append(strLogSeverity);
-    strQuery.append("\', \'");
+    strQuery = "INSERT INTO " + strAppLogTblNameApplicationLog + " (" +
+    // Fields
+                strAppLogFldAplApplicationName + ", " +
+                strAppLogFldAplTimeStamp + ", " +
+                strAppLogFldAplLogSeverity + ", " +
+                strAppLogFldAplLogMessage + ") VALUES (\'" +
+    // Values
+                strAppName + "\', \'" +
+                strTemp + "\', \'" +
+                strLogSeverity + "\', \'";
 
     //-----------------------------------------------------------------------------------
     //

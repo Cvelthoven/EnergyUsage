@@ -42,7 +42,8 @@ euApplicationSettings::euApplicationSettings()
 //  Ouptut:
 //      euGetAppSetting  : value of key if found otherwise and empty string
 //
-QString euApplicationSettings::euGetAppSetting(const QString &strSettingSection, const QString &strSettingName)
+QString euApplicationSettings::euGetAppSetting(const QString &strSettingSection,
+                                               const QString &strSettingName)
 {
 
     QSettings programDefaults;
@@ -67,7 +68,9 @@ QString euApplicationSettings::euGetAppSetting(const QString &strSettingSection,
 //
 //  save application setting value
 //
-bool euApplicationSettings::euSetAppSetting(const QString &strSettingSection, const QString &strSettingName, const QString &strSettingValue)
+bool euApplicationSettings::euSetAppSetting(const QString &strSettingSection,
+                                            const QString &strSettingName,
+                                            const QString &strSettingValue)
 {
     if (strSettingSection.size() != 0)
         strFullKeyPath = strSettingSection + "//" + strSettingName;
