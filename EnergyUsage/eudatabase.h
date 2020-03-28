@@ -28,7 +28,7 @@ public:
     euDatabase(QObject *parent, euApplicationLogging *ApplicationLog);
     ~euDatabase();
     bool euConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);
-    bool euGasCreateTable();
+    bool CreateTable(const QString *strTableName, const QStringList *stlTableFieldNames, const QStringList *stlTableFieldTypes);
     bool euRetrieveConfig();
     int ImportMetricsFile(QString *strMetricFileType, QString *strImportFileName);
 
@@ -38,6 +38,7 @@ public:
 private:
     bool AddRecord(QStringList *stlInputValues);
     void ConvertTimeStamp(QString *strTimeStampIn, QString &strDateOut, QString &strTimeOut);
+    bool ExecQuery(QString *strQuery);
     bool ExtractValuesForLine(QString *strMetricFileType, QString *strInputLine);
     QString ReFormatString(QString *strInputLine);
     int iGasValueNb = 9;// number of expected fields in gas import file
@@ -85,6 +86,34 @@ QString
     strFldGasResult         = "eu_gas_result",
     strFldGasDegreeDay      = "eu_gas_degree_day",
     strFldGasPerDegreeDay   = "eu_gas_per_degree_day";
+
+QStringList
+    stlGasTableFieldNames =
+    {
+        "eu_gas_rec_id",
+        "eu_gas_date_start",
+        "eu_gas_time_start",
+        "eu_gas_date_end",
+        "eu_gas_time_end",
+        "eu_gas_actual_usage",
+        "eu_gas_expected_usage",
+        "eu_gas_result",
+        "eu_gas_degree_day",
+        "eu_gas_per_degree_day"
+    },
+    stlGasTableFieldTypes =
+    {
+        "SERIAL PRIMARY KEY",
+        "date",
+        "time without time zone",
+        "date",
+        "time without time zone",
+        "numeric(10,4)",
+        "numeric(10,4)",
+        "integer",
+        "numeric(8,4)",
+        "numeric(8,4)"
+    };
 
 //-----------------------------------------------------------------------------------
 //

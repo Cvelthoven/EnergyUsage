@@ -112,7 +112,7 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName,
     //  Check eu_gas_usage table exists
     if (!stlDbTables.contains(strTblGasName))
     {
-        if (!euGasCreateTable())
+        if (!CreateTable(&strTblGasName,&stlGasTableFieldNames,&stlGasTableFieldTypes))
         {
             strSeverity = "Error";
             strLogMessage = "Table: " + strTblGasName + " not found and could not be created";
@@ -126,42 +126,41 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName,
 
 //---------------------------------------------------------------------------------------
 //
-//  euGasCreateTable
+//  CreateTable
 //
-//  Creates the table: strTblGasName
+//  Creates the tables
 //
-bool euDatabase::euGasCreateTable()
+bool euDatabase::CreateTable(const QString *strTableName,
+                             const QStringList *stlTableFieldNames,
+                             const QStringList *stlTableFieldTypes)
 {
+    int
+        iCnt;
+
     QString
         strQuery;
 
     //-----------------------------------------------------------------------------------
     //
-    //  Build build query of strTblGasName
-    strQuery = "CREATE TABLE " + strTblGasName + " (" +
-                strFldGasRecId + " SERIAL PRIMARY KEY, " +
-                strFldGasDateStart + " date, " +
-                strFldGasTimeStart + " time without time zone, " +
-                strFldGasDateEnd + " date, " +
-                strFldGasTimeEnd + " time without time zone, " +
-                strFldGasActualUsage + " numeric(10,4), " +
-                strFldGasExpectedUsage + " numeric(10,4), " +
-                strFldGasResult + " integer, " +
-                strFldGasDegreeDay + " numeric(8,4), " +
-                strFldGasPerDegreeDay + " numeric(8,4));";
+    //  Build build table creation query
+    strQuery = "CREATE TABLE " + *strTableName + " (";
+    for (iCnt = 0; iCnt < stlTableFieldNames->size(); iCnt++)
+    {
+        strQuery.append(stlTableFieldNames->at(iCnt));
+        strQuery.append(" ");
+        strQuery.append(stlTableFieldTypes->at(iCnt));
+        if (iCnt != (stlTableFieldNames->size() - 1))
+            strQuery.append(", ");
+        else
+            strQuery.append(");");
+    }
 
     //-----------------------------------------------------------------------------------
     //
-    //  Create eu_gas_usage table
+    //  Create table
     //
-    QSqlQuery qQuery("",sdbEnergyUsage);
-    if (!qQuery.exec(strQuery))
-    {
-        qDebug() << sdbEnergyUsage.lastError();
-        return false;
-    }
+    return ExecQuery(&strQuery);
 
-    return true;
 }
 
 //---------------------------------------------------------------------------------------
@@ -224,6 +223,7 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
 {
     int
         iCnt1,
+        iCnt2,
         iNbValues;  // Number of values in input stringlist
 
     QString
@@ -232,7 +232,11 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
         strStartTime,
         strEndDate,
         strEndTime,
+        strTableName,
         strTemp;
+
+    QStringList
+        stlTableFields;
 
     //-----------------------------------------------------------------------------------
     //
@@ -247,46 +251,63 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
     if ((stlInputValues->at(0) == "gas")&&
         (iNbValues == iGasValueNb))
     {
-        //
-        //  Convert timestamps input file to postgress format
-        //
-        strTemp = stlInputValues->at(1);
-        ConvertTimeStamp(&strTemp,strStartDate,strStartTime);
-        strTemp = stlInputValues->at(2);
-        ConvertTimeStamp(&strTemp,strEndDate,strEndTime);
-        strQuery = "INSERT INTO " + strTblGasName + " (" +
-                    strFldGasDateStart + ", " + strFldGasTimeStart + ", " +
-                    strFldGasDateEnd + ", " + strFldGasTimeEnd + "," +
-                    strFldGasActualUsage + ", " + strFldGasExpectedUsage + ", " +
-                    strFldGasResult + ", " + strFldGasDegreeDay + ", " + strFldGasPerDegreeDay +
-                    ") VALUES ('" + strStartDate + "', '" + strStartTime + "', '" +
-                    strEndDate +"', '" + strEndTime;
-        for (iCnt1 = 3; iCnt1 < iGasValueNb; iCnt1++)
-        {
-            // skip empty field in input file
-            if (iCnt1 != 6)
-            {
-                strQuery.append("', '");
-                strQuery.append(stlInputValues->at(iCnt1));
-            }
-        }
-        strQuery.append("');");
+        stlTableFields = stlGasTableFieldNames;
+        strTableName = strTblGasName;
+    }
 
-        //-----------------------------------------------------------------------------------
-        //
-        //  Write record to database
-        //
-        QSqlQuery qQuery("",sdbEnergyUsage);
-        if (!qQuery.exec(strQuery))
+    //-------------------------------------------------------------------------------
+    //
+    //  Convert timestamps input file to postgress format
+    //
+    strTemp = stlInputValues->at(1);
+    ConvertTimeStamp(&strTemp,strStartDate,strStartTime);
+    strTemp = stlInputValues->at(2);
+    ConvertTimeStamp(&strTemp,strEndDate,strEndTime);
+
+    //-------------------------------------------------------------------------------
+    //
+    //  Build first part of insert query
+    //
+    strQuery = "INSERT INTO " + strTableName + " (";
+    for (iCnt1 = 1; iCnt1 < stlTableFields.size(); iCnt1++)
+    {
+        strQuery.append(stlTableFields.at(iCnt1));
+        if (iCnt1 != (stlTableFields.size() - 1))
+            strQuery.append(", ");
+        else
         {
-            strSeverity = "Error";
-            strLogMessage = "Query: " + strQuery + " failed";
-            dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
-            return false;
+            strQuery.append(") VALUES ('");
+            strQuery.append(strStartDate);
+            strQuery.append("', '");
+            strQuery.append(strStartTime);
+            strQuery.append("', '");
+            strQuery.append(strEndDate);
+            strQuery.append("', '");
+            strQuery.append(strEndTime);
         }
     }
 
-    return true;
+    //-------------------------------------------------------------------------------
+    //
+    //  Build second part of insert query
+    //
+    for (iCnt2 = 3; iCnt2 < iNbValues; iCnt2++)
+    {
+        // skip empty field in input file
+        if ((iCnt2 != 6)&&(strTableName == strTblGasName))
+        {
+            strQuery.append("', '");
+            strQuery.append(stlInputValues->at(iCnt2));
+        }
+    }
+    strQuery.append("');");
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Write record to database
+    //
+    return ExecQuery(&strQuery);
+
 }
 
 //---------------------------------------------------------------------------------------
@@ -442,6 +463,25 @@ void euDatabase::ConvertTimeStamp(QString *strTimeStampIn, QString &strDateOut,
     strTemp.append(QString("%1").arg(iMinute,2,10,QChar('0')));
     strTemp.append(":00.000");
     strTimeOut = strTemp;
+
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  Execute Query
+//
+bool euDatabase::ExecQuery(QString *strQuery)
+{
+    QSqlQuery qQuery("",sdbEnergyUsage);
+    if (qQuery.exec(*strQuery))
+        return true;
+    else
+    {
+        strSeverity = "Error";
+        strLogMessage = "Query: " + *strQuery + " failed";
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+        return false;
+    }
 
 }
 
