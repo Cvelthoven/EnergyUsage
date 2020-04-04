@@ -26,6 +26,8 @@ class Ui_MainWindow
 public:
     QAction *actionGas;
     QAction *actionExit;
+    QAction *actionElectricity;
+    QAction *actionWater;
     QWidget *centralWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -42,6 +44,10 @@ public:
         actionGas->setObjectName(QString::fromUtf8("actionGas"));
         actionExit = new QAction(MainWindow);
         actionExit->setObjectName(QString::fromUtf8("actionExit"));
+        actionElectricity = new QAction(MainWindow);
+        actionElectricity->setObjectName(QString::fromUtf8("actionElectricity"));
+        actionWater = new QAction(MainWindow);
+        actionWater->setObjectName(QString::fromUtf8("actionWater"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         MainWindow->setCentralWidget(centralWidget);
@@ -64,6 +70,8 @@ public:
         menuFile->addAction(menuOpen_import->menuAction());
         menuFile->addAction(actionExit);
         menuOpen_import->addAction(actionGas);
+        menuOpen_import->addAction(actionElectricity);
+        menuOpen_import->addAction(actionWater);
 
         retranslateUi(MainWindow);
 
@@ -75,6 +83,8 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         actionGas->setText(QCoreApplication::translate("MainWindow", "Gas", nullptr));
         actionExit->setText(QCoreApplication::translate("MainWindow", "Exit", nullptr));
+        actionElectricity->setText(QCoreApplication::translate("MainWindow", "Electricity", nullptr));
+        actionWater->setText(QCoreApplication::translate("MainWindow", "Water", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuOpen_import->setTitle(QCoreApplication::translate("MainWindow", "Open import", nullptr));
     } // retranslateUi

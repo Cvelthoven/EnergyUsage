@@ -112,10 +112,55 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName,
     //  Check eu_gas_usage table exists
     if (!stlDbTables.contains(strTblGasName))
     {
-        if (!CreateTable(&strTblGasName,&stlGasTableFieldNames,&stlGasTableFieldTypes))
+        if (CreateTable(&strTblGasName,&stlGasTableFieldNames,&stlGasTableFieldTypes))
+        {
+            strSeverity = "Info";
+            strLogMessage = "Table: " + strTblGasName + " created";
+            dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+        }
+        else
         {
             strSeverity = "Error";
             strLogMessage = "Table: " + strTblGasName + " not found and could not be created";
+            dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+            return false;
+        }
+    }
+
+    //
+    //  Check eu_elec_usage table exists
+    if (!stlDbTables.contains(strTblElecName))
+    {
+        if (CreateTable(&strTblElecName,&stlElecTableFieldNames,&stlElecTableFieldTypes))
+        {
+            strSeverity = "Info";
+            strLogMessage = "Table: " + strTblElecName + " created";
+            dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+        }
+        else
+        {
+            strSeverity = "Error";
+            strLogMessage = "Table: " + strTblElecName + " not found and could not be created";
+            dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+            return false;
+        }
+    }
+
+
+    //
+    //  Check eu_water_usage table exists
+    if (!stlDbTables.contains(strTblWaterName))
+    {
+        if (CreateTable(&strTblWaterName,&stlWaterTableFieldNames,&stlWaterTableFieldTypes))
+        {
+            strSeverity = "Info";
+            strLogMessage = "Table: " + strTblWaterName + " created";
+            dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+        }
+        else
+        {
+            strSeverity = "Error";
+            strLogMessage = "Table: " + strTblWaterName + " not found and could not be created";
             dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
             return false;
         }

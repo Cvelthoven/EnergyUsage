@@ -32,6 +32,8 @@
       <string>Open import</string>
      </property>
      <addaction name="actionGas"/>
+     <addaction name="actionElectricity"/>
+     <addaction name="actionWater"/>
     </widget>
     <addaction name="menuOpen_import"/>
     <addaction name="actionExit"/>
@@ -55,6 +57,16 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionElectricity">
+   <property name="text">
+    <string>Electricity</string>
+   </property>
+  </action>
+  <action name="actionWater">
+   <property name="text">
+    <string>Water</string>
    </property>
   </action>
  </widget>

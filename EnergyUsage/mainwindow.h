@@ -30,13 +30,17 @@ private slots:
 
     void on_actionGas_triggered();
 
+    void on_actionElectricity_triggered();
+
+    void on_actionWater_triggered();
+
 private:
     Ui::MainWindow *ui;
 
     euDatabase *Database;
 
     QString
-        strGasImportFileName,
+        strImportFileName,
         strTemp,
         strSeverity,
         strMessage;

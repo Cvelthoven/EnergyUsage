@@ -73,21 +73,17 @@ QString
 
     //-------------------------------------------------------------------------------
     //
-    //  euGas table names
+    //  Resource table names
 QString
-    strTblGasName           = "eu_gas_usage",
-    strFldGasRecId          = "eu_gas_rec_id",
-    strFldGasDateStart      = "eu_gas_date_start",
-    strFldGasTimeStart      = "eu_gas_time_start",
-    strFldGasDateEnd        = "eu_gas_date_end",
-    strFldGasTimeEnd        = "eu_gas_time_end",
-    strFldGasActualUsage    = "eu_gas_actual_usage",
-    strFldGasExpectedUsage  = "eu_gas_expected_usage",
-    strFldGasResult         = "eu_gas_result",
-    strFldGasDegreeDay      = "eu_gas_degree_day",
-    strFldGasPerDegreeDay   = "eu_gas_per_degree_day";
+    strTblGasName   = "eu_gas_usage",
+    strTblElecName  = "eu_elec_usage",
+    strTblWaterName = "eu_water_usage";
 
 QStringList
+    //-----------------------------------------------------------------------------------
+    //
+    // Field names and types of eu_elec_usage
+    //
     stlGasTableFieldNames =
     {
         "eu_gas_rec_id",
@@ -113,6 +109,65 @@ QStringList
         "integer",
         "numeric(8,4)",
         "numeric(8,4)"
+    },
+    //-----------------------------------------------------------------------------------
+    //
+    //  Field names and types of eu_elec_usage
+    //  Total field in import file is excluded
+    //
+    stlElecTableFieldNames =
+    {
+        "eu_elec_rec_id",
+        "eu_elec_date_start",
+        "eu_elec_time_start",
+        "eu_elec_date_end",
+        "eu_elec_time_end",
+        "eu_elec_usage_low_tarif",
+        "eu_elec_usage_high_tarif",
+        "eu_elec_return_low_tarif",
+        "eu_elec_return_high_tarif",
+        "eu_elec_expected_usage",
+        "eu_elec_result"
+    },
+    stlElecTableFieldTypes =
+    {
+        "SERIAL PRIMARY KEY",
+        "date",
+        "time without time zone",
+        "date",
+        "time without time zone",
+        "numeric(10,5)",
+        "numeric(10,5)",
+        "numeric(10,5)",
+        "numeric(10,5)",
+        "numeric(10,5)",
+        "integer",
+    },
+    //-----------------------------------------------------------------------------------
+    //
+    // Field names and types of eu_water_usage
+    //
+    stlWaterTableFieldNames =
+    {
+        "eu_water_rec_id",
+        "eu_water_date_start",
+        "eu_water_time_start",
+        "eu_water_date_end",
+        "eu_water_time_end",
+        "eu_water_actual_usage",
+        "eu_water_expected_usage",
+        "eu_water_result",
+    },
+    stlWaterTableFieldTypes =
+    {
+        "SERIAL PRIMARY KEY",
+        "date",
+        "time without time zone",
+        "date",
+        "time without time zone",
+        "numeric(10,4)",
+        "numeric(10,4)",
+        "integer"
     };
 
 //-----------------------------------------------------------------------------------

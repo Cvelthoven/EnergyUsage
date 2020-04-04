@@ -104,6 +104,7 @@ void MainWindow::on_actionExit_triggered()
     strMessage  = "EnergyUsage ended normal";
     ApplicationLog->WriteLogRecord(&strSeverity,&strMessage);
     delete ApplicationLog;
+    delete Database;
     exit(0);
 
 }
@@ -115,8 +116,34 @@ void MainWindow::on_actionExit_triggered()
 void MainWindow::on_actionGas_triggered()
 {
     strTemp = "gas";
-    strGasImportFileName = QFileDialog::getOpenFileName(this,tr("Gas metrics import file"));
-    if (strGasImportFileName.length() != 0)
-        Database->ImportMetricsFile(&strTemp,&strGasImportFileName);
+    strImportFileName = QFileDialog::getOpenFileName(this,tr("Gas metrics import file"));
+    if (strImportFileName.length() != 0)
+        Database->ImportMetricsFile(&strTemp,&strImportFileName);
+
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  File -> Open Import -> Electricity
+//
+void MainWindow::on_actionElectricity_triggered()
+{
+    strTemp = "elec";
+    strImportFileName = QFileDialog::getOpenFileName(this,tr("Electricity metrics import file"));
+    if (strImportFileName.length() != 0)
+        Database->ImportMetricsFile(&strTemp,&strImportFileName);
+
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  File -> Open Import -> Water
+//
+void MainWindow::on_actionWater_triggered()
+{
+    strTemp = "water";
+    strImportFileName = QFileDialog::getOpenFileName(this,tr("Water metrics import file"));
+    if (strImportFileName.length() != 0)
+        Database->ImportMetricsFile(&strTemp,&strImportFileName);
 
 }
