@@ -41,7 +41,10 @@ private:
     bool ExecQuery(QString *strQuery);
     bool ExtractValuesForLine(QString *strMetricFileType, QString *strInputLine);
     QString ReFormatString(QString *strInputLine);
-    int iGasValueNb = 9;// number of expected fields in gas import file
+
+    int iGasValueNb     = 9,    // number of expected fields in gas import file
+        iElecValueNb    = 10,   // number of expected fields in electricity import file
+        iWaterValueNb   = 6;    // number of expected fields in water import file
 
     QSqlDatabase
         sdbEnergyUsage;

@@ -266,6 +266,9 @@ bool euDatabase::euRetrieveConfig()
 //
 bool euDatabase::AddRecord(QStringList *stlInputValues)
 {
+    bool
+        bTableFound = false;
+
     int
         iCnt1,
         iCnt2,
@@ -291,6 +294,17 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
 
     //-----------------------------------------------------------------------------------
     //
+    //  Prepare query for Elec table
+    //
+    if ((stlInputValues->at(0) == "elec")&&
+        (iNbValues == iElecValueNb))
+    {
+        stlTableFields = stlElecTableFieldNames;
+        strTableName = strTblElecName;
+        bTableFound = true;
+    }
+    //-----------------------------------------------------------------------------------
+    //
     //  Prepare query for Gas table
     //
     if ((stlInputValues->at(0) == "gas")&&
@@ -298,7 +312,26 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
     {
         stlTableFields = stlGasTableFieldNames;
         strTableName = strTblGasName;
+        bTableFound = true;
     }
+    //-----------------------------------------------------------------------------------
+    //
+    //  Prepare query for Water table
+    //
+    if ((stlInputValues->at(0) == "water")&&
+        (iNbValues == iWaterValueNb))
+    {
+        stlTableFields = stlWaterTableFieldNames;
+        strTableName = strTblWaterName;
+        bTableFound = true;
+    }
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Check if table is found
+    //
+    if (!bTableFound)
+        return false;
 
     //-------------------------------------------------------------------------------
     //
@@ -338,12 +371,16 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
     //
     for (iCnt2 = 3; iCnt2 < iNbValues; iCnt2++)
     {
-        // skip empty field in input file
-        if ((iCnt2 != 6)&&(strTableName == strTblGasName))
-        {
-            strQuery.append("', '");
-            strQuery.append(stlInputValues->at(iCnt2));
-        }
+        // skip empty field in gas input file
+        if ((iCnt2 == 6)&&(strTableName == strTblGasName))
+            continue;
+        // skip value "Totaal"
+        if ((iCnt2 == 7)&&(strTableName == strTblElecName))
+            continue;
+
+        //  Append value
+        strQuery.append("', '");
+        strQuery.append(stlInputValues->at(iCnt2));
     }
     strQuery.append("');");
 
