@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    energyusagedatamodel.cpp \
     euapplicationlogging.cpp \
     eudatabase.cpp \
         main.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
 
 HEADERS += \
     energyusage.h \
+    energyusagedatamodel.h \
     euapplicationlogging.h \
     eudatabase.h \
         mainwindow.h \
