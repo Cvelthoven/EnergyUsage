@@ -18,8 +18,8 @@
 #include "ui_mainwindow.h"
 
 #include "energyusage.h"
-#include "euapplicationsettings.h"
-#include "euapplicationlogging.h"
+#include "applicationsettings.h"
+#include "applicationlogging.h"
 
 //---------------------------------------------------------------------------------------
 //
@@ -73,17 +73,17 @@ bool MainWindow::InitializeProgram()
     strSeverity = "Info";
     strMessage  = "EnergyUsage started";
     QDateTime euStartTime = QDateTime::currentDateTime();
-    ApplicationLog = new euApplicationLogging(this);
-    if (!ApplicationLog->bDBconnected)
+    AppLogging = new ApplicationLogging(this);
+    if (!AppLogging->bDBconnected)
     {
         exit(0);
     }
-    ApplicationLog->WriteLogRecord(&euStartTime,&strSeverity,&strMessage);
+    AppLogging->WriteLogRecord(&euStartTime,&strSeverity,&strMessage);
 
     //---------------------------------------------------------------------------------------
     //
     //  Connect to database
-    Database = new euDatabase(this, ApplicationLog);
+    Database = new EnergyUsageDatabase(this, AppLogging);
     if (!Database->bDBconnected)
     {
         exit(0);
@@ -102,8 +102,8 @@ void MainWindow::on_actionExit_triggered()
 {
     strSeverity = "Info";
     strMessage  = "EnergyUsage ended normal";
-    ApplicationLog->WriteLogRecord(&strSeverity,&strMessage);
-    delete ApplicationLog;
+    AppLogging->WriteLogRecord(&strSeverity,&strMessage);
+    delete AppLogging;
     delete Database;
     exit(0);
 

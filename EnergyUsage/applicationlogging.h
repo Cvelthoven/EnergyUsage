@@ -16,15 +16,15 @@
 #include <QStandardItemModel>
 #include <QString>
 
-#include "euapplicationsettings.h"
+#include "applicationsettings.h"
 
-class euApplicationLogging : public QStandardItemModel
+class ApplicationLogging : public QStandardItemModel
 {
     Q_OBJECT
 
 public:
-    euApplicationLogging(QObject *parent);
-    ~euApplicationLogging();
+    ApplicationLogging(QObject *parent);
+    ~ApplicationLogging();
     void WriteLogRecord(const QString *strLogSeverity, const QString *strLogMessage);
     void WriteLogRecord(const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage);
     void WriteLogRecord(const QString *strAppName, const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage);
@@ -38,7 +38,7 @@ private:
     bool RetrieveLogConfig();
     void SendWarningMessage(const QString &strMsgPart1, const QString &strMsgPart2);
 
-    euApplicationSettings *euAplLogingSettings;
+    ApplicationSettings *euAplLogingSettings;
 
     QSqlDatabase sdbAppLogDB;
 

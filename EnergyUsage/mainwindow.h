@@ -4,9 +4,9 @@
 #include <QMainWindow>
 #include <QString>
 
-#include "euapplicationsettings.h"
-#include "euapplicationlogging.h"
-#include "eudatabase.h"
+#include "applicationsettings.h"
+#include "applicationlogging.h"
+#include "energyusagedatabase.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,8 +20,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    euApplicationSettings   *ApplicationSettings;
-    euApplicationLogging    *ApplicationLog;
+    ApplicationSettings   *AppSettings;
+    ApplicationLogging    *AppLogging;
 
     bool InitializeProgram();
 
@@ -37,7 +37,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    euDatabase *Database;
+    EnergyUsageDatabase *Database;
 
     QString
         strImportFileName,

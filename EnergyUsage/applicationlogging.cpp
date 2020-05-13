@@ -4,8 +4,8 @@
 //
 //  This class handles all application logging to a database or file
 //
-#include "euapplicationlogging.h"
-#include "euapplicationsettings.h"
+#include "applicationlogging.h"
+#include "applicationsettings.h"
 #include "energyusage.h"
 
 #include <QCoreApplication>
@@ -19,13 +19,13 @@
 //
 //  Default constructor
 //
-euApplicationLogging::euApplicationLogging(QObject *parent)
+ApplicationLogging::ApplicationLogging(QObject *parent)
         : QStandardItemModel(parent)
 {
     //-----------------------------------------------------------------------------------
     //
     //  Retrieve application logging configuration
-    euAplLogingSettings = new euApplicationSettings();
+    euAplLogingSettings = new ApplicationSettings();
     RetrieveLogConfig();
     if (ConnectDB(&strAppLogDatabaseName, &strAppLogDatabaseServerName,
                   &strAppLogDatabaseUserId, &strAppLogDatabasePassword))
@@ -43,7 +43,7 @@ euApplicationLogging::euApplicationLogging(QObject *parent)
 //
 //  Destructor including disconnect from logging database
 //
-euApplicationLogging::~euApplicationLogging()
+ApplicationLogging::~ApplicationLogging()
 {
     sdbAppLogDB.close();
 
@@ -56,7 +56,7 @@ euApplicationLogging::~euApplicationLogging()
 //
 //  Connects to the database and verifies that the tables exist or let them be created
 //
-bool euApplicationLogging::ConnectDB(QString *strDatabaseName, QString *strHostName,
+bool ApplicationLogging::ConnectDB(QString *strDatabaseName, QString *strHostName,
                                      QString *strUserId, QString *strPassword)
 {
     QStringList
@@ -116,7 +116,7 @@ bool euApplicationLogging::ConnectDB(QString *strDatabaseName, QString *strHostN
 //
 //  Creates the table: application_log
 //
-bool euApplicationLogging::LogCreateTable()
+bool ApplicationLogging::LogCreateTable()
 {
 QString
     strQuery;
@@ -150,7 +150,7 @@ QString
 //
 //  Retrieve application logging configuration
 //
-bool euApplicationLogging::RetrieveLogConfig()
+bool ApplicationLogging::RetrieveLogConfig()
 {
     bool
         bOK = true;
@@ -161,11 +161,11 @@ bool euApplicationLogging::RetrieveLogConfig()
     //
     //  Check type of logging
     //
-    strAppLogLoggingType = euAplLogingSettings->euGetAppSetting(strAppLogSectionName, strAppLogKeyLoggingType);
+    strAppLogLoggingType = euAplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyLoggingType);
     iStrlen = strAppLogLoggingType.length();
     if (iStrlen == 0)
     {
-        bOK = euAplLogingSettings->euSetAppSetting(strAppLogSectionName,strAppLogKeyLoggingType,strAppLogLoggingTypeDef);
+        bOK = euAplLogingSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyLoggingType,strAppLogLoggingTypeDef);
         if(!bOK)
             SendWarningMessage(strAppLogKeyLoggingType,"Unable to write to configuration.");
         strAppLogLoggingType = strAppLogLoggingTypeDef;
@@ -178,44 +178,44 @@ bool euApplicationLogging::RetrieveLogConfig()
     if (strAppLogLoggingType == "db")
     {
         //  Get database servername
-        strAppLogDatabaseServerName = euAplLogingSettings->euGetAppSetting(strAppLogSectionName, strAppLogKeyDbServerName);
+        strAppLogDatabaseServerName = euAplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyDbServerName);
         iStrlen = strAppLogDatabaseServerName.length();
         if (iStrlen == 0)
         {
-            bOK = euAplLogingSettings->euSetAppSetting(strAppLogSectionName,strAppLogKeyDbServerName,strAppLogDatabaseServerNameDef);
+            bOK = euAplLogingSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbServerName,strAppLogDatabaseServerNameDef);
             if(!bOK)
                 SendWarningMessage(strAppLogKeyLoggingType,"Unable to write to configuration.");
             strAppLogDatabaseServerName = strAppLogDatabaseServerNameDef;
         }
         //
         //  Get database name
-        strAppLogDatabaseName = euAplLogingSettings->euGetAppSetting(strAppLogSectionName, strAppLogKeyDbName);
+        strAppLogDatabaseName = euAplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyDbName);
         iStrlen = strAppLogDatabaseName.length();
         if (iStrlen == 0)
         {
-            bOK = euAplLogingSettings->euSetAppSetting(strAppLogSectionName,strAppLogKeyDbName,strAppLogDatabaseNameDef);
+            bOK = euAplLogingSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbName,strAppLogDatabaseNameDef);
             if(!bOK)
                 SendWarningMessage(strAppLogKeyDbName,"Unable to write to configuration.");
             strAppLogDatabaseName = strAppLogDatabaseNameDef;
         }
         //
         //  Get database Username
-        strAppLogDatabaseUserId = euAplLogingSettings->euGetAppSetting(strAppLogSectionName, strAppLogKeyDbUserId);
+        strAppLogDatabaseUserId = euAplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyDbUserId);
         iStrlen = strAppLogDatabaseUserId.length();
         if (iStrlen == 0)
         {
-            bOK = euAplLogingSettings->euSetAppSetting(strAppLogSectionName,strAppLogKeyDbUserId,strAppLogDatabaseUserIdDef);
+            bOK = euAplLogingSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbUserId,strAppLogDatabaseUserIdDef);
             if(!bOK)
                 SendWarningMessage(strAppLogKeyDbUserId,"Unable to write to configuration.");
             strAppLogDatabaseUserId = strAppLogDatabaseUserIdDef;
         }
         //
         //  Get database Password
-        strAppLogDatabasePassword = euAplLogingSettings->euGetAppSetting(strAppLogSectionName, strAppLogKeyDbPassword);
+        strAppLogDatabasePassword = euAplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyDbPassword);
         iStrlen = strAppLogDatabasePassword.length();
         if (iStrlen == 0)
         {
-            bOK = euAplLogingSettings->euSetAppSetting(strAppLogSectionName,strAppLogKeyDbPassword,strAppLogDatabasePasswordDef);
+            bOK = euAplLogingSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbPassword,strAppLogDatabasePasswordDef);
             if(!bOK)
                 SendWarningMessage(strAppLogKeyDbPassword,"Unable to write to configuration.");
             strAppLogDatabasePassword = strAppLogDatabasePasswordDef;
@@ -248,7 +248,7 @@ bool euApplicationLogging::RetrieveLogConfig()
 //
 //  Display warning message log configuration
 //
-void euApplicationLogging::SendWarningMessage(const QString &strMsgPart1, const QString &strMsgPart2)
+void ApplicationLogging::SendWarningMessage(const QString &strMsgPart1, const QString &strMsgPart2)
 {
     QMessageBox msgBox;
     QString euMessage;
@@ -264,7 +264,7 @@ void euApplicationLogging::SendWarningMessage(const QString &strMsgPart1, const 
 //
 //  Write a log record with predefined application name and without timestamp set
 //
-void euApplicationLogging::WriteLogRecord(const QString *strLogSeverity, const QString *strLogMessage)
+void ApplicationLogging::WriteLogRecord(const QString *strLogSeverity, const QString *strLogMessage)
 {
     //-----------------------------------------------------------------------------------
     //
@@ -284,7 +284,7 @@ void euApplicationLogging::WriteLogRecord(const QString *strLogSeverity, const Q
 //
 //  Write a log record with predefined application name
 //
-void euApplicationLogging::WriteLogRecord(const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage)
+void ApplicationLogging::WriteLogRecord(const QDateTime *qdRecTimeStamp, const QString *strLogSeverity, const QString *strLogMessage)
 {
 
     //-----------------------------------------------------------------------------------
@@ -298,7 +298,7 @@ void euApplicationLogging::WriteLogRecord(const QDateTime *qdRecTimeStamp, const
 //---------------------------------------------------------------------------------------
 //  Write a log record
 //
-void euApplicationLogging::WriteLogRecord(const QString *strAppName,
+void ApplicationLogging::WriteLogRecord(const QString *strAppName,
                                           const QDateTime *qdRecTimeStamp,
                                           const QString *strLogSeverity,
                                           const QString *strLogMessage)

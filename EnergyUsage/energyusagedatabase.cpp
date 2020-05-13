@@ -5,9 +5,9 @@
 //  This class handles the data interaction with the underlying database
 //
 #include "energyusage.h"
-#include "eudatabase.h"
-#include "euapplicationlogging.h"
-#include "euapplicationsettings.h"
+#include "energyusagedatabase.h"
+#include "applicationlogging.h"
+#include "applicationsettings.h"
 
 #include <QMessageBox>
 #include <QSqlDatabase>
@@ -21,11 +21,11 @@
 //
 //  Constructor
 //
-euDatabase::euDatabase(QObject *parent, euApplicationLogging *ApplicationLog)
+EnergyUsageDatabase::EnergyUsageDatabase(QObject *parent, ApplicationLogging *ApplicationLog)
     : QStandardItemModel(parent)
 {
 
-    ApplicationSettings = new euApplicationSettings();
+    AppSettings = new ApplicationSettings();
     dbApplicationLog = ApplicationLog;
     euRetrieveConfig();
     if (euConnectDB(&strDatabaseName,&strDatabaseServerName,&strDatabaseUserId,&strDatabasePassword))
@@ -43,7 +43,7 @@ euDatabase::euDatabase(QObject *parent, euApplicationLogging *ApplicationLog)
 //
 //  Destructor with disconnect from metrics database
 //
-euDatabase::~euDatabase()
+EnergyUsageDatabase::~EnergyUsageDatabase()
 {
     sdbEnergyUsage.close();
 }
@@ -59,7 +59,7 @@ euDatabase::~euDatabase()
 //
 //  Connects to the database and verifies that the tables exist or let them be created
 //
-bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName,
+bool EnergyUsageDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName,
                              QString *strUserId, QString *strPassword)
 {
     QStringList
@@ -175,7 +175,7 @@ bool euDatabase::euConnectDB(QString *strDatabaseName, QString *strHostName,
 //
 //  Creates the tables
 //
-bool euDatabase::CreateTable(const QString *strTableName,
+bool EnergyUsageDatabase::CreateTable(const QString *strTableName,
                              const QStringList *stlTableFieldNames,
                              const QStringList *stlTableFieldTypes)
 {
@@ -214,7 +214,7 @@ bool euDatabase::CreateTable(const QString *strTableName,
 //
 //  Retrieves the database related application settings
 //
-bool euDatabase::euRetrieveConfig()
+bool EnergyUsageDatabase::euRetrieveConfig()
 {
     bool
         bOK = true;
@@ -224,32 +224,32 @@ bool euDatabase::euRetrieveConfig()
     //-----------------------------------------------------------------------------------
     //
     //  Get datbase configuration
-    strDatabaseServerName = ApplicationSettings->euGetAppSetting(strDatabaseSection, strKeyDbServerName);
+    strDatabaseServerName = AppSettings->GetAppSetting(strDatabaseSection, strKeyDbServerName);
     iStrlen = strDatabaseServerName.length();
     if (iStrlen == 0)
     {
-        bOK = ApplicationSettings->euSetAppSetting(strDatabaseSection,strKeyDbServerName,strDatabaseServerNameDef);
+        bOK = AppSettings->SetAppSetting(strDatabaseSection,strKeyDbServerName,strDatabaseServerNameDef);
         strDatabaseServerName = strDatabaseServerNameDef;
     }
-    strDatabaseName = ApplicationSettings->euGetAppSetting(strDatabaseSection, strKeyDbName);
+    strDatabaseName = AppSettings->GetAppSetting(strDatabaseSection, strKeyDbName);
     iStrlen = strDatabaseName.length();
     if (iStrlen == 0)
     {
-        bOK = ApplicationSettings->euSetAppSetting(strDatabaseSection,strKeyDbName,strDatabaseNameDef);
+        bOK = AppSettings->SetAppSetting(strDatabaseSection,strKeyDbName,strDatabaseNameDef);
         strDatabaseName = strDatabaseNameDef;
     }
-    strDatabaseUserId = ApplicationSettings->euGetAppSetting(strDatabaseSection, strKeyDbUserId);
+    strDatabaseUserId = AppSettings->GetAppSetting(strDatabaseSection, strKeyDbUserId);
     iStrlen = strDatabaseUserId.length();
     if (iStrlen == 0)
     {
-        bOK = ApplicationSettings->euSetAppSetting(strDatabaseSection,strKeyDbUserId,strDatabaseUserIdDef);
+        bOK = AppSettings->SetAppSetting(strDatabaseSection,strKeyDbUserId,strDatabaseUserIdDef);
         strDatabaseUserId = strDatabaseUserIdDef;
     }
-    strDatabasePassword = ApplicationSettings->euGetAppSetting(strDatabaseSection, strKeyDbPassword);
+    strDatabasePassword = AppSettings->GetAppSetting(strDatabaseSection, strKeyDbPassword);
     iStrlen = strDatabasePassword.length();
     if (iStrlen == 0)
     {
-        bOK = ApplicationSettings->euSetAppSetting(strDatabaseSection,strKeyDbPassword,strDatabasePasswordDef);
+        bOK = AppSettings->SetAppSetting(strDatabaseSection,strKeyDbPassword,strDatabasePasswordDef);
         strDatabasePassword = strDatabasePasswordDef;
     }
 
@@ -264,7 +264,7 @@ bool euDatabase::euRetrieveConfig()
 //
 //  Add record
 //
-bool euDatabase::AddRecord(QStringList *stlInputValues)
+bool EnergyUsageDatabase::AddRecord(QStringList *stlInputValues)
 {
     bool
         bTableFound = false;
@@ -396,7 +396,7 @@ bool euDatabase::AddRecord(QStringList *stlInputValues)
 //
 //  Open import file
 //
-bool euDatabase::ExtractValuesForLine(QString *strMetricType, QString *strInputLine)
+bool EnergyUsageDatabase::ExtractValuesForLine(QString *strMetricType, QString *strInputLine)
 {
     int
         iInputStringLength,         // length of the input string
@@ -437,7 +437,7 @@ bool euDatabase::ExtractValuesForLine(QString *strMetricType, QString *strInputL
 //
 //  Open import file
 //
-int euDatabase::ImportMetricsFile(QString *strMetricFileType, QString *strImportFileName)
+int EnergyUsageDatabase::ImportMetricsFile(QString *strMetricFileType, QString *strImportFileName)
 {
     int iTotalLines = 0,
         iTotalRecords = 0;
@@ -507,7 +507,7 @@ int euDatabase::ImportMetricsFile(QString *strMetricFileType, QString *strImport
 //
 //  Convert timestmap format from yyyy-mm-dd hh:mm to (m)m/(d)d/yyyy (h)h:mm:00.000
 //
-void euDatabase::ConvertTimeStamp(QString *strTimeStampIn, QString &strDateOut,
+void EnergyUsageDatabase::ConvertTimeStamp(QString *strTimeStampIn, QString &strDateOut,
                                   QString &strTimeOut)
 {
     int
@@ -552,7 +552,7 @@ void euDatabase::ConvertTimeStamp(QString *strTimeStampIn, QString &strDateOut,
 //
 //  Execute Query
 //
-bool euDatabase::ExecQuery(QString *strQuery)
+bool EnergyUsageDatabase::ExecQuery(QString *strQuery)
 {
     QSqlQuery qQuery("",sdbEnergyUsage);
     if (qQuery.exec(*strQuery))
@@ -573,7 +573,7 @@ bool euDatabase::ExecQuery(QString *strQuery)
 //  Removes . in the numeric values
 //  Replaces , with . in the numeric values
 //
-QString euDatabase::ReFormatString(QString *strInputLine)
+QString EnergyUsageDatabase::ReFormatString(QString *strInputLine)
 {
     QString
         strTemp;

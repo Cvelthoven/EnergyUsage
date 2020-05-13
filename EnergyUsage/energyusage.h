@@ -1,6 +1,6 @@
 #ifndef ENERGYUSAGE_H
 #define ENERGYUSAGE_H
-#include"euapplicationlogging.h"
+#include"applicationlogging.h"
 #include <QString>
 
 const QString

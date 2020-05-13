@@ -17,16 +17,16 @@
 #include <QString>
 #include <QStringList>
 
-#include "euapplicationsettings.h"
-#include "euapplicationlogging.h"
+#include "applicationsettings.h"
+#include "applicationlogging.h"
 
-class euDatabase : public QStandardItemModel
+class EnergyUsageDatabase : public QStandardItemModel
 {
     Q_OBJECT
 
 public:
-    euDatabase(QObject *parent, euApplicationLogging *ApplicationLog);
-    ~euDatabase();
+    EnergyUsageDatabase(QObject *parent, ApplicationLogging *ApplicationLog);
+    ~EnergyUsageDatabase();
     bool euConnectDB(QString *strDatabaseName, QString *strHostName, QString *strUserId, QString *strPassword);
     bool CreateTable(const QString *strTableName, const QStringList *stlTableFieldNames, const QStringList *stlTableFieldTypes);
     bool euRetrieveConfig();
@@ -53,8 +53,8 @@ private:
 //
 //  Application settings
 //
-euApplicationSettings *ApplicationSettings;
-euApplicationLogging *dbApplicationLog;
+ApplicationSettings *AppSettings;
+ApplicationLogging *dbApplicationLog;
 
 QString
     strDatabaseSection = "AplDatabase",             // Database section name

@@ -6,7 +6,7 @@
 //
 //  Location of configuration file linux: home/.config/Cvelthoven
 //
-#include "euapplicationsettings.h"
+#include "applicationsettings.h"
 #include "energyusage.h"
 
 #include <QCoreApplication>
@@ -18,7 +18,7 @@
 //  Default contructor
 //
 //flrApplicationSettings::flrApplicationSettings(QObject *parent)
-euApplicationSettings::euApplicationSettings()
+ApplicationSettings::ApplicationSettings()
 {
     //-----------------------------------------------------------------------------------
     //
@@ -42,7 +42,7 @@ euApplicationSettings::euApplicationSettings()
 //  Ouptut:
 //      euGetAppSetting  : value of key if found otherwise and empty string
 //
-QString euApplicationSettings::euGetAppSetting(const QString &strSettingSection,
+QString ApplicationSettings::GetAppSetting(const QString &strSettingSection,
                                                const QString &strSettingName)
 {
 
@@ -68,7 +68,7 @@ QString euApplicationSettings::euGetAppSetting(const QString &strSettingSection,
 //
 //  save application setting value
 //
-bool euApplicationSettings::euSetAppSetting(const QString &strSettingSection,
+bool ApplicationSettings::SetAppSetting(const QString &strSettingSection,
                                             const QString &strSettingName,
                                             const QString &strSettingValue)
 {
