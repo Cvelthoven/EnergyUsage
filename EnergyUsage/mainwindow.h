@@ -34,7 +34,15 @@ private slots:
 
     void on_actionWater_triggered();
 
+    void on_tbvDatabaseView_activated(const QModelIndex &index);
+
+    void on_TestLineEdit_cursorPositionChanged(int arg1, int arg2);
+
+    void on_TestLineEdit_returnPressed();
+
 private:
+    void setupMenuBar();
+
     Ui::MainWindow *ui;
 
     EnergyUsageDatabase *Database;

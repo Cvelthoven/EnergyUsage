@@ -16,7 +16,7 @@
 #include <QStandardItemModel>
 #include <QString>
 
-#include "applicationsettings.h"
+#include "applicationsettingsmodel.h"
 
 class ApplicationLogging : public QStandardItemModel
 {
@@ -38,7 +38,7 @@ private:
     bool RetrieveLogConfig();
     void SendWarningMessage(const QString &strMsgPart1, const QString &strMsgPart2);
 
-    ApplicationSettings *euAplLogingSettings;
+    ApplicationSettingsModel *euAplLogingSettings;
 
     QSqlDatabase sdbAppLogDB;
 

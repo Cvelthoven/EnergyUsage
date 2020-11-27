@@ -8,6 +8,8 @@
 //  General include files
 #include <QDateTime>
 #include <QFileDialog>
+#include <QMenu>
+#include <QMenuBar>
 #include <QString>
 
 //---------------------------------------------------------------------------------------
@@ -20,6 +22,9 @@
 #include "energyusage.h"
 #include "applicationsettings.h"
 #include "applicationlogging.h"
+#include "energyusagedatamodel.h"
+
+#include <QDebug>
 
 //---------------------------------------------------------------------------------------
 //
@@ -29,6 +34,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+//    QTableView tableView;
+//    EnergyUsageDataModel energyUsageDatabase;
+//    tableView.setModel(&energyUsageDatabase);
+//    tableView.show();
+
     //-----------------------------------------------------------------------------------
     //
     //  Program initialization
@@ -44,8 +54,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //
     ui->setupUi(this);
 
-
 }
+
 
 //---------------------------------------------------------------------------------------
 //
@@ -56,6 +66,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 //---------------------------------------------------------------------------------------
 //
 //  Proceduce: InitializeProgram
@@ -64,8 +75,9 @@ bool MainWindow::InitializeProgram()
 {
     //-----------------------------------------------------------------------------------
     //
-    //  Local variables
-//    bool bOk = false;
+    //  Setup mainwindow gui
+//    setupMenuBar();
+
 
     //---------------------------------------------------------------------------------------
     //
@@ -92,6 +104,20 @@ bool MainWindow::InitializeProgram()
     return true;
 }
 
+
+//---------------------------------------------------------------------------------------
+//
+//  Proceduce: setupMenuBar
+//
+void MainWindow::setupMenuBar()
+{
+    QMenu *menu = menuBar()->addMenu(tr("Test menu"));
+    // = menuBar()->addMenu(tr("Test menu"));
+    menu->addAction(tr("test exit"),this,&MainWindow::on_actionExit_triggered);
+
+}
+
+
 //---------------------------------------------------------------------------------------
 //
 //  Main menu slot functions
@@ -109,6 +135,7 @@ void MainWindow::on_actionExit_triggered()
 
 }
 
+
 //---------------------------------------------------------------------------------------
 //
 //  File -> Open Import -> Gas
@@ -121,6 +148,7 @@ void MainWindow::on_actionGas_triggered()
         Database->ImportMetricsFile(&strTemp,&strImportFileName);
 
 }
+
 
 //---------------------------------------------------------------------------------------
 //
@@ -135,6 +163,7 @@ void MainWindow::on_actionElectricity_triggered()
 
 }
 
+
 //---------------------------------------------------------------------------------------
 //
 //  File -> Open Import -> Water
@@ -145,5 +174,34 @@ void MainWindow::on_actionWater_triggered()
     strImportFileName = QFileDialog::getOpenFileName(this,tr("Water metrics import file"));
     if (strImportFileName.length() != 0)
         Database->ImportMetricsFile(&strTemp,&strImportFileName);
+
+}
+
+
+//---------------------------------------------------------------------------------------
+//
+//  DatabaseView activated
+//
+void MainWindow::on_tbvDatabaseView_activated(const QModelIndex &index)
+{
+    ui->tbvDatabaseView->setRootIndex(index);
+}
+
+//---------------------------------------------------------------------------------------
+//
+// TestLineEdit actions
+//
+void MainWindow::on_TestLineEdit_cursorPositionChanged(int arg1, int arg2)
+{
+    qDebug("arg1: %i",arg1);
+    qDebug("arg2: %i",arg2);
+}
+
+void MainWindow::on_TestLineEdit_returnPressed()
+{
+    ui->TestLineEdit->setPlaceholderText("test line");
+    ui->TestLineEdit->setFocus();
+    QString test = ui->TestLineEdit->text();
+    qDebug() << "Test string: " << test;
 
 }

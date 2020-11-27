@@ -27,6 +27,8 @@ CONFIG += c++11
 SOURCES += \
     applicationlogging.cpp \
     applicationsettings.cpp \
+    applicationsettingsmodel.cpp \
+    applicationsettingsview.cpp \
     energyusagedatabase.cpp \
     energyusagedatamodel.cpp \
         main.cpp \
@@ -35,6 +37,8 @@ SOURCES += \
 HEADERS += \
     applicationlogging.h \
     applicationsettings.h \
+    applicationsettingsmodel.h \
+    applicationsettingsview.h \
     energyusage.h \
     energyusagedatabase.h \
     energyusagedatamodel.h \

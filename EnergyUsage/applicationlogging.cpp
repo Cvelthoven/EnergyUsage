@@ -5,7 +5,7 @@
 //  This class handles all application logging to a database or file
 //
 #include "applicationlogging.h"
-#include "applicationsettings.h"
+#include "applicationsettingsmodel.h"
 #include "energyusage.h"
 
 #include <QCoreApplication>
@@ -25,7 +25,7 @@ ApplicationLogging::ApplicationLogging(QObject *parent)
     //-----------------------------------------------------------------------------------
     //
     //  Retrieve application logging configuration
-    euAplLogingSettings = new ApplicationSettings();
+    euAplLogingSettings = new ApplicationSettingsModel();
     RetrieveLogConfig();
     if (ConnectDB(&strAppLogDatabaseName, &strAppLogDatabaseServerName,
                   &strAppLogDatabaseUserId, &strAppLogDatabasePassword))
