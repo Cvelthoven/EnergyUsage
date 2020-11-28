@@ -17,7 +17,7 @@
 #include <QString>
 #include <QStringList>
 
-#include "applicationsettings.h"
+#include "applicationsettingsmodel.h"
 #include "applicationlogging.h"
 
 class EnergyUsageDatabase : public QStandardItemModel
@@ -53,7 +53,7 @@ private:
 //
 //  Application settings
 //
-ApplicationSettings *AppSettings;
+ApplicationSettingsModel*AppSettings;
 ApplicationLogging *dbApplicationLog;
 
 QString

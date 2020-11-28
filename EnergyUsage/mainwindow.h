@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QString>
 
-#include "applicationsettings.h"
+#include "applicationsettingsmodel.h"
 #include "applicationlogging.h"
 #include "energyusagedatabase.h"
 
@@ -20,7 +20,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    ApplicationSettings   *AppSettings;
+    ApplicationSettingsModel   *AppSettings;
     ApplicationLogging    *AppLogging;
 
     bool InitializeProgram();

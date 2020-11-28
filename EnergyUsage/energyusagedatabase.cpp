@@ -7,7 +7,7 @@
 #include "energyusage.h"
 #include "energyusagedatabase.h"
 #include "applicationlogging.h"
-#include "applicationsettings.h"
+#include "applicationsettingsmodel.h"
 
 #include <QMessageBox>
 #include <QSqlDatabase>
@@ -25,7 +25,7 @@ EnergyUsageDatabase::EnergyUsageDatabase(QObject *parent, ApplicationLogging *Ap
     : QStandardItemModel(parent)
 {
 
-    AppSettings = new ApplicationSettings();
+    AppSettings = new ApplicationSettingsModel();
     dbApplicationLog = ApplicationLog;
     euRetrieveConfig();
     if (euConnectDB(&strDatabaseName,&strDatabaseServerName,&strDatabaseUserId,&strDatabasePassword))

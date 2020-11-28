@@ -20,7 +20,7 @@
 #include "ui_mainwindow.h"
 
 #include "energyusage.h"
-#include "applicationsettings.h"
+#include "applicationsettingsmodel.h"
 #include "applicationlogging.h"
 #include "energyusagedatamodel.h"
 
