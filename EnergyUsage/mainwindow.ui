@@ -14,26 +14,156 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTableView" name="tbvDatabaseView">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>100</y>
-      <width>601</width>
-      <height>311</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="TestLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>20</y>
-      <width>113</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="DatabaseLoggingLayout">
+      <item>
+       <layout class="QFormLayout" name="DatabaseForm">
+        <item row="0" column="0">
+         <widget class="QLabel" name="applicationServerLabel">
+          <property name="text">
+           <string>Application server:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="applicationServerLineEdit"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="applicationDatabaseLabel">
+          <property name="text">
+           <string>Application database:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="applicationDatabaseLineEdit"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="useridLabel">
+          <property name="text">
+           <string>Userid:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="useridLineEdit"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="passwordLabel">
+          <property name="text">
+           <string>Password:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="passwordLineEdit"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QFormLayout" name="LoggingForm">
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="loggingServerLineEdit"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="loggingServerLabel">
+          <property name="text">
+           <string>Logging server:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="loggingDatabaseLabel">
+          <property name="text">
+           <string>Logging database:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="loggingDatabaseLineEdit"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="useridLabel_2">
+          <property name="text">
+           <string>Userid:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="useridLineEdit_2"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="passwordLabel_2">
+          <property name="text">
+           <string>Password:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="passwordLineEdit_2"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="buttonslayout">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>188</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnStart">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Start</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnExit">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Exit</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>238</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -19,6 +19,7 @@
 
 #include "applicationsettingsmodel.h"
 #include "applicationlogging.h"
+//#include "energyusage.h"
 
 class EnergyUsageDatabase : public QStandardItemModel
 {
@@ -57,22 +58,10 @@ ApplicationSettingsModel*AppSettings;
 ApplicationLogging *dbApplicationLog;
 
 QString
-    strDatabaseSection = "AplDatabase",             // Database section name
-    strKeyDbServerName = "AplDatabaseServerName",   // Key name with database server name
-    strDatabaseServerNameDef = "192.168.1.51",      // Default database server
-    strDatabaseServerName,                          // Database server name
-    //-------------------------------------------------------------------------------
-    strKeyDbName = "AplDatabaseName",               // Key name with database name
-    strDatabaseNameDef = "cvraspi01dev",            // Default database name
-    strDatabaseName,                                // Database name
-    //-------------------------------------------------------------------------------
-    strKeyDbUserId = "AplDatabaseUserId",           // Key name with database UserID
-    strDatabaseUserIdDef = "pi",                    // Default database UserID
-    strDatabaseUserId,                              // Database userID
-    //-------------------------------------------------------------------------------
-    strKeyDbPassword = "AplDatabasePassword",       // Key name with database Password
-    strDatabasePasswordDef = "#NS01fr#LDrz76#",     // Default database Password
-    strDatabasePassword;                            // Database password
+    strDatabaseServerName,  // Database server name
+    strDatabaseName,        // Database name
+    strDatabaseUserId,      // Database userID
+    strDatabasePassword;    // Database password
 
     //-------------------------------------------------------------------------------
     //

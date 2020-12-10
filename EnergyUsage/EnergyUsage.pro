@@ -43,6 +43,7 @@ HEADERS += \
         mainwindow.h
 
 FORMS += \
+        applicationsettingsviewdialog.ui \
         mainwindow.ui
 
 # Default rules for deployment.

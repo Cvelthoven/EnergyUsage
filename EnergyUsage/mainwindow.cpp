@@ -23,6 +23,7 @@
 #include "applicationsettingsmodel.h"
 #include "applicationlogging.h"
 #include "energyusagedatamodel.h"
+#include "energyusagedatabase.h"
 
 #include <QDebug>
 
@@ -34,10 +35,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-//    QTableView tableView;
-//    EnergyUsageDataModel energyUsageDatabase;
-//    tableView.setModel(&energyUsageDatabase);
-//    tableView.show();
 
     //-----------------------------------------------------------------------------------
     //
@@ -178,30 +175,32 @@ void MainWindow::on_actionWater_triggered()
 }
 
 
-//---------------------------------------------------------------------------------------
-//
-//  DatabaseView activated
-//
-void MainWindow::on_tbvDatabaseView_activated(const QModelIndex &index)
-{
-    ui->tbvDatabaseView->setRootIndex(index);
-}
+////---------------------------------------------------------------------------------------
+////
+////  DatabaseView activated
+////
+//void MainWindow::on_tbvDatabaseView_activated(const QModelIndex &index)
+//{
+//    ui->tbvDatabaseView->setRootIndex(index);
+//}
 
-//---------------------------------------------------------------------------------------
-//
-// TestLineEdit actions
-//
-void MainWindow::on_TestLineEdit_cursorPositionChanged(int arg1, int arg2)
-{
-    qDebug("arg1: %i",arg1);
-    qDebug("arg2: %i",arg2);
-}
+////---------------------------------------------------------------------------------------
+////
+//// TestLineEdit actions
+////
+//void MainWindow::on_TestLineEdit_cursorPositionChanged(int arg1, int arg2)
+//{
+//    qDebug("arg1: %i",arg1);
+//    qDebug("arg2: %i",arg2);
+//}
 
-void MainWindow::on_TestLineEdit_returnPressed()
-{
-    ui->TestLineEdit->setPlaceholderText("test line");
-    ui->TestLineEdit->setFocus();
-    QString test = ui->TestLineEdit->text();
-    qDebug() << "Test string: " << test;
+//void MainWindow::on_TestLineEdit_returnPressed()
+//{
+//    ui->TestLineEdit->setPlaceholderText("test line");
+//    ui->TestLineEdit->setFocus();
+//    QString test = ui->TestLineEdit->text();
+//    qDebug() << "Test string: " << test;
 
-}
+//}
+
+

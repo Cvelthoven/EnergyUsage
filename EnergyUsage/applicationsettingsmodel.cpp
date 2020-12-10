@@ -2,7 +2,7 @@
 //
 //  ApplicationSettingsModel
 //
-//  Model class containing, handling the application settings
+//  Model class containing and handling the application settings
 //
 //  Location of configuration file linux: home/.config/Cvelthoven
 //
