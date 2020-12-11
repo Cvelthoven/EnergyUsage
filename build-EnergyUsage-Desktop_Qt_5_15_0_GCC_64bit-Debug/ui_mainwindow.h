@@ -21,6 +21,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
@@ -37,30 +38,34 @@ public:
     QAction *actionWater;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
+    QStackedWidget *stackedWidget;
+    QWidget *StartUpPage;
+    QVBoxLayout *verticalLayout_2;
     QHBoxLayout *DatabaseLoggingLayout;
     QFormLayout *DatabaseForm;
     QLabel *applicationServerLabel;
     QLineEdit *applicationServerLineEdit;
     QLabel *applicationDatabaseLabel;
     QLineEdit *applicationDatabaseLineEdit;
-    QLabel *useridLabel;
-    QLineEdit *useridLineEdit;
-    QLabel *passwordLabel;
-    QLineEdit *passwordLineEdit;
+    QLabel *applicationDatabaseUseridLabel;
+    QLineEdit *applicationDatabaseUseridLineEdit;
+    QLabel *applicationDatabasePasswordLabel;
+    QLineEdit *applicationDatabasePasswordLineEdit;
     QFormLayout *LoggingForm;
     QLineEdit *loggingServerLineEdit;
     QLabel *loggingServerLabel;
     QLabel *loggingDatabaseLabel;
     QLineEdit *loggingDatabaseLineEdit;
-    QLabel *useridLabel_2;
-    QLineEdit *useridLineEdit_2;
-    QLabel *passwordLabel_2;
-    QLineEdit *passwordLineEdit_2;
+    QLabel *loggingUseridLabel;
+    QLineEdit *loggingUseridLineEdit;
+    QLabel *loggingPasswordLabel;
+    QLineEdit *loggingPasswordLineEdit;
     QHBoxLayout *buttonslayout;
     QSpacerItem *horizontalSpacer;
     QPushButton *btnStart;
     QPushButton *btnExit;
     QSpacerItem *horizontalSpacer_2;
+    QWidget *page_2;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuOpen_import;
@@ -86,51 +91,60 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        stackedWidget = new QStackedWidget(centralWidget);
+        stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
+        StartUpPage = new QWidget();
+        StartUpPage->setObjectName(QString::fromUtf8("StartUpPage"));
+        verticalLayout_2 = new QVBoxLayout(StartUpPage);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         DatabaseLoggingLayout = new QHBoxLayout();
         DatabaseLoggingLayout->setSpacing(6);
         DatabaseLoggingLayout->setObjectName(QString::fromUtf8("DatabaseLoggingLayout"));
         DatabaseForm = new QFormLayout();
         DatabaseForm->setSpacing(6);
         DatabaseForm->setObjectName(QString::fromUtf8("DatabaseForm"));
-        applicationServerLabel = new QLabel(centralWidget);
+        applicationServerLabel = new QLabel(StartUpPage);
         applicationServerLabel->setObjectName(QString::fromUtf8("applicationServerLabel"));
 
         DatabaseForm->setWidget(0, QFormLayout::LabelRole, applicationServerLabel);
 
-        applicationServerLineEdit = new QLineEdit(centralWidget);
+        applicationServerLineEdit = new QLineEdit(StartUpPage);
         applicationServerLineEdit->setObjectName(QString::fromUtf8("applicationServerLineEdit"));
 
         DatabaseForm->setWidget(0, QFormLayout::FieldRole, applicationServerLineEdit);
 
-        applicationDatabaseLabel = new QLabel(centralWidget);
+        applicationDatabaseLabel = new QLabel(StartUpPage);
         applicationDatabaseLabel->setObjectName(QString::fromUtf8("applicationDatabaseLabel"));
 
         DatabaseForm->setWidget(1, QFormLayout::LabelRole, applicationDatabaseLabel);
 
-        applicationDatabaseLineEdit = new QLineEdit(centralWidget);
+        applicationDatabaseLineEdit = new QLineEdit(StartUpPage);
         applicationDatabaseLineEdit->setObjectName(QString::fromUtf8("applicationDatabaseLineEdit"));
 
         DatabaseForm->setWidget(1, QFormLayout::FieldRole, applicationDatabaseLineEdit);
 
-        useridLabel = new QLabel(centralWidget);
-        useridLabel->setObjectName(QString::fromUtf8("useridLabel"));
+        applicationDatabaseUseridLabel = new QLabel(StartUpPage);
+        applicationDatabaseUseridLabel->setObjectName(QString::fromUtf8("applicationDatabaseUseridLabel"));
 
-        DatabaseForm->setWidget(2, QFormLayout::LabelRole, useridLabel);
+        DatabaseForm->setWidget(2, QFormLayout::LabelRole, applicationDatabaseUseridLabel);
 
-        useridLineEdit = new QLineEdit(centralWidget);
-        useridLineEdit->setObjectName(QString::fromUtf8("useridLineEdit"));
+        applicationDatabaseUseridLineEdit = new QLineEdit(StartUpPage);
+        applicationDatabaseUseridLineEdit->setObjectName(QString::fromUtf8("applicationDatabaseUseridLineEdit"));
 
-        DatabaseForm->setWidget(2, QFormLayout::FieldRole, useridLineEdit);
+        DatabaseForm->setWidget(2, QFormLayout::FieldRole, applicationDatabaseUseridLineEdit);
 
-        passwordLabel = new QLabel(centralWidget);
-        passwordLabel->setObjectName(QString::fromUtf8("passwordLabel"));
+        applicationDatabasePasswordLabel = new QLabel(StartUpPage);
+        applicationDatabasePasswordLabel->setObjectName(QString::fromUtf8("applicationDatabasePasswordLabel"));
 
-        DatabaseForm->setWidget(3, QFormLayout::LabelRole, passwordLabel);
+        DatabaseForm->setWidget(3, QFormLayout::LabelRole, applicationDatabasePasswordLabel);
 
-        passwordLineEdit = new QLineEdit(centralWidget);
-        passwordLineEdit->setObjectName(QString::fromUtf8("passwordLineEdit"));
+        applicationDatabasePasswordLineEdit = new QLineEdit(StartUpPage);
+        applicationDatabasePasswordLineEdit->setObjectName(QString::fromUtf8("applicationDatabasePasswordLineEdit"));
+        applicationDatabasePasswordLineEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
 
-        DatabaseForm->setWidget(3, QFormLayout::FieldRole, passwordLineEdit);
+        DatabaseForm->setWidget(3, QFormLayout::FieldRole, applicationDatabasePasswordLineEdit);
 
 
         DatabaseLoggingLayout->addLayout(DatabaseForm);
@@ -138,51 +152,52 @@ public:
         LoggingForm = new QFormLayout();
         LoggingForm->setSpacing(6);
         LoggingForm->setObjectName(QString::fromUtf8("LoggingForm"));
-        loggingServerLineEdit = new QLineEdit(centralWidget);
+        loggingServerLineEdit = new QLineEdit(StartUpPage);
         loggingServerLineEdit->setObjectName(QString::fromUtf8("loggingServerLineEdit"));
 
         LoggingForm->setWidget(0, QFormLayout::FieldRole, loggingServerLineEdit);
 
-        loggingServerLabel = new QLabel(centralWidget);
+        loggingServerLabel = new QLabel(StartUpPage);
         loggingServerLabel->setObjectName(QString::fromUtf8("loggingServerLabel"));
 
         LoggingForm->setWidget(0, QFormLayout::LabelRole, loggingServerLabel);
 
-        loggingDatabaseLabel = new QLabel(centralWidget);
+        loggingDatabaseLabel = new QLabel(StartUpPage);
         loggingDatabaseLabel->setObjectName(QString::fromUtf8("loggingDatabaseLabel"));
 
         LoggingForm->setWidget(1, QFormLayout::LabelRole, loggingDatabaseLabel);
 
-        loggingDatabaseLineEdit = new QLineEdit(centralWidget);
+        loggingDatabaseLineEdit = new QLineEdit(StartUpPage);
         loggingDatabaseLineEdit->setObjectName(QString::fromUtf8("loggingDatabaseLineEdit"));
 
         LoggingForm->setWidget(1, QFormLayout::FieldRole, loggingDatabaseLineEdit);
 
-        useridLabel_2 = new QLabel(centralWidget);
-        useridLabel_2->setObjectName(QString::fromUtf8("useridLabel_2"));
+        loggingUseridLabel = new QLabel(StartUpPage);
+        loggingUseridLabel->setObjectName(QString::fromUtf8("loggingUseridLabel"));
 
-        LoggingForm->setWidget(2, QFormLayout::LabelRole, useridLabel_2);
+        LoggingForm->setWidget(2, QFormLayout::LabelRole, loggingUseridLabel);
 
-        useridLineEdit_2 = new QLineEdit(centralWidget);
-        useridLineEdit_2->setObjectName(QString::fromUtf8("useridLineEdit_2"));
+        loggingUseridLineEdit = new QLineEdit(StartUpPage);
+        loggingUseridLineEdit->setObjectName(QString::fromUtf8("loggingUseridLineEdit"));
 
-        LoggingForm->setWidget(2, QFormLayout::FieldRole, useridLineEdit_2);
+        LoggingForm->setWidget(2, QFormLayout::FieldRole, loggingUseridLineEdit);
 
-        passwordLabel_2 = new QLabel(centralWidget);
-        passwordLabel_2->setObjectName(QString::fromUtf8("passwordLabel_2"));
+        loggingPasswordLabel = new QLabel(StartUpPage);
+        loggingPasswordLabel->setObjectName(QString::fromUtf8("loggingPasswordLabel"));
 
-        LoggingForm->setWidget(3, QFormLayout::LabelRole, passwordLabel_2);
+        LoggingForm->setWidget(3, QFormLayout::LabelRole, loggingPasswordLabel);
 
-        passwordLineEdit_2 = new QLineEdit(centralWidget);
-        passwordLineEdit_2->setObjectName(QString::fromUtf8("passwordLineEdit_2"));
+        loggingPasswordLineEdit = new QLineEdit(StartUpPage);
+        loggingPasswordLineEdit->setObjectName(QString::fromUtf8("loggingPasswordLineEdit"));
+        loggingPasswordLineEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
 
-        LoggingForm->setWidget(3, QFormLayout::FieldRole, passwordLineEdit_2);
+        LoggingForm->setWidget(3, QFormLayout::FieldRole, loggingPasswordLineEdit);
 
 
         DatabaseLoggingLayout->addLayout(LoggingForm);
 
 
-        verticalLayout->addLayout(DatabaseLoggingLayout);
+        verticalLayout_2->addLayout(DatabaseLoggingLayout);
 
         buttonslayout = new QHBoxLayout();
         buttonslayout->setSpacing(6);
@@ -191,13 +206,13 @@ public:
 
         buttonslayout->addItem(horizontalSpacer);
 
-        btnStart = new QPushButton(centralWidget);
+        btnStart = new QPushButton(StartUpPage);
         btnStart->setObjectName(QString::fromUtf8("btnStart"));
         btnStart->setMinimumSize(QSize(100, 30));
 
         buttonslayout->addWidget(btnStart);
 
-        btnExit = new QPushButton(centralWidget);
+        btnExit = new QPushButton(StartUpPage);
         btnExit->setObjectName(QString::fromUtf8("btnExit"));
         btnExit->setMinimumSize(QSize(100, 30));
 
@@ -208,7 +223,14 @@ public:
         buttonslayout->addItem(horizontalSpacer_2);
 
 
-        verticalLayout->addLayout(buttonslayout);
+        verticalLayout_2->addLayout(buttonslayout);
+
+        stackedWidget->addWidget(StartUpPage);
+        page_2 = new QWidget();
+        page_2->setObjectName(QString::fromUtf8("page_2"));
+        stackedWidget->addWidget(page_2);
+
+        verticalLayout->addWidget(stackedWidget);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -235,6 +257,9 @@ public:
 
         retranslateUi(MainWindow);
 
+        stackedWidget->setCurrentIndex(0);
+
+
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
@@ -247,12 +272,12 @@ public:
         actionWater->setText(QCoreApplication::translate("MainWindow", "Water", nullptr));
         applicationServerLabel->setText(QCoreApplication::translate("MainWindow", "Application server:", nullptr));
         applicationDatabaseLabel->setText(QCoreApplication::translate("MainWindow", "Application database:", nullptr));
-        useridLabel->setText(QCoreApplication::translate("MainWindow", "Userid:", nullptr));
-        passwordLabel->setText(QCoreApplication::translate("MainWindow", "Password:", nullptr));
+        applicationDatabaseUseridLabel->setText(QCoreApplication::translate("MainWindow", "Userid:", nullptr));
+        applicationDatabasePasswordLabel->setText(QCoreApplication::translate("MainWindow", "Password:", nullptr));
         loggingServerLabel->setText(QCoreApplication::translate("MainWindow", "Logging server:", nullptr));
         loggingDatabaseLabel->setText(QCoreApplication::translate("MainWindow", "Logging database:", nullptr));
-        useridLabel_2->setText(QCoreApplication::translate("MainWindow", "Userid:", nullptr));
-        passwordLabel_2->setText(QCoreApplication::translate("MainWindow", "Password:", nullptr));
+        loggingUseridLabel->setText(QCoreApplication::translate("MainWindow", "Userid:", nullptr));
+        loggingPasswordLabel->setText(QCoreApplication::translate("MainWindow", "Password:", nullptr));
         btnStart->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
         btnExit->setText(QCoreApplication::translate("MainWindow", "Exit", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));

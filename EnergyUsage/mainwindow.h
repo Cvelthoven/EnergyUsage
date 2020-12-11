@@ -26,7 +26,7 @@ public:
     bool InitializeProgram();
 
 private slots:
-    void on_actionExit_triggered() __attribute__ ((noreturn));
+    void on_actionExit_triggered();
 
     void on_actionGas_triggered();
 
@@ -34,8 +34,18 @@ private slots:
 
     void on_actionWater_triggered();
 
+    void on_btnExit_clicked();
+
+    void on_btnStart_clicked();
+
 private:
+    void goExit() __attribute__ ((noreturn));
+    bool retrieveDbLogSettings();
     void setupMenuBar();
+
+    bool
+        bAppLogConnected   = false,
+        bDatabaseConnected = false;
 
     Ui::MainWindow *ui;
 
@@ -46,6 +56,38 @@ private:
         strTemp,
         strSeverity,
         strMessage;
+
+    QString
+        strAppDbSectionName = "AplDatabase",             // Application database section name
+        //-------------------------------------------------------------------------------
+        strAppKeyDbServerName = "AplDatabaseServerName", // Key name with application database server name
+        strAppDatabaseServerName,                        // Application database server name
+        //-------------------------------------------------------------------------------
+        strAppKeyDbName = "AplDatabaseName",             // Key name with database name
+        strAppDatabaseName,                              // Database name
+        //-------------------------------------------------------------------------------
+        strAppKeyDbUserId = "AplDatabaseUserId",         // Key name with database UserID
+        strAppDatabaseUserId,                            // Database userID
+         //-------------------------------------------------------------------------------
+        strAppKeyDbPassword = "AplDatabasePassword",     // Key name with database Password
+        strAppDatabasePassword;                          // Database password
+
+    QString
+        strAppLogSectionName = "Log",                       // Application logging section name
+        strAppLogKeyLoggingType = "LogType",                // Key name with the type of log (db or file)
+        strAppLogLoggingType,                               // Application loggging type
+        //-------------------------------------------------------------------------------
+        strAppLogKeyDbServerName = "LogDatabaseServerName", // Key name with application logging database server name
+        strAppLogDatabaseServerName,                        // Application Logging database server name
+        //-------------------------------------------------------------------------------
+        strAppLogKeyDbName = "LogDatabaseName",             // Key name with database name
+        strAppLogDatabaseName,                              // Database name
+        //-------------------------------------------------------------------------------
+        strAppLogKeyDbUserId = "LogDatabaseUserId",         // Key name with database UserID
+        strAppLogDatabaseUserId,                            // Database userID
+         //-------------------------------------------------------------------------------
+        strAppLogKeyDbPassword = "LogDatabasePassword",        // Key name with database Password
+        strAppLogDatabasePassword;                          // Database password
 
 };
 

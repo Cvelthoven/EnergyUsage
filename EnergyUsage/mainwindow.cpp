@@ -40,16 +40,22 @@ MainWindow::MainWindow(QWidget *parent) :
     //
     //  Program initialization
     //
-    if (!InitializeProgram())
-    {
-       exit(0);
-    }
+
+//    if (!InitializeProgram())
+//    {
+//       exit(0);
+//    }
 
     //-----------------------------------------------------------------------------------
     //
     //  Actual program run
+    //  and load startup page values
     //
     ui->setupUi(this);
+    if (!retrieveDbLogSettings())
+    {
+        goExit();
+    }
 
 }
 
@@ -83,20 +89,20 @@ bool MainWindow::InitializeProgram()
     strMessage  = "EnergyUsage started";
     QDateTime euStartTime = QDateTime::currentDateTime();
     AppLogging = new ApplicationLogging(this);
-    if (!AppLogging->bDBconnected)
-    {
+    if (AppLogging->bDBconnected)
+        bAppLogConnected = true;
+    else
         exit(0);
-    }
-    AppLogging->WriteLogRecord(&euStartTime,&strSeverity,&strMessage);
+     AppLogging->WriteLogRecord(&euStartTime,&strSeverity,&strMessage);
 
     //---------------------------------------------------------------------------------------
     //
     //  Connect to database
     Database = new EnergyUsageDatabase(this, AppLogging);
-    if (!Database->bDBconnected)
-    {
+    if (Database->bDBconnected)
+        bDatabaseConnected = true;
+    else
         exit(0);
-    }
 
     return true;
 }
@@ -123,13 +129,7 @@ void MainWindow::setupMenuBar()
 //
 void MainWindow::on_actionExit_triggered()
 {
-    strSeverity = "Info";
-    strMessage  = "EnergyUsage ended normal";
-    AppLogging->WriteLogRecord(&strSeverity,&strMessage);
-    delete AppLogging;
-    delete Database;
-    exit(0);
-
+    goExit();
 }
 
 
@@ -175,32 +175,102 @@ void MainWindow::on_actionWater_triggered()
 }
 
 
-////---------------------------------------------------------------------------------------
-////
-////  DatabaseView activated
-////
-//void MainWindow::on_tbvDatabaseView_activated(const QModelIndex &index)
-//{
-//    ui->tbvDatabaseView->setRootIndex(index);
-//}
-
-////---------------------------------------------------------------------------------------
-////
-//// TestLineEdit actions
-////
-//void MainWindow::on_TestLineEdit_cursorPositionChanged(int arg1, int arg2)
-//{
-//    qDebug("arg1: %i",arg1);
-//    qDebug("arg2: %i",arg2);
-//}
-
-//void MainWindow::on_TestLineEdit_returnPressed()
-//{
-//    ui->TestLineEdit->setPlaceholderText("test line");
-//    ui->TestLineEdit->setFocus();
-//    QString test = ui->TestLineEdit->text();
-//    qDebug() << "Test string: " << test;
-
-//}
+void MainWindow::on_btnExit_clicked()
+{
+    goExit();
+}
 
 
+//---------------------------------------------------------------------------------------
+//
+//  MainWindow general functions
+//
+//---------------------------------------------------------------------------------------
+//
+//  Function: goExit
+//      Clean up
+//      Close databases
+//      go exit
+//
+void MainWindow::goExit()
+{
+    if (bAppLogConnected)
+    {
+        strSeverity = "Info";
+        strMessage  = "EnergyUsage ended normal";
+        AppLogging->WriteLogRecord(&strSeverity,&strMessage);
+        delete AppLogging;
+    }
+    if (bDatabaseConnected)
+        delete Database;
+    exit(0);
+
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  retrieveDbLogSettings
+//      Retrieve settings defined in the application configuration for:
+//      -   application database
+//      -   application logging
+bool MainWindow::retrieveDbLogSettings()
+{
+    int iStrLen;
+    //-----------------------------------------------------------------------------------
+    //
+    //  Retrieve application database settings and load them in startup window
+    AppSettings = new ApplicationSettingsModel;
+    strAppDatabaseServerName = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbServerName);
+    iStrLen = strAppDatabaseServerName.length();
+    if (iStrLen != 0)
+        ui->applicationServerLineEdit->insert(strAppDatabaseServerName);
+
+    strAppDatabaseName       = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbName);
+    iStrLen = strAppDatabaseName.length();
+    if (iStrLen != 0)
+        ui->applicationDatabaseLineEdit->insert(strAppDatabaseName);
+
+    strAppDatabaseUserId     = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbUserId);
+    iStrLen = strAppDatabaseUserId.length();
+    if (iStrLen != 0)
+        ui->applicationDatabaseUseridLineEdit->insert(strAppDatabaseUserId);
+
+    strAppDatabasePassword   = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbPassword);
+    iStrLen = strAppDatabasePassword.length();
+    if (iStrLen != 0)
+        ui->applicationDatabasePasswordLineEdit->insert(strAppDatabasePassword);
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Retrieve logging settings and load them in startup window
+    strAppLogDatabaseServerName = AppSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbServerName);
+    iStrLen = strAppLogDatabaseServerName.length();
+    if (iStrLen != 0)
+        ui->loggingServerLineEdit->insert(strAppLogDatabaseServerName);
+
+    strAppLogDatabaseName       = AppSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbName);
+    iStrLen = strAppLogDatabaseName.length();
+    if (iStrLen != 0)
+        ui->loggingDatabaseLineEdit->insert(strAppLogDatabaseName);
+
+    strAppLogDatabaseUserId     = AppSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbUserId);
+    iStrLen = strAppLogDatabaseUserId.length();
+    if (iStrLen != 0)
+        ui->loggingUseridLineEdit->insert(strAppLogDatabaseUserId);
+
+    strAppLogDatabasePassword   = AppSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbPassword);
+    iStrLen = strAppLogDatabasePassword.length();
+    if (iStrLen != 0)
+        ui->loggingPasswordLineEdit->insert(strAppLogDatabasePassword);
+
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  Function: goExit
+void MainWindow::on_btnStart_clicked()
+{
+
+}
