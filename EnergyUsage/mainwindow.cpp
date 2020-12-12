@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //
     //  Program initialization
     //
+    AppSettings = new ApplicationSettingsModel;
 
 //    if (!InitializeProgram())
 //    {
@@ -132,6 +133,70 @@ void MainWindow::on_actionExit_triggered()
     goExit();
 }
 
+//---------------------------------------------------------------------------------------
+//
+//  Database configuration change functions
+//
+void MainWindow::on_applicationServerLineEdit_returnPressed()
+{
+    strTemp = ui->applicationServerLineEdit->text();
+    if (strTemp.length() > 0)
+       AppSettings->SetAppSetting(strAppDbSectionName,strAppKeyDbServerName,strTemp);
+}
+
+void MainWindow::on_applicationDatabaseLineEdit_returnPressed()
+{
+    strTemp = ui->applicationDatabaseLineEdit->text();
+    if (strTemp.length() > 0)
+        AppSettings->SetAppSetting(strAppDbSectionName,strAppKeyDbName,strTemp);
+}
+
+void MainWindow::on_applicationDatabaseUseridLineEdit_returnPressed()
+{
+    strTemp = ui->applicationDatabaseUseridLineEdit->text();
+    if (strTemp.length() > 0)
+        AppSettings->SetAppSetting(strAppDbSectionName,strAppKeyDbUserId,strTemp);
+}
+
+void MainWindow::on_applicationDatabasePasswordLineEdit_returnPressed()
+{
+    strTemp = ui->applicationDatabasePasswordLineEdit->text();
+    if (strTemp.length() > 0)
+       AppSettings->SetAppSetting(strAppDbSectionName,strAppKeyDbPassword,strTemp);
+}
+//---------------------------------------------------------------------------------------
+//
+//  Logging configuration change functions
+//
+void MainWindow::on_loggingServerLineEdit_returnPressed()
+{
+    strTemp = ui->loggingServerLineEdit->text();
+    if (strTemp.length() > 0)
+       AppSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbServerName,strTemp);
+}
+
+void MainWindow::on_loggingDatabaseLineEdit_returnPressed()
+{
+    strTemp = ui->loggingDatabaseLineEdit->text();
+    if (strTemp.length() > 0)
+       AppSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbName,strTemp);
+}
+
+void MainWindow::on_loggingUseridLineEdit_returnPressed()
+{
+    strTemp = ui->loggingUseridLineEdit->text();
+    if (strTemp.length() > 0)
+       AppSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbUserId,strTemp);
+}
+
+void MainWindow::on_loggingPasswordLineEdit_returnPressed()
+{
+    strTemp = ui->loggingPasswordLineEdit->text();
+    if (strTemp.length() > 0)
+       AppSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbPassword,strTemp);
+}
+
+
 
 //---------------------------------------------------------------------------------------
 //
@@ -219,7 +284,7 @@ bool MainWindow::retrieveDbLogSettings()
     //-----------------------------------------------------------------------------------
     //
     //  Retrieve application database settings and load them in startup window
-    AppSettings = new ApplicationSettingsModel;
+//    AppSettings = new ApplicationSettingsModel;
     strAppDatabaseServerName = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbServerName);
     iStrLen = strAppDatabaseServerName.length();
     if (iStrLen != 0)

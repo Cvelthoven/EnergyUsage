@@ -34,9 +34,25 @@ private slots:
 
     void on_actionWater_triggered();
 
+    void on_applicationServerLineEdit_returnPressed();
+
+    void on_applicationDatabaseLineEdit_returnPressed();
+
+    void on_applicationDatabaseUseridLineEdit_returnPressed();
+
+    void on_applicationDatabasePasswordLineEdit_returnPressed();
+
     void on_btnExit_clicked();
 
     void on_btnStart_clicked();
+
+    void on_loggingServerLineEdit_returnPressed();
+
+    void on_loggingDatabaseLineEdit_returnPressed();
+
+    void on_loggingUseridLineEdit_returnPressed();
+
+    void on_loggingPasswordLineEdit_returnPressed();
 
 private:
     void goExit() __attribute__ ((noreturn));
