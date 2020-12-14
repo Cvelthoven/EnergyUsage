@@ -57,7 +57,10 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         goExit();
     }
-
+    //-----------------------------------------------------------------------------------
+    //
+    //  Create startup graphs
+    chartGasLineSetup();
 }
 
 
@@ -108,6 +111,28 @@ bool MainWindow::InitializeProgram()
     return true;
 }
 
+//---------------------------------------------------------------------------------------
+//
+//  Proceduce: setupMenuBar
+//
+void MainWindow::chartGasLineSetup()
+{
+    QLineSeries *gasLine = new QLineSeries();
+    gasLine->append(0, 6);
+    gasLine->append(2, 4);
+    gasLine->append(3, 8);
+    gasLine->append(10,5);
+
+    QChart *gasLineChart = new QChart();
+    gasLineChart->addSeries(gasLine);
+    gasLineChart->createDefaultAxes();
+    gasLineChart->setTitle("Gas usage");
+
+    chartGasLine = new QChartView(gasLineChart);
+    chartGasLine->setRenderHint(QPainter::Antialiasing);
+    chartGasLine->setParent(ui->gasChartFrame);
+
+}
 
 //---------------------------------------------------------------------------------------
 //
@@ -197,7 +222,6 @@ void MainWindow::on_loggingPasswordLineEdit_returnPressed()
 }
 
 
-
 //---------------------------------------------------------------------------------------
 //
 //  File -> Open Import -> Gas
@@ -272,6 +296,7 @@ void MainWindow::goExit()
 
 }
 
+
 //---------------------------------------------------------------------------------------
 //
 //  retrieveDbLogSettings
@@ -332,10 +357,27 @@ bool MainWindow::retrieveDbLogSettings()
     return true;
 }
 
+
 //---------------------------------------------------------------------------------------
 //
 //  Function: goExit
 void MainWindow::on_btnStart_clicked()
 {
+
+}
+
+
+//---------------------------------------------------------------------------------------
+//
+//  Events
+//
+//---------------------------------------------------------------------------------------
+//
+//  resizeEvent
+void MainWindow::resizeEvent(QResizeEvent* event)
+{
+
+    QMainWindow::resizeEvent(event);
+    chartGasLine->resize((chartGasLine->parentWidget()->size()));
 
 }

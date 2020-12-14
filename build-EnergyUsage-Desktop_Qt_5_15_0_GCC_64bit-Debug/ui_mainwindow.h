@@ -13,6 +13,8 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFormLayout>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -37,7 +39,7 @@ public:
     QAction *actionElectricity;
     QAction *actionWater;
     QWidget *centralWidget;
-    QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout_2;
     QStackedWidget *stackedWidget;
     QWidget *StartUpPage;
     QVBoxLayout *verticalLayout_2;
@@ -66,6 +68,15 @@ public:
     QPushButton *btnExit;
     QSpacerItem *horizontalSpacer_2;
     QWidget *page_2;
+    QWidget *gridLayoutWidget;
+    QGridLayout *gridLayout;
+    QVBoxLayout *verticalLayout_6;
+    QVBoxLayout *verticalLayout_8;
+    QVBoxLayout *verticalLayout_9;
+    QVBoxLayout *verticalLayout_5;
+    QVBoxLayout *verticalLayout_3;
+    QFrame *gasChartFrame;
+    QVBoxLayout *verticalLayout_4;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuOpen_import;
@@ -87,10 +98,10 @@ public:
         actionWater->setObjectName(QString::fromUtf8("actionWater"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        gridLayout_2 = new QGridLayout(centralWidget);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         stackedWidget = new QStackedWidget(centralWidget);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
         StartUpPage = new QWidget();
@@ -228,9 +239,56 @@ public:
         stackedWidget->addWidget(StartUpPage);
         page_2 = new QWidget();
         page_2->setObjectName(QString::fromUtf8("page_2"));
+        gridLayoutWidget = new QWidget(page_2);
+        gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
+        gridLayoutWidget->setGeometry(QRect(10, 0, 871, 441));
+        gridLayout = new QGridLayout(gridLayoutWidget);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+
+        gridLayout->addLayout(verticalLayout_6, 0, 2, 1, 1);
+
+        verticalLayout_8 = new QVBoxLayout();
+        verticalLayout_8->setSpacing(6);
+        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
+
+        gridLayout->addLayout(verticalLayout_8, 0, 1, 1, 1);
+
+        verticalLayout_9 = new QVBoxLayout();
+        verticalLayout_9->setSpacing(6);
+        verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
+
+        gridLayout->addLayout(verticalLayout_9, 1, 1, 1, 1);
+
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+
+        gridLayout->addLayout(verticalLayout_5, 1, 0, 1, 1);
+
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+
+        gridLayout->addLayout(verticalLayout_3, 1, 2, 1, 1);
+
+        gasChartFrame = new QFrame(gridLayoutWidget);
+        gasChartFrame->setObjectName(QString::fromUtf8("gasChartFrame"));
+        verticalLayout_4 = new QVBoxLayout(gasChartFrame);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+
+        gridLayout->addWidget(gasChartFrame, 0, 0, 1, 1);
+
         stackedWidget->addWidget(page_2);
 
-        verticalLayout->addWidget(stackedWidget);
+        gridLayout_2->addWidget(stackedWidget, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -257,7 +315,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

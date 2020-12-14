@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QString>
+#include <QtCharts>
+#include <QChartView>
+#include <QLineSeries>
 
 #include "applicationsettingsmodel.h"
 #include "applicationlogging.h"
@@ -55,8 +58,10 @@ private slots:
     void on_loggingPasswordLineEdit_returnPressed();
 
 private:
+    void chartGasLineSetup();
     void goExit() __attribute__ ((noreturn));
     bool retrieveDbLogSettings();
+    void resizeEvent(QResizeEvent* event);
     void setupMenuBar();
 
     bool
@@ -66,6 +71,8 @@ private:
     Ui::MainWindow *ui;
 
     EnergyUsageDatabase *Database;
+
+    QChartView *chartGasLine;
 
     QString
         strImportFileName,
