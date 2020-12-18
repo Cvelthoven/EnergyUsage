@@ -57,6 +57,8 @@ private slots:
 
     void on_loggingPasswordLineEdit_returnPressed();
 
+    void on_stackedWidget_currentChanged(int arg1);
+
 private:
     void chartGasLineSetup();
     void goExit() __attribute__ ((noreturn));

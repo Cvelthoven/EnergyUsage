@@ -381,3 +381,13 @@ void MainWindow::resizeEvent(QResizeEvent* event)
     chartGasLine->resize((chartGasLine->parentWidget()->size()));
 
 }
+
+//---------------------------------------------------------------------------------------
+//
+//  Handles switching of pages
+//
+void MainWindow::on_stackedWidget_currentChanged(int arg1)
+{
+    if (arg1 == 1)
+        qDebug() << "second page";
+}
