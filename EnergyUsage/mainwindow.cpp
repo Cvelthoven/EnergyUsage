@@ -29,6 +29,7 @@
 
 //---------------------------------------------------------------------------------------
 //
+//
 //  Proceduce: MainWindow constructor
 //
 MainWindow::MainWindow(QWidget *parent) :
