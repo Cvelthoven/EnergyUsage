@@ -8,6 +8,7 @@
 #include <QLineSeries>
 
 #include "applicationsettingsmodel.h"
+#include "applicationsettingsview.h"
 #include "applicationlogging.h"
 #include "energyusagedatabase.h"
 
@@ -24,11 +25,13 @@ public:
     ~MainWindow();
 
     ApplicationSettingsModel   *AppSettings;
+    ApplicationSettingsView    *AppSettingsView;
     ApplicationLogging    *AppLogging;
 
     bool InitializeProgram();
 
 private slots:
+    // File menu actions
     void on_actionExit_triggered();
 
     void on_actionGas_triggered();
@@ -37,6 +40,8 @@ private slots:
 
     void on_actionWater_triggered();
 
+    // Options menu actions
+    void on_actionDatabase_triggered();
 
 private:
     void goExit() __attribute__ ((noreturn));
@@ -50,8 +55,6 @@ private:
     Ui::MainWindow *ui;
 
     EnergyUsageDatabase *Database;
-
-    QChartView *chartGasLine;
 
     QString
         strImportFileName,

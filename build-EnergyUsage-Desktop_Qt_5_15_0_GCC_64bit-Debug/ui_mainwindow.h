@@ -29,11 +29,14 @@ public:
     QAction *actionExit;
     QAction *actionElectricity;
     QAction *actionWater;
+    QAction *actionDatabase;
+    QAction *actionLogging;
     QWidget *centralWidget;
     QGridLayout *gridLayout_2;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuOpen_import;
+    QMenu *menuOptions;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -50,6 +53,10 @@ public:
         actionElectricity->setObjectName(QString::fromUtf8("actionElectricity"));
         actionWater = new QAction(MainWindow);
         actionWater->setObjectName(QString::fromUtf8("actionWater"));
+        actionDatabase = new QAction(MainWindow);
+        actionDatabase->setObjectName(QString::fromUtf8("actionDatabase"));
+        actionLogging = new QAction(MainWindow);
+        actionLogging->setObjectName(QString::fromUtf8("actionLogging"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout_2 = new QGridLayout(centralWidget);
@@ -64,6 +71,8 @@ public:
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuOpen_import = new QMenu(menuFile);
         menuOpen_import->setObjectName(QString::fromUtf8("menuOpen_import"));
+        menuOptions = new QMenu(menuBar);
+        menuOptions->setObjectName(QString::fromUtf8("menuOptions"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -73,11 +82,14 @@ public:
         MainWindow->setStatusBar(statusBar);
 
         menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuOptions->menuAction());
         menuFile->addAction(menuOpen_import->menuAction());
         menuFile->addAction(actionExit);
         menuOpen_import->addAction(actionGas);
         menuOpen_import->addAction(actionElectricity);
         menuOpen_import->addAction(actionWater);
+        menuOptions->addAction(actionDatabase);
+        menuOptions->addAction(actionLogging);
 
         retranslateUi(MainWindow);
 
@@ -91,8 +103,11 @@ public:
         actionExit->setText(QCoreApplication::translate("MainWindow", "Exit", nullptr));
         actionElectricity->setText(QCoreApplication::translate("MainWindow", "Electricity", nullptr));
         actionWater->setText(QCoreApplication::translate("MainWindow", "Water", nullptr));
+        actionDatabase->setText(QCoreApplication::translate("MainWindow", "Database", nullptr));
+        actionLogging->setText(QCoreApplication::translate("MainWindow", "Logging", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuOpen_import->setTitle(QCoreApplication::translate("MainWindow", "Open import", nullptr));
+        menuOptions->setTitle(QCoreApplication::translate("MainWindow", "Options", nullptr));
     } // retranslateUi
 
 };

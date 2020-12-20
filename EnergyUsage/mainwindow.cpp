@@ -122,8 +122,11 @@ void MainWindow::setupMenuBar()
 
 
 //---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
 //
 //  Main menu slot functions
+//
+//---------------------------------------------------------------------------------------
 //
 //  File -> exit
 //
@@ -131,11 +134,6 @@ void MainWindow::on_actionExit_triggered()
 {
     goExit();
 }
-
-//---------------------------------------------------------------------------------------
-//
-//  Database configuration change functions
-//
 
 
 //---------------------------------------------------------------------------------------
@@ -176,6 +174,17 @@ void MainWindow::on_actionWater_triggered()
     strImportFileName = QFileDialog::getOpenFileName(this,tr("Water metrics import file"));
     if (strImportFileName.length() != 0)
         Database->ImportMetricsFile(&strTemp,&strImportFileName);
+
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  Options -> Database
+//
+void MainWindow::on_actionDatabase_triggered()
+{
+    qDebug() << "Options->Database triggered";
+
 
 }
 
@@ -273,4 +282,5 @@ bool MainWindow::retrieveDbLogSettings()
 //  Events
 //
 //---------------------------------------------------------------------------------------
+
 

@@ -40,7 +40,15 @@
     <addaction name="menuOpen_import"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="actionDatabase"/>
+    <addaction name="actionLogging"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuOptions"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -69,6 +77,16 @@
   <action name="actionWater">
    <property name="text">
     <string>Water</string>
+   </property>
+  </action>
+  <action name="actionDatabase">
+   <property name="text">
+    <string>Database</string>
+   </property>
+  </action>
+  <action name="actionLogging">
+   <property name="text">
+    <string>Logging</string>
    </property>
   </action>
  </widget>

@@ -5,10 +5,10 @@
 #include <QObject>
 #include <QWidget>
 
-class applicationsettingsview
+class ApplicationSettingsView
 {
 public:
-    applicationsettingsview();
+    ApplicationSettingsView();
 };
 
 #endif // APPLICATIONSETTINGSVIEW_H

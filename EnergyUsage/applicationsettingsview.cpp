@@ -1,6 +1,6 @@
 #include "applicationsettingsview.h"
 
-applicationsettingsview::applicationsettingsview()
+ApplicationSettingsView::ApplicationSettingsView()
 {
 
 }

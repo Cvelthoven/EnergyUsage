@@ -79,4 +79,3 @@ bool ApplicationSettingsModel::SetAppSetting(const QString &strSettingSection,
     programDefaults.setValue(strFullKeyPath,strSettingValue);
     return(true);
 }
-
