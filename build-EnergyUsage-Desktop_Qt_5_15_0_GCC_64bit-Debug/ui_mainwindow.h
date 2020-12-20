@@ -12,21 +12,12 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QFormLayout>
-#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
-#include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -40,43 +31,6 @@ public:
     QAction *actionWater;
     QWidget *centralWidget;
     QGridLayout *gridLayout_2;
-    QStackedWidget *stackedWidget;
-    QWidget *StartUpPage;
-    QVBoxLayout *verticalLayout_2;
-    QHBoxLayout *DatabaseLoggingLayout;
-    QFormLayout *DatabaseForm;
-    QLabel *applicationServerLabel;
-    QLineEdit *applicationServerLineEdit;
-    QLabel *applicationDatabaseLabel;
-    QLineEdit *applicationDatabaseLineEdit;
-    QLabel *applicationDatabaseUseridLabel;
-    QLineEdit *applicationDatabaseUseridLineEdit;
-    QLabel *applicationDatabasePasswordLabel;
-    QLineEdit *applicationDatabasePasswordLineEdit;
-    QFormLayout *LoggingForm;
-    QLineEdit *loggingServerLineEdit;
-    QLabel *loggingServerLabel;
-    QLabel *loggingDatabaseLabel;
-    QLineEdit *loggingDatabaseLineEdit;
-    QLabel *loggingUseridLabel;
-    QLineEdit *loggingUseridLineEdit;
-    QLabel *loggingPasswordLabel;
-    QLineEdit *loggingPasswordLineEdit;
-    QHBoxLayout *buttonslayout;
-    QSpacerItem *horizontalSpacer;
-    QPushButton *btnStart;
-    QPushButton *btnExit;
-    QSpacerItem *horizontalSpacer_2;
-    QWidget *page_2;
-    QWidget *gridLayoutWidget;
-    QGridLayout *gridLayout;
-    QVBoxLayout *verticalLayout_6;
-    QVBoxLayout *verticalLayout_8;
-    QVBoxLayout *verticalLayout_9;
-    QVBoxLayout *verticalLayout_5;
-    QVBoxLayout *verticalLayout_3;
-    QFrame *gasChartFrame;
-    QVBoxLayout *verticalLayout_4;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuOpen_import;
@@ -87,7 +41,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(908, 521);
+        MainWindow->resize(908, 615);
         actionGas = new QAction(MainWindow);
         actionGas->setObjectName(QString::fromUtf8("actionGas"));
         actionExit = new QAction(MainWindow);
@@ -102,194 +56,6 @@ public:
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        stackedWidget = new QStackedWidget(centralWidget);
-        stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
-        StartUpPage = new QWidget();
-        StartUpPage->setObjectName(QString::fromUtf8("StartUpPage"));
-        verticalLayout_2 = new QVBoxLayout(StartUpPage);
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        DatabaseLoggingLayout = new QHBoxLayout();
-        DatabaseLoggingLayout->setSpacing(6);
-        DatabaseLoggingLayout->setObjectName(QString::fromUtf8("DatabaseLoggingLayout"));
-        DatabaseForm = new QFormLayout();
-        DatabaseForm->setSpacing(6);
-        DatabaseForm->setObjectName(QString::fromUtf8("DatabaseForm"));
-        applicationServerLabel = new QLabel(StartUpPage);
-        applicationServerLabel->setObjectName(QString::fromUtf8("applicationServerLabel"));
-
-        DatabaseForm->setWidget(0, QFormLayout::LabelRole, applicationServerLabel);
-
-        applicationServerLineEdit = new QLineEdit(StartUpPage);
-        applicationServerLineEdit->setObjectName(QString::fromUtf8("applicationServerLineEdit"));
-
-        DatabaseForm->setWidget(0, QFormLayout::FieldRole, applicationServerLineEdit);
-
-        applicationDatabaseLabel = new QLabel(StartUpPage);
-        applicationDatabaseLabel->setObjectName(QString::fromUtf8("applicationDatabaseLabel"));
-
-        DatabaseForm->setWidget(1, QFormLayout::LabelRole, applicationDatabaseLabel);
-
-        applicationDatabaseLineEdit = new QLineEdit(StartUpPage);
-        applicationDatabaseLineEdit->setObjectName(QString::fromUtf8("applicationDatabaseLineEdit"));
-
-        DatabaseForm->setWidget(1, QFormLayout::FieldRole, applicationDatabaseLineEdit);
-
-        applicationDatabaseUseridLabel = new QLabel(StartUpPage);
-        applicationDatabaseUseridLabel->setObjectName(QString::fromUtf8("applicationDatabaseUseridLabel"));
-
-        DatabaseForm->setWidget(2, QFormLayout::LabelRole, applicationDatabaseUseridLabel);
-
-        applicationDatabaseUseridLineEdit = new QLineEdit(StartUpPage);
-        applicationDatabaseUseridLineEdit->setObjectName(QString::fromUtf8("applicationDatabaseUseridLineEdit"));
-
-        DatabaseForm->setWidget(2, QFormLayout::FieldRole, applicationDatabaseUseridLineEdit);
-
-        applicationDatabasePasswordLabel = new QLabel(StartUpPage);
-        applicationDatabasePasswordLabel->setObjectName(QString::fromUtf8("applicationDatabasePasswordLabel"));
-
-        DatabaseForm->setWidget(3, QFormLayout::LabelRole, applicationDatabasePasswordLabel);
-
-        applicationDatabasePasswordLineEdit = new QLineEdit(StartUpPage);
-        applicationDatabasePasswordLineEdit->setObjectName(QString::fromUtf8("applicationDatabasePasswordLineEdit"));
-        applicationDatabasePasswordLineEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
-
-        DatabaseForm->setWidget(3, QFormLayout::FieldRole, applicationDatabasePasswordLineEdit);
-
-
-        DatabaseLoggingLayout->addLayout(DatabaseForm);
-
-        LoggingForm = new QFormLayout();
-        LoggingForm->setSpacing(6);
-        LoggingForm->setObjectName(QString::fromUtf8("LoggingForm"));
-        loggingServerLineEdit = new QLineEdit(StartUpPage);
-        loggingServerLineEdit->setObjectName(QString::fromUtf8("loggingServerLineEdit"));
-
-        LoggingForm->setWidget(0, QFormLayout::FieldRole, loggingServerLineEdit);
-
-        loggingServerLabel = new QLabel(StartUpPage);
-        loggingServerLabel->setObjectName(QString::fromUtf8("loggingServerLabel"));
-
-        LoggingForm->setWidget(0, QFormLayout::LabelRole, loggingServerLabel);
-
-        loggingDatabaseLabel = new QLabel(StartUpPage);
-        loggingDatabaseLabel->setObjectName(QString::fromUtf8("loggingDatabaseLabel"));
-
-        LoggingForm->setWidget(1, QFormLayout::LabelRole, loggingDatabaseLabel);
-
-        loggingDatabaseLineEdit = new QLineEdit(StartUpPage);
-        loggingDatabaseLineEdit->setObjectName(QString::fromUtf8("loggingDatabaseLineEdit"));
-
-        LoggingForm->setWidget(1, QFormLayout::FieldRole, loggingDatabaseLineEdit);
-
-        loggingUseridLabel = new QLabel(StartUpPage);
-        loggingUseridLabel->setObjectName(QString::fromUtf8("loggingUseridLabel"));
-
-        LoggingForm->setWidget(2, QFormLayout::LabelRole, loggingUseridLabel);
-
-        loggingUseridLineEdit = new QLineEdit(StartUpPage);
-        loggingUseridLineEdit->setObjectName(QString::fromUtf8("loggingUseridLineEdit"));
-
-        LoggingForm->setWidget(2, QFormLayout::FieldRole, loggingUseridLineEdit);
-
-        loggingPasswordLabel = new QLabel(StartUpPage);
-        loggingPasswordLabel->setObjectName(QString::fromUtf8("loggingPasswordLabel"));
-
-        LoggingForm->setWidget(3, QFormLayout::LabelRole, loggingPasswordLabel);
-
-        loggingPasswordLineEdit = new QLineEdit(StartUpPage);
-        loggingPasswordLineEdit->setObjectName(QString::fromUtf8("loggingPasswordLineEdit"));
-        loggingPasswordLineEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
-
-        LoggingForm->setWidget(3, QFormLayout::FieldRole, loggingPasswordLineEdit);
-
-
-        DatabaseLoggingLayout->addLayout(LoggingForm);
-
-
-        verticalLayout_2->addLayout(DatabaseLoggingLayout);
-
-        buttonslayout = new QHBoxLayout();
-        buttonslayout->setSpacing(6);
-        buttonslayout->setObjectName(QString::fromUtf8("buttonslayout"));
-        horizontalSpacer = new QSpacerItem(188, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        buttonslayout->addItem(horizontalSpacer);
-
-        btnStart = new QPushButton(StartUpPage);
-        btnStart->setObjectName(QString::fromUtf8("btnStart"));
-        btnStart->setMinimumSize(QSize(100, 30));
-
-        buttonslayout->addWidget(btnStart);
-
-        btnExit = new QPushButton(StartUpPage);
-        btnExit->setObjectName(QString::fromUtf8("btnExit"));
-        btnExit->setMinimumSize(QSize(100, 30));
-
-        buttonslayout->addWidget(btnExit);
-
-        horizontalSpacer_2 = new QSpacerItem(238, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        buttonslayout->addItem(horizontalSpacer_2);
-
-
-        verticalLayout_2->addLayout(buttonslayout);
-
-        stackedWidget->addWidget(StartUpPage);
-        page_2 = new QWidget();
-        page_2->setObjectName(QString::fromUtf8("page_2"));
-        gridLayoutWidget = new QWidget(page_2);
-        gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(10, 0, 871, 441));
-        gridLayout = new QGridLayout(gridLayoutWidget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
-        verticalLayout_6 = new QVBoxLayout();
-        verticalLayout_6->setSpacing(6);
-        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
-
-        gridLayout->addLayout(verticalLayout_6, 0, 2, 1, 1);
-
-        verticalLayout_8 = new QVBoxLayout();
-        verticalLayout_8->setSpacing(6);
-        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
-
-        gridLayout->addLayout(verticalLayout_8, 0, 1, 1, 1);
-
-        verticalLayout_9 = new QVBoxLayout();
-        verticalLayout_9->setSpacing(6);
-        verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
-
-        gridLayout->addLayout(verticalLayout_9, 1, 1, 1, 1);
-
-        verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setSpacing(6);
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
-
-        gridLayout->addLayout(verticalLayout_5, 1, 0, 1, 1);
-
-        verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setSpacing(6);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-
-        gridLayout->addLayout(verticalLayout_3, 1, 2, 1, 1);
-
-        gasChartFrame = new QFrame(gridLayoutWidget);
-        gasChartFrame->setObjectName(QString::fromUtf8("gasChartFrame"));
-        verticalLayout_4 = new QVBoxLayout(gasChartFrame);
-        verticalLayout_4->setSpacing(6);
-        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-
-        gridLayout->addWidget(gasChartFrame, 0, 0, 1, 1);
-
-        stackedWidget->addWidget(page_2);
-
-        gridLayout_2->addWidget(stackedWidget, 0, 0, 1, 1);
-
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -315,9 +81,6 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(0);
-
-
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
@@ -328,16 +91,6 @@ public:
         actionExit->setText(QCoreApplication::translate("MainWindow", "Exit", nullptr));
         actionElectricity->setText(QCoreApplication::translate("MainWindow", "Electricity", nullptr));
         actionWater->setText(QCoreApplication::translate("MainWindow", "Water", nullptr));
-        applicationServerLabel->setText(QCoreApplication::translate("MainWindow", "Application server:", nullptr));
-        applicationDatabaseLabel->setText(QCoreApplication::translate("MainWindow", "Application database:", nullptr));
-        applicationDatabaseUseridLabel->setText(QCoreApplication::translate("MainWindow", "Userid:", nullptr));
-        applicationDatabasePasswordLabel->setText(QCoreApplication::translate("MainWindow", "Password:", nullptr));
-        loggingServerLabel->setText(QCoreApplication::translate("MainWindow", "Logging server:", nullptr));
-        loggingDatabaseLabel->setText(QCoreApplication::translate("MainWindow", "Logging database:", nullptr));
-        loggingUseridLabel->setText(QCoreApplication::translate("MainWindow", "Userid:", nullptr));
-        loggingPasswordLabel->setText(QCoreApplication::translate("MainWindow", "Password:", nullptr));
-        btnStart->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
-        btnExit->setText(QCoreApplication::translate("MainWindow", "Exit", nullptr));
         menuFile->setTitle(QCoreApplication::translate("MainWindow", "File", nullptr));
         menuOpen_import->setTitle(QCoreApplication::translate("MainWindow", "Open import", nullptr));
     } // retranslateUi

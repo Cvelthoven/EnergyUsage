@@ -57,10 +57,6 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         goExit();
     }
-    //-----------------------------------------------------------------------------------
-    //
-    //  Create startup graphs
-    chartGasLineSetup();
 }
 
 
@@ -111,28 +107,6 @@ bool MainWindow::InitializeProgram()
     return true;
 }
 
-//---------------------------------------------------------------------------------------
-//
-//  Proceduce: setupMenuBar
-//
-void MainWindow::chartGasLineSetup()
-{
-    QLineSeries *gasLine = new QLineSeries();
-    gasLine->append(0, 6);
-    gasLine->append(2, 4);
-    gasLine->append(3, 8);
-    gasLine->append(10,5);
-
-    QChart *gasLineChart = new QChart();
-    gasLineChart->addSeries(gasLine);
-    gasLineChart->createDefaultAxes();
-    gasLineChart->setTitle("Gas usage");
-
-    chartGasLine = new QChartView(gasLineChart);
-    chartGasLine->setRenderHint(QPainter::Antialiasing);
-    chartGasLine->setParent(ui->gasChartFrame);
-
-}
 
 //---------------------------------------------------------------------------------------
 //
@@ -162,64 +136,6 @@ void MainWindow::on_actionExit_triggered()
 //
 //  Database configuration change functions
 //
-void MainWindow::on_applicationServerLineEdit_returnPressed()
-{
-    strTemp = ui->applicationServerLineEdit->text();
-    if (strTemp.length() > 0)
-       AppSettings->SetAppSetting(strAppDbSectionName,strAppKeyDbServerName,strTemp);
-}
-
-void MainWindow::on_applicationDatabaseLineEdit_returnPressed()
-{
-    strTemp = ui->applicationDatabaseLineEdit->text();
-    if (strTemp.length() > 0)
-        AppSettings->SetAppSetting(strAppDbSectionName,strAppKeyDbName,strTemp);
-}
-
-void MainWindow::on_applicationDatabaseUseridLineEdit_returnPressed()
-{
-    strTemp = ui->applicationDatabaseUseridLineEdit->text();
-    if (strTemp.length() > 0)
-        AppSettings->SetAppSetting(strAppDbSectionName,strAppKeyDbUserId,strTemp);
-}
-
-void MainWindow::on_applicationDatabasePasswordLineEdit_returnPressed()
-{
-    strTemp = ui->applicationDatabasePasswordLineEdit->text();
-    if (strTemp.length() > 0)
-       AppSettings->SetAppSetting(strAppDbSectionName,strAppKeyDbPassword,strTemp);
-}
-//---------------------------------------------------------------------------------------
-//
-//  Logging configuration change functions
-//
-void MainWindow::on_loggingServerLineEdit_returnPressed()
-{
-    strTemp = ui->loggingServerLineEdit->text();
-    if (strTemp.length() > 0)
-       AppSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbServerName,strTemp);
-}
-
-void MainWindow::on_loggingDatabaseLineEdit_returnPressed()
-{
-    strTemp = ui->loggingDatabaseLineEdit->text();
-    if (strTemp.length() > 0)
-       AppSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbName,strTemp);
-}
-
-void MainWindow::on_loggingUseridLineEdit_returnPressed()
-{
-    strTemp = ui->loggingUseridLineEdit->text();
-    if (strTemp.length() > 0)
-       AppSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbUserId,strTemp);
-}
-
-void MainWindow::on_loggingPasswordLineEdit_returnPressed()
-{
-    strTemp = ui->loggingPasswordLineEdit->text();
-    if (strTemp.length() > 0)
-       AppSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbPassword,strTemp);
-}
 
 
 //---------------------------------------------------------------------------------------
@@ -264,12 +180,6 @@ void MainWindow::on_actionWater_triggered()
 }
 
 
-void MainWindow::on_btnExit_clicked()
-{
-    goExit();
-}
-
-
 //---------------------------------------------------------------------------------------
 //
 //  MainWindow general functions
@@ -305,53 +215,53 @@ void MainWindow::goExit()
 //      -   application logging
 bool MainWindow::retrieveDbLogSettings()
 {
-    int iStrLen;
+//    int iStrLen;
     //-----------------------------------------------------------------------------------
     //
     //  Retrieve application database settings and load them in startup window
 //    AppSettings = new ApplicationSettingsModel;
-    strAppDatabaseServerName = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbServerName);
-    iStrLen = strAppDatabaseServerName.length();
-    if (iStrLen != 0)
-        ui->applicationServerLineEdit->insert(strAppDatabaseServerName);
+//    strAppDatabaseServerName = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbServerName);
+//    iStrLen = strAppDatabaseServerName.length();
+//    if (iStrLen != 0)
+//        ui->applicationServerLineEdit->insert(strAppDatabaseServerName);
 
-    strAppDatabaseName       = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbName);
-    iStrLen = strAppDatabaseName.length();
-    if (iStrLen != 0)
-        ui->applicationDatabaseLineEdit->insert(strAppDatabaseName);
+//    strAppDatabaseName       = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbName);
+//    iStrLen = strAppDatabaseName.length();
+//    if (iStrLen != 0)
+//        ui->applicationDatabaseLineEdit->insert(strAppDatabaseName);
 
-    strAppDatabaseUserId     = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbUserId);
-    iStrLen = strAppDatabaseUserId.length();
-    if (iStrLen != 0)
-        ui->applicationDatabaseUseridLineEdit->insert(strAppDatabaseUserId);
+//    strAppDatabaseUserId     = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbUserId);
+//    iStrLen = strAppDatabaseUserId.length();
+//    if (iStrLen != 0)
+//        ui->applicationDatabaseUseridLineEdit->insert(strAppDatabaseUserId);
 
-    strAppDatabasePassword   = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbPassword);
-    iStrLen = strAppDatabasePassword.length();
-    if (iStrLen != 0)
-        ui->applicationDatabasePasswordLineEdit->insert(strAppDatabasePassword);
+//    strAppDatabasePassword   = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbPassword);
+//    iStrLen = strAppDatabasePassword.length();
+//    if (iStrLen != 0)
+//        ui->applicationDatabasePasswordLineEdit->insert(strAppDatabasePassword);
 
-    //-----------------------------------------------------------------------------------
-    //
-    //  Retrieve logging settings and load them in startup window
-    strAppLogDatabaseServerName = AppSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbServerName);
-    iStrLen = strAppLogDatabaseServerName.length();
-    if (iStrLen != 0)
-        ui->loggingServerLineEdit->insert(strAppLogDatabaseServerName);
+//    //-----------------------------------------------------------------------------------
+//    //
+//    //  Retrieve logging settings and load them in startup window
+//    strAppLogDatabaseServerName = AppSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbServerName);
+//    iStrLen = strAppLogDatabaseServerName.length();
+//    if (iStrLen != 0)
+//        ui->loggingServerLineEdit->insert(strAppLogDatabaseServerName);
 
-    strAppLogDatabaseName       = AppSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbName);
-    iStrLen = strAppLogDatabaseName.length();
-    if (iStrLen != 0)
-        ui->loggingDatabaseLineEdit->insert(strAppLogDatabaseName);
+//    strAppLogDatabaseName       = AppSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbName);
+//    iStrLen = strAppLogDatabaseName.length();
+//    if (iStrLen != 0)
+//        ui->loggingDatabaseLineEdit->insert(strAppLogDatabaseName);
 
-    strAppLogDatabaseUserId     = AppSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbUserId);
-    iStrLen = strAppLogDatabaseUserId.length();
-    if (iStrLen != 0)
-        ui->loggingUseridLineEdit->insert(strAppLogDatabaseUserId);
+//    strAppLogDatabaseUserId     = AppSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbUserId);
+//    iStrLen = strAppLogDatabaseUserId.length();
+//    if (iStrLen != 0)
+//        ui->loggingUseridLineEdit->insert(strAppLogDatabaseUserId);
 
-    strAppLogDatabasePassword   = AppSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbPassword);
-    iStrLen = strAppLogDatabasePassword.length();
-    if (iStrLen != 0)
-        ui->loggingPasswordLineEdit->insert(strAppLogDatabasePassword);
+//    strAppLogDatabasePassword   = AppSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbPassword);
+//    iStrLen = strAppLogDatabasePassword.length();
+//    if (iStrLen != 0)
+//        ui->loggingPasswordLineEdit->insert(strAppLogDatabasePassword);
 
 
     return true;
@@ -360,34 +270,7 @@ bool MainWindow::retrieveDbLogSettings()
 
 //---------------------------------------------------------------------------------------
 //
-//  Function: goExit
-void MainWindow::on_btnStart_clicked()
-{
-
-}
-
-
-//---------------------------------------------------------------------------------------
-//
 //  Events
 //
 //---------------------------------------------------------------------------------------
-//
-//  resizeEvent
-void MainWindow::resizeEvent(QResizeEvent* event)
-{
 
-    QMainWindow::resizeEvent(event);
-    chartGasLine->resize((chartGasLine->parentWidget()->size()));
-
-}
-
-//---------------------------------------------------------------------------------------
-//
-//  Handles switching of pages
-//
-void MainWindow::on_stackedWidget_currentChanged(int arg1)
-{
-    if (arg1 == 1)
-        qDebug() << "second page";
-}
