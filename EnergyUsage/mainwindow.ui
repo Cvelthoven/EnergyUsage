@@ -42,10 +42,9 @@
    </widget>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
-     <string>Options</string>
+     <string>Tools</string>
     </property>
-    <addaction name="actionDatabase"/>
-    <addaction name="actionLogging"/>
+    <addaction name="actionConfiguration"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuOptions"/>
@@ -79,14 +78,9 @@
     <string>Water</string>
    </property>
   </action>
-  <action name="actionDatabase">
+  <action name="actionConfiguration">
    <property name="text">
-    <string>Database</string>
-   </property>
-  </action>
-  <action name="actionLogging">
-   <property name="text">
-    <string>Logging</string>
+    <string>Configuration</string>
    </property>
   </action>
  </widget>

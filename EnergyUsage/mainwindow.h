@@ -24,8 +24,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    ApplicationSettingsModel   *AppSettings;
-    ApplicationSettingsView    *AppSettingsView;
+    ApplicationSettingsView *ApplicationSettings;
     ApplicationLogging         *AppLogging;
 
     bool InitializeProgram();
@@ -41,12 +40,11 @@ private slots:
     void on_actionWater_triggered();
 
     // Options menu actions
-    void on_actionDatabase_triggered();
+    void on_actionConfiguration_triggered();
 
 private:
     void goExit() __attribute__ ((noreturn));
     bool retrieveDbLogSettings();
-    void setupMenuBar();
 
     bool
         bAppLogConnected   = false,

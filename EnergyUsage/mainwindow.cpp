@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //
     //  Program initialization
     //
-    AppSettings = new ApplicationSettingsModel;
+//    AppSettings = new ApplicationSettingsModel;
 
 //    if (!InitializeProgram())
 //    {
@@ -53,10 +53,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //  and load startup page values
     //
     ui->setupUi(this);
-    if (!retrieveDbLogSettings())
-    {
-        goExit();
-    }
+//    if (!retrieveDbLogSettings())
+//    {
+//        goExit();
+//    }
 }
 
 
@@ -76,11 +76,6 @@ MainWindow::~MainWindow()
 //
 bool MainWindow::InitializeProgram()
 {
-    //-----------------------------------------------------------------------------------
-    //
-    //  Setup mainwindow gui
-//    setupMenuBar();
-
 
     //---------------------------------------------------------------------------------------
     //
@@ -108,20 +103,6 @@ bool MainWindow::InitializeProgram()
 }
 
 
-//---------------------------------------------------------------------------------------
-//
-//  Proceduce: setupMenuBar
-//
-void MainWindow::setupMenuBar()
-{
-    QMenu *menu = menuBar()->addMenu(tr("Test menu"));
-    // = menuBar()->addMenu(tr("Test menu"));
-    menu->addAction(tr("test exit"),this,&MainWindow::on_actionExit_triggered);
-
-}
-
-
-//---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
 //
 //  Main menu slot functions
@@ -177,16 +158,18 @@ void MainWindow::on_actionWater_triggered()
 
 }
 
+
 //---------------------------------------------------------------------------------------
 //
-//  Options -> Database
+//  Tools -> Configuration
 //
-void MainWindow::on_actionDatabase_triggered()
+void MainWindow::on_actionConfiguration_triggered()
 {
-    qDebug() << "Options->Database triggered";
-    AppSettingsView = new ApplicationSettingsView;
-
+    qDebug() << "Tools -> Configuration triggered";
+    ApplicationSettings = new ApplicationSettingsView;
 }
+
+//---------------------------------------------------------------------------------------
 
 
 //---------------------------------------------------------------------------------------
@@ -282,5 +265,6 @@ bool MainWindow::retrieveDbLogSettings()
 //  Events
 //
 //---------------------------------------------------------------------------------------
+
 
 
