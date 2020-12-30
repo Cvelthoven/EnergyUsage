@@ -26,7 +26,7 @@ public:
 
     ApplicationSettingsModel   *AppSettings;
     ApplicationSettingsView    *AppSettingsView;
-    ApplicationLogging    *AppLogging;
+    ApplicationLogging         *AppLogging;
 
     bool InitializeProgram();
 

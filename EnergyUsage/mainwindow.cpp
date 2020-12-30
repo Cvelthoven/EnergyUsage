@@ -184,7 +184,7 @@ void MainWindow::on_actionWater_triggered()
 void MainWindow::on_actionDatabase_triggered()
 {
     qDebug() << "Options->Database triggered";
-
+    AppSettingsView = new ApplicationSettingsView;
 
 }
 

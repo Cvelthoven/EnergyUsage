@@ -27,7 +27,6 @@ CONFIG += c++11
 SOURCES += \
     applicationlogging.cpp \
     applicationsettingsmodel.cpp \
-    applicationsettingsview.cpp \
     energyusagedatabase.cpp \
     energyusagedatamodel.cpp \
         main.cpp \
@@ -36,14 +35,12 @@ SOURCES += \
 HEADERS += \
     applicationlogging.h \
     applicationsettingsmodel.h \
-    applicationsettingsview.h \
     energyusage.h \
     energyusagedatabase.h \
     energyusagedatamodel.h \
         mainwindow.h
 
 FORMS += \
-        applicationsettingsviewdialog.ui \
         mainwindow.ui
 
 # Default rules for deployment.
