@@ -10,6 +10,7 @@
 //
 // EnergyUsage specific header files
 #include "energyusage.h"
+#include "applicationsettingsmodel.h"
 #include "applicationsettingsview.h"
 #include "ui_applicationsettingsview.h"
 
@@ -26,6 +27,7 @@ ApplicationSettingsView::ApplicationSettingsView(QWidget *parent) :
     ui(new Ui::ApplicationSettingsView)
 {
     qDebug() << "Settings dialog -> constructor triggered";
+    AplConfiguration = new ApplicationSettingsModel;
     ui->setupUi(this);
     ApplicationSettingsView::exec();
 }
@@ -40,3 +42,12 @@ ApplicationSettingsView::~ApplicationSettingsView()
 }
 
 
+//---------------------------------------------------------------------------------------
+//
+//  ApplicationSettingsView slots
+//
+void ApplicationSettingsView::on_btnConfig_accepted()
+{
+    qDebug() << "Settings dialog -> config accepted slot triggered";
+
+}

@@ -50,7 +50,7 @@ public:
     QLineEdit *lnLogUserId;
     QLabel *lblLogPassword;
     QLineEdit *lnLogPassword;
-    QDialogButtonBox *buttonBox;
+    QDialogButtonBox *btnConfig;
     QSpacerItem *verticalSpacer;
 
     void setupUi(QDialog *ApplicationSettingsView)
@@ -166,12 +166,12 @@ public:
 
         verticalLayout->addWidget(tabApplicationConfiguration);
 
-        buttonBox = new QDialogButtonBox(ApplicationSettingsView);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setOrientation(Qt::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+        btnConfig = new QDialogButtonBox(ApplicationSettingsView);
+        btnConfig->setObjectName(QString::fromUtf8("btnConfig"));
+        btnConfig->setOrientation(Qt::Horizontal);
+        btnConfig->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
-        verticalLayout->addWidget(buttonBox);
+        verticalLayout->addWidget(btnConfig);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -179,8 +179,8 @@ public:
 
 
         retranslateUi(ApplicationSettingsView);
-        QObject::connect(buttonBox, SIGNAL(accepted()), ApplicationSettingsView, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), ApplicationSettingsView, SLOT(reject()));
+        QObject::connect(btnConfig, SIGNAL(accepted()), ApplicationSettingsView, SLOT(accept()));
+        QObject::connect(btnConfig, SIGNAL(rejected()), ApplicationSettingsView, SLOT(reject()));
 
         tabApplicationConfiguration->setCurrentIndex(0);
 
