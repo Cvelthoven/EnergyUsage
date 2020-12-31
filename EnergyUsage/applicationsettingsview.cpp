@@ -46,47 +46,42 @@ ApplicationSettingsView::ApplicationSettingsView(QWidget *parent) :
     //  Initialise aplConfigurationList and retrieve configured application settings
     //
     AplConfiguration = new ApplicationSettingsModel();
-    strTempSectionName = "AplDatabase";
-    for (iCnt = 0; iCnt < 4; iCnt++)
+    AplConfiguration = new ApplicationSettingsModel;
+    ui->setupUi(this);
+    for (iCnt = 0; iCnt < 8; iCnt++)
     {
         switch (iCnt)
         {
-
+            //---------------------------------------------------------------------------
+            //
+            //  Switch to application section of configuration
             case 0:
+                strTempSectionName = "AplDatabase";
                 strTempSettingName = "AplDatabaseServerName";
                 break;
             case 1:
                 strTempSettingName = "AplDatabaseName";
-                break;
+                 break;
             case 2:
                 strTempSettingName = "AplDatabaseUserId";
                 break;
             case 3:
                 strTempSettingName = "AplDatabasePassword";
                 break;
-        }
-        strTempSettingValue = AplConfiguration->GetAppSetting(strTempSectionName,strTempSettingName);
-        strListTemp << strTempSettingName << strTempSettingValue;
-        aplConfigurationList.append(strListTemp);
-        strListTemp.clear();
-    }
-
-    strTempSectionName = "Log";
-    for (iCnt = 0; iCnt < 4; iCnt++)
-    {
-        switch (iCnt)
-        {
-
-            case 0:
+            //---------------------------------------------------------------------------
+            //
+            //  Switch to log section of configuration
+            case 4:
+                strTempSectionName = "Log";
                 strTempSettingName = "LogDatabaseServerName";
                 break;
-            case 1:
+            case 5:
                 strTempSettingName = "LogDatabaseName";
                 break;
-            case 2:
+            case 6:
                 strTempSettingName = "LogDatabaseUserId";
                 break;
-            case 3:
+            case 7:
                 strTempSettingName = "LogDatabasePassword";
                 break;
         }
@@ -94,15 +89,45 @@ ApplicationSettingsView::ApplicationSettingsView(QWidget *parent) :
         strListTemp << strTempSettingName << strTempSettingValue;
         aplConfigurationList.append(strListTemp);
         strListTemp.clear();
+
+        //---------------------------------------------------------------------------
+        //
+        //  Load found settings to dialog
+        switch (iCnt)
+        {
+            case 0:
+                ui->lnAplDatabaseServer->setText(strTempSettingValue);
+                break;
+            case 1:
+                ui->lnAplDatabase->setText(strTempSettingValue);
+                break;
+            case 2:
+                ui->lnAplUserID->setText(strTempSettingValue);
+                break;
+            case 3:
+                ui->lnAplPassword->setText(strTempSettingValue);
+                break;
+            case 4:
+                ui->lnLogLoggingServer->setText(strTempSettingValue);
+                break;
+            case 5:
+                ui->lnLogLoggingDatabase->setText(strTempSettingValue);
+                break;
+            case 6:
+                ui->lnLogUserId->setText(strTempSettingValue);
+                break;
+            case 7:
+                ui->lnLogPassword->setText(strTempSettingValue);
+                break;
+        }
     }
 
     //-----------------------------------------------------------------------------------
     //
-    //  Create and load dialog
+    //  Execute dialog
     //
-    AplConfiguration = new ApplicationSettingsModel;
-    ui->setupUi(this);
     ApplicationSettingsView::exec();
+
 }
 
 //---------------------------------------------------------------------------------------
