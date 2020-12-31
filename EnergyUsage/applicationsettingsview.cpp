@@ -5,6 +5,9 @@
 //---------------------------------------------------------------------------------------
 //
 //  General QT header files
+#include <QList>
+#include <QString>
+#include <QStringList>
 
 //---------------------------------------------------------------------------------------
 //
@@ -27,6 +30,76 @@ ApplicationSettingsView::ApplicationSettingsView(QWidget *parent) :
     ui(new Ui::ApplicationSettingsView)
 {
     qDebug() << "Settings dialog -> constructor triggered";
+    //-----------------------------------------------------------------------------------
+    //
+    //  local variables
+    //
+    int iCnt;
+
+    QString strTempSectionName,
+            strTempSettingName,
+            strTempSettingValue;
+    QStringList strListTemp;
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Initialise aplConfigurationList and retrieve configured application settings
+    //
+    AplConfiguration = new ApplicationSettingsModel();
+    strTempSectionName = "AplDatabase";
+    for (iCnt = 0; iCnt < 4; iCnt++)
+    {
+        switch (iCnt)
+        {
+
+            case 0:
+                strTempSettingName = "AplDatabaseServerName";
+                break;
+            case 1:
+                strTempSettingName = "AplDatabaseName";
+                break;
+            case 2:
+                strTempSettingName = "AplDatabaseUserId";
+                break;
+            case 3:
+                strTempSettingName = "AplDatabasePassword";
+                break;
+        }
+        strTempSettingValue = AplConfiguration->GetAppSetting(strTempSectionName,strTempSettingName);
+        strListTemp << strTempSettingName << strTempSettingValue;
+        aplConfigurationList.append(strListTemp);
+        strListTemp.clear();
+    }
+
+    strTempSectionName = "Log";
+    for (iCnt = 0; iCnt < 4; iCnt++)
+    {
+        switch (iCnt)
+        {
+
+            case 0:
+                strTempSettingName = "LogDatabaseServerName";
+                break;
+            case 1:
+                strTempSettingName = "LogDatabaseName";
+                break;
+            case 2:
+                strTempSettingName = "LogDatabaseUserId";
+                break;
+            case 3:
+                strTempSettingName = "LogDatabasePassword";
+                break;
+        }
+        strTempSettingValue = AplConfiguration->GetAppSetting(strTempSectionName,strTempSettingName);
+        strListTemp << strTempSettingName << strTempSettingValue;
+        aplConfigurationList.append(strListTemp);
+        strListTemp.clear();
+    }
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Create and load dialog
+    //
     AplConfiguration = new ApplicationSettingsModel;
     ui->setupUi(this);
     ApplicationSettingsView::exec();

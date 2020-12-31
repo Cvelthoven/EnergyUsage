@@ -4,6 +4,8 @@
 //
 //  General QT header files
 #include <QDialog>
+#include <QList>
+#include <QStringList>
 
 //---------------------------------------------------------------------------------------
 //
@@ -29,6 +31,8 @@ private:
     Ui::ApplicationSettingsView *ui;
 
     ApplicationSettingsModel *AplConfiguration;
+
+    QList<QStringList> aplConfigurationList;
 };
 
 #endif // APPLICATIONSETTINGSVIEW_H
