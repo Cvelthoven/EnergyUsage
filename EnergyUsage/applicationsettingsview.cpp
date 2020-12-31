@@ -146,6 +146,84 @@ ApplicationSettingsView::~ApplicationSettingsView()
 //
 void ApplicationSettingsView::on_btnConfig_accepted()
 {
+    //-----------------------------------------------------------------------------------
+    //
+    //  local variables
+    //
+    bool
+            bAplConfigChanged = false,
+            bLogConfigChanged = false;
+    int iCnt1;
+
+    QString
+            strSectionName,
+            strTemp;
+    QStringList strListTemp;
+
     qDebug() << "Settings dialog -> config accepted slot triggered";
 
+    //-----------------------------------------------------------------------------------
+    //
+    //  Verify values are changed and update the application configuration
+    for (iCnt1=0; iCnt1 < 8; iCnt1++)
+    {
+        strListTemp = aplConfigurationList[iCnt1];
+        switch (iCnt1)
+        {
+            //---------------------------------------------------------------------------
+            //
+            //  Switch to application section of configuration
+            case 0:
+                strSectionName = "AplDatabase";
+                strTemp = ui->lnAplDatabaseServer->text();
+                break;
+            case 1:
+                strTemp = ui->lnAplDatabase->text();
+                break;
+            case 2:
+                strTemp = ui->lnAplUserID->text();
+                break;
+            case 3:
+                strTemp = ui->lnAplPassword->text();
+                break;
+            //---------------------------------------------------------------------------
+            //
+            //  Switch to log section of configuration
+            case 4:
+                strSectionName = "Log";
+                strTemp = ui->lnLogLoggingServer->text();
+                break;
+            case 5:
+                strTemp = ui->lnLogLoggingDatabase->text();
+                break;
+            case 6:
+                strTemp = ui->lnLogUserId->text();
+                break;
+            case 7:
+                strTemp = ui->lnLogPassword->text();
+                break;
+
+        }
+
+        //-------------------------------------------------------------------------------
+        //
+        //  Update application configuration when value is changed
+        if (strListTemp[1] != strTemp)
+        {
+            AplConfiguration->SetAppSetting(strSectionName,strListTemp[0],strTemp);
+            if (iCnt1 < 4)
+                bAplConfigChanged = true;
+            else
+                bLogConfigChanged = true;
+        }
+    }
+    if (bAplConfigChanged)
+    {
+        qDebug() << "Signal to applicationmodel that application configuration is changed";
+    }
+    if (bLogConfigChanged)
+    {
+        qDebug() << "Signal to applicationmodel that logging configuration is changed";
+
+    }
 }
