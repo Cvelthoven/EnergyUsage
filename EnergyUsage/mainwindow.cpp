@@ -10,6 +10,7 @@
 #include <QFileDialog>
 #include <QMenu>
 #include <QMenuBar>
+#include <QStatusBar>
 #include <QString>
 
 //---------------------------------------------------------------------------------------
@@ -40,6 +41,18 @@ MainWindow::MainWindow(QWidget *parent) :
     //
     //  Program initialization
     //
+    QLabel *statusApplication = new QLabel();
+    statusApplication->setText("Starting");
+    statusApplication->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+
+    QLabel *statusAplDb = new QLabel();
+    statusAplDb->setText("Database: not connected");
+    statusAplDb->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+
+    QLabel *statusLogging = new QLabel();
+    statusLogging->setText("Logging: not connected");
+    statusLogging->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+
 //    AppSettings = new ApplicationSettingsModel;
 
 //    if (!InitializeProgram())
@@ -53,6 +66,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //  and load startup page values
     //
     ui->setupUi(this);
+    ui->statusBar->addWidget(statusApplication,0);
+    ui->statusBar->insertWidget(1,statusAplDb,0);
+    ui->statusBar->insertWidget(2,statusLogging,0);
 //    if (!retrieveDbLogSettings())
 //    {
 //        goExit();

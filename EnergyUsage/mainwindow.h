@@ -29,6 +29,11 @@ public:
 
     bool InitializeProgram();
 
+    QLabel
+        statusApplication,
+        statusAplDb,
+        statusLogging;
+
 private slots:
     // File menu actions
     void on_actionExit_triggered();
