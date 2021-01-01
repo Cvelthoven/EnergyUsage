@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI verified="false" xmi.version="1.2" timestamp="2020-12-31T11:42:24" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
+<XMI verified="false" xmi.version="1.2" timestamp="2021-01-01T12:54:03" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://umbrello.kde.org</XMI.exporter>
@@ -149,6 +149,7 @@
        <UML:Classifier.feature>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="u9mNaf9mxn6fw" type="uzz8LfKFeHEbv" name="AplConfiguration"/>
         <UML:Operation visibility="private" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="upFSn3H5xa2Ru" isOverride="false" name="on_btnConfig_accepted" isInline="false" isVirtual="false"/>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="uLgvksupwJ7vs" isOverride="false" name="LoggingConfigurationChanged" isInline="false" isVirtual="false"/>
        </UML:Classifier.feature>
       </UML:Class>
      </UML:Namespace.ownedElement>
@@ -158,7 +159,7 @@
         <widgets>
          <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" showoperations="1" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1828" showattsigs="601" showstereotype="1" y="-971" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="un45lDKFW0B1d" width="841" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="uFpxNeHmMhfur" autoresize="1" showscope="1" height="525" showopsigs="601"/>
          <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" showoperations="1" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2420.77" showattsigs="601" showstereotype="1" y="-1325.26" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="uwH8aZ1lQ8p4T" width="685" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="uzz8LfKFeHEbv" autoresize="1" showscope="1" height="75" showopsigs="601"/>
-         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" showoperations="1" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2400" showattsigs="601" showstereotype="1" y="-1115" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="un19IjQIsYAnK" width="253" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="uSoFzWFdWN5GO" autoresize="1" showscope="1" height="45" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" showoperations="1" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2400" showattsigs="601" showstereotype="1" y="-1115" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="un19IjQIsYAnK" width="253" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="uSoFzWFdWN5GO" autoresize="1" showscope="1" height="60" showopsigs="601"/>
         </widgets>
         <messages/>
         <associations>
@@ -197,7 +198,7 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello">
-  <docsettings viewid="ui7PXHq702wcA" uniqueid="upFSn3H5xa2Ru" documentation=""/>
+  <docsettings viewid="ui7PXHq702wcA" uniqueid="uLgvksupwJ7vs" documentation=""/>
   <listview>
    <listitem open="1" type="800" id="Views">
     <listitem open="1" type="821" id="Component_View"/>
@@ -212,6 +213,7 @@
      </listitem>
      <listitem open="1" type="813" id="uSoFzWFdWN5GO">
       <listitem open="0" type="814" id="u9mNaf9mxn6fw"/>
+      <listitem open="0" type="815" id="uLgvksupwJ7vs"/>
       <listitem open="0" type="815" id="upFSn3H5xa2Ru"/>
      </listitem>
      <listitem open="0" type="807" id="ui7PXHq702wcA" label="class diagram"/>
