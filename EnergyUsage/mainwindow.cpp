@@ -8,6 +8,7 @@
 //  General include files
 #include <QDateTime>
 #include <QFileDialog>
+#include <QLabel>
 #include <QMenu>
 #include <QMenuBar>
 #include <QStatusBar>
@@ -41,24 +42,11 @@ MainWindow::MainWindow(QWidget *parent) :
     //
     //  Program initialization
     //
-    QLabel *statusApplication = new QLabel();
-    statusApplication->setText("Starting");
-    statusApplication->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 
-    QLabel *statusAplDb = new QLabel();
-    statusAplDb->setText("Database: not connected");
-    statusAplDb->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-
-    QLabel *statusLogging = new QLabel();
-    statusLogging->setText("Logging: not connected");
-    statusLogging->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-
-//    AppSettings = new ApplicationSettingsModel;
-
-//    if (!InitializeProgram())
-//    {
-//       exit(0);
-//    }
+    if (!InitializeProgram())
+    {
+       exit(0);
+    }
 
     //-----------------------------------------------------------------------------------
     //
@@ -93,27 +81,60 @@ MainWindow::~MainWindow()
 bool MainWindow::InitializeProgram()
 {
 
-    //---------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------
     //
     //  Start application logging
+    //
+    //  Retrieve current date time and setup startup logging record
+    QDateTime aplStartTime = QDateTime::currentDateTime();
     strSeverity = "Info";
     strMessage  = "EnergyUsage started";
-    QDateTime euStartTime = QDateTime::currentDateTime();
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Set statusbar fields to startup values
+    statusApplication = new QLabel();
+    statusApplication->setText("Starting");
+    statusApplication->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+
+    statusAplDb = new QLabel();
+    statusAplDb->setText("Database: not connected");
+    statusAplDb->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+
+    statusLogging = new QLabel();
+    statusLogging->setText("Logging: not connected");
+    statusLogging->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Set statusbar fields to startup values
+    ApplicationSettingsModel *tempAplSettings = new ApplicationSettingsModel();
+    strAppLogDatabaseName = tempAplSettings->GetAppSetting(strAppLogSectionName,strAppLogKeyDbName);
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Connect logging database
+    //
     AppLogging = new ApplicationLogging(this);
     if (AppLogging->bDBconnected)
+    {
+        strTemp = "Logging: " + strAppLogDatabaseName;
+        statusLogging->setText(strTemp);
+        statusLogging->setStyleSheet("color:green");
         bAppLogConnected = true;
+    }
     else
         exit(0);
-     AppLogging->WriteLogRecord(&euStartTime,&strSeverity,&strMessage);
+     AppLogging->WriteLogRecord(&aplStartTime,&strSeverity,&strMessage);
 
     //---------------------------------------------------------------------------------------
     //
     //  Connect to database
-    Database = new EnergyUsageDatabase(this, AppLogging);
-    if (Database->bDBconnected)
-        bDatabaseConnected = true;
-    else
-        exit(0);
+//    Database = new EnergyUsageDatabase(this, AppLogging);
+//    if (Database->bDBconnected)
+//        bDatabaseConnected = true;
+//    else
+//        exit(0);
 
     return true;
 }

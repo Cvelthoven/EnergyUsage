@@ -1,11 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QLabel>
 #include <QMainWindow>
 #include <QString>
-#include <QtCharts>
-#include <QChartView>
-#include <QLineSeries>
 
 #include "applicationsettingsmodel.h"
 #include "applicationsettingsview.h"
@@ -25,14 +23,15 @@ public:
     ~MainWindow();
 
     ApplicationSettingsView *ApplicationSettings;
-    ApplicationLogging         *AppLogging;
+
+    ApplicationLogging *AppLogging;
 
     bool InitializeProgram();
 
     QLabel
-        statusApplication,
-        statusAplDb,
-        statusLogging;
+        *statusApplication,
+        *statusAplDb,
+        *statusLogging;
 
 private slots:
     // File menu actions
