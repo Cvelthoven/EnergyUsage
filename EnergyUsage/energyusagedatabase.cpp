@@ -219,39 +219,39 @@ bool EnergyUsageDatabase::euRetrieveConfig()
     bool
         bOK = true;
 
-    int iStrlen;
+//    int iStrlen;
 
     //-----------------------------------------------------------------------------------
     //
     //  Get datbase configuration
     strDatabaseServerName = AppSettings->GetAppSetting(strDatabaseSection, strKeyDbServerName);
-    iStrlen = strDatabaseServerName.length();
-    if (iStrlen == 0)
-    {
-        bOK = AppSettings->SetAppSetting(strDatabaseSection,strKeyDbServerName,strDatabaseServerNameDef);
-        strDatabaseServerName = strDatabaseServerNameDef;
-    }
+//    iStrlen = strDatabaseServerName.length();
+//    if (iStrlen == 0)
+//    {
+//        bOK = AppSettings->SetAppSetting(strDatabaseSection,strKeyDbServerName,strDatabaseServerNameDef);
+//        strDatabaseServerName = strDatabaseServerNameDef;
+//    }
     strDatabaseName = AppSettings->GetAppSetting(strDatabaseSection, strKeyDbName);
-    iStrlen = strDatabaseName.length();
-    if (iStrlen == 0)
-    {
-        bOK = AppSettings->SetAppSetting(strDatabaseSection,strKeyDbName,strDatabaseNameDef);
-        strDatabaseName = strDatabaseNameDef;
-    }
+//    iStrlen = strDatabaseName.length();
+//    if (iStrlen == 0)
+//    {
+//        bOK = AppSettings->SetAppSetting(strDatabaseSection,strKeyDbName,strDatabaseNameDef);
+//        strDatabaseName = strDatabaseNameDef;
+//    }
     strDatabaseUserId = AppSettings->GetAppSetting(strDatabaseSection, strKeyDbUserId);
-    iStrlen = strDatabaseUserId.length();
-    if (iStrlen == 0)
-    {
-        bOK = AppSettings->SetAppSetting(strDatabaseSection,strKeyDbUserId,strDatabaseUserIdDef);
-        strDatabaseUserId = strDatabaseUserIdDef;
-    }
+//    iStrlen = strDatabaseUserId.length();
+//    if (iStrlen == 0)
+//    {
+//        bOK = AppSettings->SetAppSetting(strDatabaseSection,strKeyDbUserId,strDatabaseUserIdDef);
+//        strDatabaseUserId = strDatabaseUserIdDef;
+//    }
     strDatabasePassword = AppSettings->GetAppSetting(strDatabaseSection, strKeyDbPassword);
-    iStrlen = strDatabasePassword.length();
-    if (iStrlen == 0)
-    {
-        bOK = AppSettings->SetAppSetting(strDatabaseSection,strKeyDbPassword,strDatabasePasswordDef);
-        strDatabasePassword = strDatabasePasswordDef;
-    }
+//    iStrlen = strDatabasePassword.length();
+//    if (iStrlen == 0)
+//    {
+//        bOK = AppSettings->SetAppSetting(strDatabaseSection,strKeyDbPassword,strDatabasePasswordDef);
+//        strDatabasePassword = strDatabasePasswordDef;
+//    }
 
     return(bOK);
 }
