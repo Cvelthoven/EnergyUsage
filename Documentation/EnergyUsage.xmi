@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI verified="false" xmi.version="1.2" timestamp="2021-01-01T12:54:03" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
+<XMI verified="false" xmi.version="1.2" timestamp="2021-01-18T13:52:21" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://umbrello.kde.org</XMI.exporter>
@@ -36,26 +36,21 @@
         <UML:DataType visibility="public" isSpecification="false" namespace="Datatypes" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="u8tO0Sets4CHC" name="wchar_t"/>
        </UML:Namespace.ownedElement>
       </UML:Package>
-      <UML:Class visibility="public" isSpecification="false" namespace="Logical_View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="uFpxNeHmMhfur" name="euApplicationLogging">
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical_View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="uFpxNeHmMhfur" name="ApplicationLogging">
        <UML:Classifier.feature>
         <UML:Attribute visibility="public" isSpecification="false" xmi.id="uIs2uw4pltQez" type="u0YR1THRycptp" name="bDBconnected"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uHiCwHnuUVLFs" type="uzz8LfKFeHEbv" name="*euAplLogingSettings"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uXxY5nM7vWik0" type="u79fObOEgj719" name="sdbAppLogDB"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="upW2DY46U1c23" type="uieyfQLUNQOBT" initialValue="Log" name="strAppLogSectionName"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="u6bfoHEuYedTm" type="uieyfQLUNQOBT" initialValue="LogType" name="strAppLogKeyLoggingType"/>
-        <UML:Attribute visibility="private" isSpecification="false" xmi.id="uIFudxbqi5hTt" type="uieyfQLUNQOBT" initialValue="db" name="strAppLogLoggingTypeDef"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="u4cxqM6BXnoKj" type="uieyfQLUNQOBT" name="strAppLogLoggingType"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uMoQtxZVntiV7" type="uieyfQLUNQOBT" initialValue="LogDatabaseServerName" name="strAppLogKeyDbServerName"/>
-        <UML:Attribute visibility="private" isSpecification="false" xmi.id="uWz1KnyOM7J6y" type="uieyfQLUNQOBT" initialValue="192.168.1.51" name="strAppLogDatabaseServerNameDef"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uVcwVdc6jzvUH" type="uieyfQLUNQOBT" name="strAppLogDatabaseServerName"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uN9VPAZ4w3nrI" type="uieyfQLUNQOBT" initialValue="LogDatabaseName" name="strAppLogKeyDbName"/>
-        <UML:Attribute visibility="private" isSpecification="false" xmi.id="uJ8kkIIbLzZXw" type="uieyfQLUNQOBT" initialValue="cvraspi01dev" name="strAppLogDatabaseNameDef"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="ukQ6pof7mItM7" type="uieyfQLUNQOBT" name="strAppLogDatabaseName"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uqTloIyuFVQlW" type="uieyfQLUNQOBT" initialValue="LogDatabaseUserId" name="strAppLogKeyDbUserId"/>
-        <UML:Attribute visibility="private" isSpecification="false" xmi.id="uwWWMcwxMA9mv" type="uieyfQLUNQOBT" initialValue="pi" name="strAppLogDatabaseUserIdDef"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uRasKAwQIJNGG" type="uieyfQLUNQOBT" name="strAppLogDatabaseUserId"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uKiZ3p0tWxLbc" type="uieyfQLUNQOBT" initialValue="LogDatabasePassword" name="strAppLogKeyDbPassword"/>
-        <UML:Attribute visibility="private" isSpecification="false" xmi.id="u6EkpIi6MWsOB" type="uieyfQLUNQOBT" initialValue="#NS01fr#LDrz76#" name="strAppLogDatabasePasswordDef"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uKkoESKDQE4DB" type="uieyfQLUNQOBT" name="strAppLogDatabasePassword"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uq7fMgiBmZoOW" type="uieyfQLUNQOBT" initialValue="application_log" name="strAppLogTblNameApplicationLog"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uQ5JQ0ykMbu9C" type="uieyfQLUNQOBT" initialValue="apl_log_rec_id" name="strAppLogFldAplRecId"/>
@@ -64,7 +59,7 @@
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uHBIQlqEiolTw" type="uieyfQLUNQOBT" initialValue="apl_log_severity" name="strAppLogFldAplLogSeverity"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="u0XMplMjSqcea" type="uieyfQLUNQOBT" initialValue="apl_log_message" name="strAppLogFldAplLogMessage"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uH4z4uQmQtETG" type="unm10k898BVND" name="stlAplLogTables"/>
-        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="up8WZlAHFgWV3" comment="Default construction" isOverride="false" name="euApplicationLogging" isInline="false" isVirtual="false">
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="up8WZlAHFgWV3" comment="Default construction" isOverride="false" name="ApplicationLogging" isInline="false" isVirtual="false">
          <UML:BehavioralFeature.parameter>
           <UML:Parameter kind="return" xmi.id="uAHYSNVU7Dh2R" type="uFpxNeHmMhfur"/>
           <UML:Parameter visibility="private" isSpecification="false" xmi.id="uHiI5LaNGojVI" type="uBhznSOsv7j3T" value="" name="*parent"/>
@@ -155,9 +150,9 @@
      </UML:Namespace.ownedElement>
      <XMI.extension xmi.extender="umbrello">
       <diagrams resolution="96">
-       <diagram showopsig="1" linecolor="#ff0000" snapx="25" showattribassocs="1" snapy="25" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="class diagram" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="879.26" canvaswidth="1433.77" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#d3d3d3" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="ui7PXHq702wcA" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
+       <diagram showopsig="1" linecolor="#ff0000" snapx="25" showattribassocs="1" snapy="25" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="class diagram" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="804.26" canvaswidth="1433.77" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#d3d3d3" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="ui7PXHq702wcA" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
         <widgets>
-         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" showoperations="1" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1828" showattsigs="601" showstereotype="1" y="-971" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="un45lDKFW0B1d" width="841" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="uFpxNeHmMhfur" autoresize="1" showscope="1" height="525" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" showoperations="1" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1828" showattsigs="601" showstereotype="1" y="-971" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="un45lDKFW0B1d" width="841" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="uFpxNeHmMhfur" autoresize="1" showscope="1" height="450" showopsigs="601"/>
          <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" showoperations="1" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2420.77" showattsigs="601" showstereotype="1" y="-1325.26" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="uwH8aZ1lQ8p4T" width="685" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="uzz8LfKFeHEbv" autoresize="1" showscope="1" height="75" showopsigs="601"/>
          <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" showoperations="1" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2400" showattsigs="601" showstereotype="1" y="-1115" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="un19IjQIsYAnK" width="253" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="uSoFzWFdWN5GO" autoresize="1" showscope="1" height="60" showopsigs="601"/>
         </widgets>
@@ -198,13 +193,44 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello">
-  <docsettings viewid="ui7PXHq702wcA" uniqueid="uLgvksupwJ7vs" documentation=""/>
+  <docsettings viewid="ui7PXHq702wcA" uniqueid="ufdFbuPIilZw6" documentation=""/>
   <listview>
    <listitem open="1" type="800" id="Views">
     <listitem open="1" type="821" id="Component_View"/>
     <listitem open="1" type="827" id="Deployment_View"/>
     <listitem open="1" type="836" id="Entity_Relationship_Model"/>
     <listitem open="1" type="801" id="Logical_View">
+     <listitem open="1" type="813" id="uFpxNeHmMhfur">
+      <listitem open="0" type="814" id="uHiCwHnuUVLFs"/>
+      <listitem open="0" type="815" id="up8WZlAHFgWV3"/>
+      <listitem open="0" type="814" id="uIs2uw4pltQez"/>
+      <listitem open="0" type="815" id="uJpChMC9NRGmk"/>
+      <listitem open="0" type="815" id="ueAAoCQH4BrIY"/>
+      <listitem open="0" type="815" id="ulaNFLRFek4D4"/>
+      <listitem open="0" type="814" id="uXxY5nM7vWik0"/>
+      <listitem open="0" type="815" id="uE1wal2GIt9Dc"/>
+      <listitem open="0" type="814" id="uH4z4uQmQtETG"/>
+      <listitem open="0" type="814" id="ukQ6pof7mItM7"/>
+      <listitem open="0" type="814" id="uKkoESKDQE4DB"/>
+      <listitem open="0" type="814" id="uVcwVdc6jzvUH"/>
+      <listitem open="0" type="814" id="uRasKAwQIJNGG"/>
+      <listitem open="0" type="814" id="ustr1lqgVbfmg"/>
+      <listitem open="0" type="814" id="u0XMplMjSqcea"/>
+      <listitem open="0" type="814" id="uHBIQlqEiolTw"/>
+      <listitem open="0" type="814" id="uQ5JQ0ykMbu9C"/>
+      <listitem open="0" type="814" id="uzQDbsdUUaBcx"/>
+      <listitem open="0" type="814" id="uN9VPAZ4w3nrI"/>
+      <listitem open="0" type="814" id="uKiZ3p0tWxLbc"/>
+      <listitem open="0" type="814" id="uMoQtxZVntiV7"/>
+      <listitem open="0" type="814" id="uqTloIyuFVQlW"/>
+      <listitem open="0" type="814" id="u6bfoHEuYedTm"/>
+      <listitem open="0" type="814" id="u4cxqM6BXnoKj"/>
+      <listitem open="0" type="814" id="upW2DY46U1c23"/>
+      <listitem open="0" type="814" id="uq7fMgiBmZoOW"/>
+      <listitem open="0" type="815" id="ug4WiFUUh26FN"/>
+      <listitem open="0" type="815" id="u3qjQo5AsQoqN"/>
+      <listitem open="0" type="815" id="u0U8TogaNNmOR"/>
+     </listitem>
      <listitem open="1" type="813" id="uzz8LfKFeHEbv">
       <listitem open="0" type="815" id="uYKt1FbaXaraF"/>
       <listitem open="0" type="815" id="ufW2PxRMIoLcx"/>
@@ -238,42 +264,6 @@
       <listitem open="0" type="829" id="uMY4rKvFAWXlR"/>
       <listitem open="0" type="829" id="ujjWFLRFeIvD9"/>
       <listitem open="0" type="829" id="u8tO0Sets4CHC"/>
-     </listitem>
-     <listitem open="1" type="813" id="uFpxNeHmMhfur">
-      <listitem open="0" type="814" id="uHiCwHnuUVLFs"/>
-      <listitem open="0" type="814" id="uIs2uw4pltQez"/>
-      <listitem open="0" type="815" id="uJpChMC9NRGmk"/>
-      <listitem open="0" type="815" id="up8WZlAHFgWV3"/>
-      <listitem open="0" type="815" id="ueAAoCQH4BrIY"/>
-      <listitem open="0" type="815" id="ulaNFLRFek4D4"/>
-      <listitem open="0" type="814" id="uXxY5nM7vWik0"/>
-      <listitem open="0" type="815" id="uE1wal2GIt9Dc"/>
-      <listitem open="0" type="814" id="uH4z4uQmQtETG"/>
-      <listitem open="0" type="814" id="ukQ6pof7mItM7"/>
-      <listitem open="0" type="814" id="uJ8kkIIbLzZXw"/>
-      <listitem open="0" type="814" id="uKkoESKDQE4DB"/>
-      <listitem open="0" type="814" id="u6EkpIi6MWsOB"/>
-      <listitem open="0" type="814" id="uVcwVdc6jzvUH"/>
-      <listitem open="0" type="814" id="uWz1KnyOM7J6y"/>
-      <listitem open="0" type="814" id="uRasKAwQIJNGG"/>
-      <listitem open="0" type="814" id="uwWWMcwxMA9mv"/>
-      <listitem open="0" type="814" id="ustr1lqgVbfmg"/>
-      <listitem open="0" type="814" id="u0XMplMjSqcea"/>
-      <listitem open="0" type="814" id="uHBIQlqEiolTw"/>
-      <listitem open="0" type="814" id="uQ5JQ0ykMbu9C"/>
-      <listitem open="0" type="814" id="uzQDbsdUUaBcx"/>
-      <listitem open="0" type="814" id="uN9VPAZ4w3nrI"/>
-      <listitem open="0" type="814" id="uKiZ3p0tWxLbc"/>
-      <listitem open="0" type="814" id="uMoQtxZVntiV7"/>
-      <listitem open="0" type="814" id="uqTloIyuFVQlW"/>
-      <listitem open="0" type="814" id="u6bfoHEuYedTm"/>
-      <listitem open="0" type="814" id="u4cxqM6BXnoKj"/>
-      <listitem open="0" type="814" id="uIFudxbqi5hTt"/>
-      <listitem open="0" type="814" id="upW2DY46U1c23"/>
-      <listitem open="0" type="814" id="uq7fMgiBmZoOW"/>
-      <listitem open="0" type="815" id="ug4WiFUUh26FN"/>
-      <listitem open="0" type="815" id="u3qjQo5AsQoqN"/>
-      <listitem open="0" type="815" id="u0U8TogaNNmOR"/>
      </listitem>
      <listitem open="1" type="813" id="uBhznSOsv7j3T"/>
      <listitem open="1" type="813" id="u79fObOEgj719"/>
