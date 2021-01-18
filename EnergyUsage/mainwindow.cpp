@@ -57,10 +57,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->statusBar->addWidget(statusApplication,0);
     ui->statusBar->insertWidget(1,statusAplDb,0);
     ui->statusBar->insertWidget(2,statusLogging,0);
-//    if (!retrieveDbLogSettings())
-//    {
-//        goExit();
-//    }
+    if (!retrieveDbLogSettings())
+    {
+        goExit();
+    }
 }
 
 
@@ -248,11 +248,11 @@ bool MainWindow::retrieveDbLogSettings()
     //-----------------------------------------------------------------------------------
     //
     //  Retrieve application database settings and load them in startup window
-//    AppSettings = new ApplicationSettingsModel;
-//    strAppDatabaseServerName = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbServerName);
-//    iStrLen = strAppDatabaseServerName.length();
-//    if (iStrLen != 0)
-//        ui->applicationServerLineEdit->insert(strAppDatabaseServerName);
+    ApplicationSettings = new ApplicationSettingsView;
+    strAppDatabaseServerName = ApplicationSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbServerName);
+    iStrLen = strAppDatabaseServerName.length();
+    if (iStrLen != 0)
+        ui->applicationServerLineEdit->insert(strAppDatabaseServerName);
 
 //    strAppDatabaseName       = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbName);
 //    iStrLen = strAppDatabaseName.length();

@@ -16,6 +16,7 @@
 
 class ApplicationSettingsModel
 {
+
 public:
     ApplicationSettingsModel();
     QString GetAppSetting(const QString &strSettingSection, const QString &strSettingName);
