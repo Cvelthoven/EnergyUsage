@@ -25,7 +25,7 @@ ApplicationLogging::ApplicationLogging(QObject *parent)
     //-----------------------------------------------------------------------------------
     //
     //  Retrieve application logging configuration
-    euAplLogingSettings = new ApplicationSettingsModel();
+    AplLogingSettings = new ApplicationSettingsModel();
     RetrieveLogConfig();
     if (ConnectDB(&strAppLogDatabaseName, &strAppLogDatabaseServerName,
                   &strAppLogDatabaseUserId, &strAppLogDatabasePassword))
@@ -161,14 +161,11 @@ bool ApplicationLogging::RetrieveLogConfig()
     //
     //  Check type of logging
     //
-    strAppLogLoggingType = euAplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyLoggingType);
+    strAppLogLoggingType = AplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyLoggingType);
     iStrlen = strAppLogLoggingType.length();
     if (iStrlen == 0)
     {
-        bOK = euAplLogingSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyLoggingType,strAppLogLoggingTypeDef);
-        if(!bOK)
-            SendWarningMessage(strAppLogKeyLoggingType,"Unable to write to configuration.");
-        strAppLogLoggingType = strAppLogLoggingTypeDef;
+        SendWarningMessage(strAppLogKeyLoggingType,"Logging type not set.");
     }
 
     //-----------------------------------------------------------------------------------
@@ -178,47 +175,35 @@ bool ApplicationLogging::RetrieveLogConfig()
     if (strAppLogLoggingType == "db")
     {
         //  Get database servername
-        strAppLogDatabaseServerName = euAplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyDbServerName);
+        strAppLogDatabaseServerName = AplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyDbServerName);
         iStrlen = strAppLogDatabaseServerName.length();
         if (iStrlen == 0)
         {
-            bOK = euAplLogingSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbServerName,strAppLogDatabaseServerNameDef);
-            if(!bOK)
-                SendWarningMessage(strAppLogKeyLoggingType,"Unable to write to configuration.");
-            strAppLogDatabaseServerName = strAppLogDatabaseServerNameDef;
+            SendWarningMessage(strAppLogKeyLoggingType,"Database server not set.");
         }
         //
         //  Get database name
-        strAppLogDatabaseName = euAplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyDbName);
+        strAppLogDatabaseName = AplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyDbName);
         iStrlen = strAppLogDatabaseName.length();
         if (iStrlen == 0)
         {
-            bOK = euAplLogingSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbName,strAppLogDatabaseNameDef);
-            if(!bOK)
-                SendWarningMessage(strAppLogKeyDbName,"Unable to write to configuration.");
-            strAppLogDatabaseName = strAppLogDatabaseNameDef;
+            SendWarningMessage(strAppLogKeyLoggingType,"Database name not set");
         }
-        //
+         //
         //  Get database Username
-        strAppLogDatabaseUserId = euAplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyDbUserId);
+        strAppLogDatabaseUserId = AplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyDbUserId);
         iStrlen = strAppLogDatabaseUserId.length();
         if (iStrlen == 0)
         {
-            bOK = euAplLogingSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbUserId,strAppLogDatabaseUserIdDef);
-            if(!bOK)
-                SendWarningMessage(strAppLogKeyDbUserId,"Unable to write to configuration.");
-            strAppLogDatabaseUserId = strAppLogDatabaseUserIdDef;
+            SendWarningMessage(strAppLogKeyLoggingType,"Logging database userid not set.");
         }
         //
         //  Get database Password
-        strAppLogDatabasePassword = euAplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyDbPassword);
+        strAppLogDatabasePassword = AplLogingSettings->GetAppSetting(strAppLogSectionName, strAppLogKeyDbPassword);
         iStrlen = strAppLogDatabasePassword.length();
         if (iStrlen == 0)
         {
-            bOK = euAplLogingSettings->SetAppSetting(strAppLogSectionName,strAppLogKeyDbPassword,strAppLogDatabasePasswordDef);
-            if(!bOK)
-                SendWarningMessage(strAppLogKeyDbPassword,"Unable to write to configuration.");
-            strAppLogDatabasePassword = strAppLogDatabasePasswordDef;
+            SendWarningMessage(strAppLogKeyLoggingType,"Logging database password not set.");
         }
         return(bOK);
     }
@@ -304,7 +289,6 @@ void ApplicationLogging::WriteLogRecord(const QString *strAppName,
                                           const QString *strLogMessage)
 {
     QString strQuery,
-            strRecTimeStamp,
             strTimeStampFormat = "yyyy-MM-dd hh:mm:ss.zzz",
             strTemp;
 

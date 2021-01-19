@@ -38,31 +38,16 @@ private:
     bool RetrieveLogConfig();
     void SendWarningMessage(const QString &strMsgPart1, const QString &strMsgPart2);
 
-    ApplicationSettingsModel *euAplLogingSettings;
+    ApplicationSettingsModel *AplLogingSettings;
 
     QSqlDatabase sdbAppLogDB;
 
     QString
-        strAppLogSectionName = "Log",                       // Application logging section name
-        strAppLogKeyLoggingType = "LogType",                // Key name with the type of log (db or file)
-        strAppLogLoggingTypeDef = "db",                     // Default application logging type
-        strAppLogLoggingType,                               // Application loggging type
-        //-------------------------------------------------------------------------------
-        strAppLogKeyDbServerName = "LogDatabaseServerName", // Key name with application logging database server name
-        strAppLogDatabaseServerNameDef = "192.168.1.51",    // Default application logging database server
-        strAppLogDatabaseServerName,                        // Application Logging database server name
-        //-------------------------------------------------------------------------------
-        strAppLogKeyDbName = "LogDatabaseName",             // Key name with database name
-        strAppLogDatabaseNameDef = "cvraspi01dev",          // Default database name
-        strAppLogDatabaseName,                              // Database name
-        //-------------------------------------------------------------------------------
-        strAppLogKeyDbUserId = "LogDatabaseUserId",         // Key name with database UserID
-        strAppLogDatabaseUserIdDef = "pi",                  // Default database UserID
-        strAppLogDatabaseUserId,                            // Database userID
-        //-------------------------------------------------------------------------------
-        strAppLogKeyDbPassword = "LogDatabasePassword",        // Key name with database Password
-        strAppLogDatabasePasswordDef = "#NS01fr#LDrz76#",   // Default database Password
-        strAppLogDatabasePassword;                          // Database password
+        strAppLogLoggingType,       // Application loggging type
+        strAppLogDatabaseServerName,// Application Logging database server name
+        strAppLogDatabaseName,      // Database name
+        strAppLogDatabaseUserId,    // Database userID
+        strAppLogDatabasePassword;  // Database password
 
     //-----------------------------------------------------------------------------------
     //

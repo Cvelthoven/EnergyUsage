@@ -248,11 +248,11 @@ bool MainWindow::retrieveDbLogSettings()
     //-----------------------------------------------------------------------------------
     //
     //  Retrieve application database settings and load them in startup window
-    ApplicationSettings = new ApplicationSettingsView;
-    strAppDatabaseServerName = ApplicationSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbServerName);
-    iStrLen = strAppDatabaseServerName.length();
-    if (iStrLen != 0)
-        ui->applicationServerLineEdit->insert(strAppDatabaseServerName);
+//    ApplicationSettings = new ApplicationSettingsView;
+//    strAppDatabaseServerName = ApplicationSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbServerName);
+//    iStrLen = strAppDatabaseServerName.length();
+//    if (iStrLen != 0)
+//        ui->applicationServerLineEdit->insert(strAppDatabaseServerName);
 
 //    strAppDatabaseName       = AppSettings->GetAppSetting(strAppDbSectionName,strAppKeyDbName);
 //    iStrLen = strAppDatabaseName.length();
