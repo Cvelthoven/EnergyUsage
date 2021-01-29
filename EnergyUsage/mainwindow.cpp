@@ -115,27 +115,23 @@ bool MainWindow::InitializeProgram()
     //
     //  Connect logging database
     //
-    AppLogging = new ApplicationLogging(this);
-    if (AppLogging->bDBconnected)
-    {
-        strTemp = "Logging: " + strAppLogDatabaseName;
-        statusLogging->setText(strTemp);
-        statusLogging->setStyleSheet("color:green");
-        bAppLogConnected = true;
-    }
-    else
-        exit(0);
-     AppLogging->WriteLogRecord(&aplStartTime,&strSeverity,&strMessage);
+    if (!inititializeLogging())
+        return false;
 
-    //---------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------
+    //
+    //  Write application start time to log
+    AppLogging->WriteLogRecord(&aplStartTime,&strSeverity,&strMessage);
+
+    //-----------------------------------------------------------------------------------
     //
     //  Connect to database
-//    Database = new EnergyUsageDatabase(this, AppLogging);
-//    if (Database->bDBconnected)
-//        bDatabaseConnected = true;
-//    else
-//        exit(0);
+    if (!inititializeAppDatabase())
+        return false;
 
+    //-----------------------------------------------------------------------------------
+    //
+    //  Succesfull initialization
     return true;
 }
 
@@ -235,6 +231,79 @@ void MainWindow::goExit()
 
 }
 
+//---------------------------------------------------------------------------------------
+//
+//  inititializeAppDatabase
+//
+bool MainWindow::inititializeAppDatabase()
+{
+    //    Database = new EnergyUsageDatabase(this, AppLogging);
+    //    if (Database->bDBconnected)
+    //        bDatabaseConnected = true;
+    //    else
+    //        exit(0);
+
+//    AppLogging = new ApplicationLogging(this);
+//    if (AppLogging->bDBconnected)
+//    {
+//        strTemp = "Logging: " + strAppLogDatabaseName;
+//        statusLogging->setText(strTemp);
+//        statusLogging->setStyleSheet("color:green");
+//        bAppLogConnected = true;
+//        return true;
+//    }
+
+//    //-----------------------------------------------------------------------------------
+//    //
+//    //  Enable user to set the logging configuration or go exit
+//    //  Needs to be built
+//    else
+//    {
+//        strTemp = "Logging: " + strAppLogDatabaseName;
+//        statusLogging->setText(strTemp);
+//        statusLogging->setStyleSheet("color:red");
+//        bAppLogConnected = false;
+//        //
+//        // ----  Allow the user to set the logging configuration at startup
+//        //
+//        return false;
+//    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  InititializeLogging
+//
+bool MainWindow::inititializeLogging()
+{
+
+    AppLogging = new ApplicationLogging(this);
+    if (AppLogging->bDBconnected)
+    {
+        strTemp = "Logging: " + strAppLogDatabaseName;
+        statusLogging->setText(strTemp);
+        statusLogging->setStyleSheet("color:green");
+        bAppLogConnected = true;
+        return true;
+    }
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Enable user to set the logging configuration or go exit
+    //  Needs to be built
+    else
+    {
+        strTemp = "Logging: " + strAppLogDatabaseName;
+        statusLogging->setText(strTemp);
+        statusLogging->setStyleSheet("color:red");
+        bAppLogConnected = false;
+        //
+        // ----  Allow the user to set the logging configuration at startup
+        //
+        return false;
+    }
+}
 
 //---------------------------------------------------------------------------------------
 //

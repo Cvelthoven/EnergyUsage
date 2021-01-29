@@ -48,6 +48,8 @@ private slots:
 
 private:
     void goExit() __attribute__ ((noreturn));
+    bool inititializeAppDatabase();
+    bool inititializeLogging();
     bool retrieveDbLogSettings();
 
     bool
