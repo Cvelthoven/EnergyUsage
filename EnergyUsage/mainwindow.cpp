@@ -115,19 +115,44 @@ bool MainWindow::InitializeProgram()
     //
     //  Connect logging database
     //
-    if (!inititializeLogging())
+    if (inititializeLogging())
+    {
+        //-------------------------------------------------------------------------------
+        //
+        //  Write application start time to log
+        AppLogging->WriteLogRecord(&aplStartTime,&strSeverity,&strMessage);
+
+        //-------------------------------------------------------------------------------
+        //
+        //  Write application database logging connection time to log
+        aplStartTime = QDateTime::currentDateTime();
+        strSeverity = "Info";
+        strMessage  = "Application logging: " + strAppLogDatabaseName + " connected";
+        AppLogging->WriteLogRecord(&aplStartTime,&strSeverity,&strMessage);
+   }
+    else
         return false;
 
-    //-----------------------------------------------------------------------------------
-    //
-    //  Write application start time to log
-    AppLogging->WriteLogRecord(&aplStartTime,&strSeverity,&strMessage);
 
     //-----------------------------------------------------------------------------------
     //
     //  Connect to database
-    if (!inititializeAppDatabase())
+    strAppDatabaseName = tempAplSettings->GetAppSetting(strDatabaseSection,strKeyDbName);
+    if (inititializeAppDatabase())
+    {
+        aplStartTime = QDateTime::currentDateTime();
+        strSeverity = "Info";
+        strMessage  = "Application database: " + strAppDatabaseName + " ready";
+        AppLogging->WriteLogRecord(&aplStartTime,&strSeverity,&strMessage);
+    }
+    else
+    {
+        aplStartTime = QDateTime::currentDateTime();
+        strSeverity = "Error";
+        strMessage  = "Application database: " + strAppDatabaseName + " failed";
+        AppLogging->WriteLogRecord(&aplStartTime,&strSeverity,&strMessage);
         return false;
+    }
 
     //-----------------------------------------------------------------------------------
     //
@@ -237,38 +262,30 @@ void MainWindow::goExit()
 //
 bool MainWindow::inititializeAppDatabase()
 {
-    //    Database = new EnergyUsageDatabase(this, AppLogging);
-    //    if (Database->bDBconnected)
-    //        bDatabaseConnected = true;
-    //    else
-    //        exit(0);
-
-//    AppLogging = new ApplicationLogging(this);
-//    if (AppLogging->bDBconnected)
-//    {
-//        strTemp = "Logging: " + strAppLogDatabaseName;
-//        statusLogging->setText(strTemp);
-//        statusLogging->setStyleSheet("color:green");
-//        bAppLogConnected = true;
-//        return true;
-//    }
-
-//    //-----------------------------------------------------------------------------------
-//    //
-//    //  Enable user to set the logging configuration or go exit
-//    //  Needs to be built
-//    else
-//    {
-//        strTemp = "Logging: " + strAppLogDatabaseName;
-//        statusLogging->setText(strTemp);
-//        statusLogging->setStyleSheet("color:red");
-//        bAppLogConnected = false;
-//        //
-//        // ----  Allow the user to set the logging configuration at startup
-//        //
-//        return false;
-//    }
-    return false;
+    Database = new EnergyUsageDatabase(this, AppLogging);
+    if (Database->bDBconnected)
+    {
+        strTemp = "Application database: " + strAppLogDatabaseName;
+        statusAplDb->setText(strTemp);
+        statusAplDb->setStyleSheet("color:green");
+        bDatabaseConnected = true;
+        return true;
+    }
+    //-----------------------------------------------------------------------------------
+    //
+    //  Enable user to set the logging configuration or go exit
+    //  Needs to be built
+    else
+    {
+        strTemp = "Application database: " + strAppLogDatabaseName;
+        statusAplDb->setText(strTemp);
+        statusAplDb->setStyleSheet("color:red");
+        bAppLogConnected = false;
+        //
+        // ----  Allow the user to set the application database configuration at startup
+        //
+        return false;
+    }
 }
 
 //---------------------------------------------------------------------------------------
