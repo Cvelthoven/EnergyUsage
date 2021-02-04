@@ -157,6 +157,7 @@ bool MainWindow::InitializeProgram()
     //-----------------------------------------------------------------------------------
     //
     //  Succesfull initialization
+    statusApplication->setText("Ready");
     return true;
 }
 

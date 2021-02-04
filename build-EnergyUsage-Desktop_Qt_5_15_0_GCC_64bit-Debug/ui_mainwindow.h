@@ -43,7 +43,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(908, 615);
+        MainWindow->resize(1092, 659);
         actionGas = new QAction(MainWindow);
         actionGas->setObjectName(QString::fromUtf8("actionGas"));
         actionExit = new QAction(MainWindow);
@@ -63,7 +63,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 908, 22));
+        menuBar->setGeometry(QRect(0, 0, 1092, 22));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuOpen_import = new QMenu(menuFile);
