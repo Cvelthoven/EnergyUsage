@@ -7,16 +7,38 @@
 #define ENERGYUSAGEDATAMODEL_H
 
 #include <QObject>
-#include <QAbstractTableModel>
+//#include <QAbstractTableModel>
+#include <QSqlQueryModel>
 
-class EnergyUsageDataModel : public QAbstractTableModel
+//---------------------------------------------------------------------------------------
+//  project include files
+#include "applicationlogging.h"
+
+
+//class EnergyUsageDataModel : public QAbstractTableModel
+//{
+//    Q_OBJECT
+//public:
+//    EnergyUsageDataModel(QObject *parent = nullptr);
+//    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+//    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+//    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+
+//};
+class EnergyUsageDataModel : public QSqlQueryModel
 {
     Q_OBJECT
 public:
-    EnergyUsageDataModel(QObject *parent = nullptr);
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    EnergyUsageDataModel(QObject *parent, ApplicationLogging *ApplicationLog);
+
+private:
+    bool InitializeDbConnection();
+
+//---------------------------------------------------------------------------------------
+//  Application logging variables
+ApplicationSettingsModel*AppSettings;
+ApplicationLogging *dbApplicationLog;
+
 
 };
 
