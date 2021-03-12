@@ -32,7 +32,7 @@
 //       return QString("Row%1, Column%2")
 //                   .arg(index.row() + 1)
 //                   .arg(index.column() +1);
-
+//
 //    return QVariant();
 //}
 

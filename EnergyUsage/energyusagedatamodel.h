@@ -14,7 +14,6 @@
 //  project include files
 #include "applicationlogging.h"
 
-
 //class EnergyUsageDataModel : public QAbstractTableModel
 //{
 //    Q_OBJECT
