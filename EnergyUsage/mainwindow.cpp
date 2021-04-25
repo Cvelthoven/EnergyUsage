@@ -83,7 +83,7 @@ bool MainWindow::InitializeProgram()
 
     //-----------------------------------------------------------------------------------
     //
-    //  Start application logging
+    //  Start application
     //
     //  Retrieve current date time and setup startup logging record
     QDateTime aplStartTime = QDateTime::currentDateTime();
