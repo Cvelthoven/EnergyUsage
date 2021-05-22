@@ -263,30 +263,36 @@ void MainWindow::goExit()
 //
 bool MainWindow::inititializeAppDatabase()
 {
-    Database = new EnergyUsageDatabase(this, AppLogging);
-    if (Database->bDBconnected)
-    {
-        strTemp = "Application database: " + strAppLogDatabaseName;
-        statusAplDb->setText(strTemp);
-        statusAplDb->setStyleSheet("color:green");
-        bDatabaseConnected = true;
-        return true;
-    }
     //-----------------------------------------------------------------------------------
     //
-    //  Enable user to set the logging configuration or go exit
-    //  Needs to be built
-    else
-    {
-        strTemp = "Application database: " + strAppLogDatabaseName;
-        statusAplDb->setText(strTemp);
-        statusAplDb->setStyleSheet("color:red");
-        bAppLogConnected = false;
-        //
-        // ----  Allow the user to set the application database configuration at startup
-        //
-        return false;
-    }
+    //  Initialize EnergyUsageDataModel
+
+    return false;
+//----------- original code -------------------------------------------------------------
+//    Database = new EnergyUsageDatabase(this, AppLogging);
+//    if (Database->bDBconnected)
+//    {
+//        strTemp = "Application database: " + strAppLogDatabaseName;
+//        statusAplDb->setText(strTemp);
+//        statusAplDb->setStyleSheet("color:green");
+//        bDatabaseConnected = true;
+//        return true;
+//    }
+//    //-----------------------------------------------------------------------------------
+//    //
+//    //  Enable user to set the logging configuration or go exit
+//    //  Needs to be built
+//    else
+//    {
+//        strTemp = "Application database: " + strAppLogDatabaseName;
+//        statusAplDb->setText(strTemp);
+//        statusAplDb->setStyleSheet("color:red");
+//        bAppLogConnected = false;
+//        //
+//        // ----  Allow the user to set the application database configuration at startup
+//        //
+//        return false;
+//    }
 }
 
 //---------------------------------------------------------------------------------------
