@@ -266,6 +266,7 @@ bool MainWindow::inititializeAppDatabase()
     //-----------------------------------------------------------------------------------
     //
     //  Initialize EnergyUsageDataModel
+    ApllicationDatabase = new EnergyUsageDataModel(this, AppLogging);
 
     return false;
 //----------- original code -------------------------------------------------------------

@@ -9,6 +9,7 @@
 #include <QObject>
 //#include <QAbstractTableModel>
 #include <QSqlQueryModel>
+#include <QString>
 
 //---------------------------------------------------------------------------------------
 //  project include files
@@ -30,13 +31,22 @@ class EnergyUsageDataModel : public QSqlQueryModel
 public:
     EnergyUsageDataModel(QObject *parent, ApplicationLogging *ApplicationLog);
 
+    bool dbConnect = false;// indicator that database connection is available
+
 private:
     bool InitializeDbConnection();
+    bool dbConnection();
+    bool dbDriveInstalled();
 
 //---------------------------------------------------------------------------------------
 //  Application logging variables
 ApplicationSettingsModel*AppSettings;
 ApplicationLogging *dbApplicationLog;
+
+QString
+    strDbDriverName = "QPSQL",
+    strLogMessage,
+    strSeverity;
 
 
 };

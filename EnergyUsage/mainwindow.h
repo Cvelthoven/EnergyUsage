@@ -9,6 +9,7 @@
 #include "applicationsettingsview.h"
 #include "applicationlogging.h"
 #include "energyusagedatabase.h"
+#include "energyusagedatamodel.h"
 
 namespace Ui {
 class MainWindow;
@@ -58,7 +59,8 @@ private:
 
     Ui::MainWindow *ui;
 
-    EnergyUsageDatabase *Database;
+    EnergyUsageDatabase *Database;// old class must be removed
+    EnergyUsageDataModel *ApllicationDatabase;
 
     QString
         strImportFileName,
