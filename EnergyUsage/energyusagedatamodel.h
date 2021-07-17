@@ -37,6 +37,7 @@ private:
     bool InitializeDbConnection();
     bool dbConnection();
     bool dbDriveInstalled();
+    bool RetrieveDbConfiguration();
 
 //---------------------------------------------------------------------------------------
 //  Application logging variables
@@ -45,8 +46,15 @@ ApplicationLogging *dbApplicationLog;
 
 QString
     strDbDriverName = "QPSQL",
+    strAppDatabaseServerName,
+    strAplDatabaseName,
+    strAplDatabaseUserId,
+    strAplDatabasePassword,
     strLogMessage,
     strSeverity;
+
+QSqlDatabase
+    sdbApplicationdb;
 
 
 };

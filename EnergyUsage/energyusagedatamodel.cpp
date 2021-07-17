@@ -3,6 +3,7 @@
 //  class containing the data model functions of energyusage
 //
 //---------------------------------------------------------------------------------------
+#include "energyusage.h"
 #include "energyusagedatamodel.h"
 
 //#include <QAbstractTableModel>
@@ -45,6 +46,12 @@ EnergyUsageDataModel::EnergyUsageDataModel(QObject *parent, ApplicationLogging *
 {
     AppSettings = new ApplicationSettingsModel();
     dbApplicationLog = ApplicationLog;
+
+    //-----------------------------------------------------------------------------------
+    //
+    //  Retrieve database settings from the application configuration
+    //
+    RetrieveDbConfiguration();
 
     //-----------------------------------------------------------------------------------
     //
@@ -120,24 +127,78 @@ bool EnergyUsageDataModel::dbConnection()
     //
     //  Open database
     //
-//    sdbApplicationdb = QSqlDatabase::addDatabase(strDbDriverName,"EnergyUsage");
-//    sdbEnergyUsage.setHostName(*strHostName);
-//    sdbEnergyUsage.setDatabaseName(*strDatabaseName);
-//    sdbEnergyUsage.setPort(-1);
-//    if (!sdbEnergyUsage.open(*strUserId,*strPassword))
-//    {
-//        strSeverity = "Error";
-//        strLogMessage = "Unable to connect to database: " + *strDatabaseName;
-//        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
-//        return false;
-//    }
-//    else
-//    {
-//        strSeverity = "Info";
-//        strLogMessage = "Connected to database: " + *strDatabaseName;
-//        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
-//    }
-
+    sdbApplicationdb = QSqlDatabase::addDatabase(strDbDriverName,"EnergyUsage");
+    sdbApplicationdb.setHostName(strAppDatabaseServerName);
+    sdbApplicationdb.setDatabaseName(strAplDatabaseName);
+    sdbApplicationdb.setPort(-1);
+    if (!sdbApplicationdb.open(strAplDatabaseUserId,strAplDatabasePassword))
+    {
+        strSeverity = "Error";
+        strLogMessage = "Unable to connect to database: " + strAplDatabaseName;
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+        return false;
+    }
+    else
+    {
+        strSeverity = "Info";
+        strLogMessage = "Connected to database: " + strAplDatabaseName;
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+    }
 
     return true;
+}
+
+//---------------------------------------------------------------------------------------
+//
+//  Retrieve the application database configuration from the settings
+//
+bool EnergyUsageDataModel::RetrieveDbConfiguration()
+{
+    bool
+        bOK = true;
+    int
+        iStrlen;
+
+    strSeverity = "Error";
+    //  Get database servername
+    strAppDatabaseServerName = AppSettings->GetAppSetting(strDatabaseSection, strKeyDbServerName);
+    iStrlen = strAppDatabaseServerName.length();
+    if (iStrlen == 0)
+    {
+        strLogMessage = strKeyDbServerName + "Database server not set.";
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+        bOK = false;
+    }
+    //
+    //  Get database name
+    strAplDatabaseName = AppSettings->GetAppSetting(strDatabaseSection, strKeyDbName);
+    iStrlen = strAplDatabaseName.length();
+    if (iStrlen == 0)
+    {
+        strLogMessage = strKeyDbName + "Database name not set";
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+        bOK = false;
+    }
+    //
+    //  Get database Username
+    strAplDatabaseUserId = AppSettings->GetAppSetting(strDatabaseSection, strKeyDbUserId);
+    iStrlen = strAplDatabaseUserId.length();
+    if (iStrlen == 0)
+    {
+        strLogMessage = strKeyDbUserId + "Application database userid not set.";
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+        bOK = false;
+    }
+    //
+    //  Get database Password
+    strAplDatabasePassword = AppSettings->GetAppSetting(strDatabaseSection, strKeyDbPassword);
+    iStrlen = strAplDatabasePassword.length();
+    if (iStrlen == 0)
+    {
+        strLogMessage = strKeyDbPassword + "Application database password not set.";
+        dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
+        bOK = false;
+    }
+    return(bOK);
+
 }
