@@ -43,11 +43,12 @@ private:
     QSqlDatabase sdbAppLogDB;
 
     QString
-        strAppLogLoggingType,       // Application loggging type
-        strAppLogDatabaseServerName,// Application Logging database server name
-        strAppLogDatabaseName,      // Database name
-        strAppLogDatabaseUserId,    // Database userID
-        strAppLogDatabasePassword;  // Database password
+        strAppLogDriverName = "QPSQL",  // Driver name application logging
+        strAppLogLoggingType,           // Application loggging type
+        strAppLogDatabaseServerName,    // Application Logging database server name
+        strAppLogDatabaseName,          // Database name
+        strAppLogDatabaseUserId,        // Database userID
+        strAppLogDatabasePassword;      // Database password
 
     //-----------------------------------------------------------------------------------
     //

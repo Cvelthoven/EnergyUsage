@@ -59,8 +59,8 @@ ApplicationLogging::~ApplicationLogging()
 bool ApplicationLogging::ConnectDB(QString *strDatabaseName, QString *strHostName,
                                      QString *strUserId, QString *strPassword)
 {
-    QStringList
-            stlDbDrivers;
+//    QStringList
+//            stlDbDrivers;
 
     QMessageBox
         msgBox;
@@ -69,8 +69,9 @@ bool ApplicationLogging::ConnectDB(QString *strDatabaseName, QString *strHostNam
     //
     //  Load Postgresql driver
     //
-    stlDbDrivers = QSqlDatabase::drivers();
-    if (!stlDbDrivers.contains("QPSQL"))
+//    stlDbDrivers = QSqlDatabase::drivers();
+//    if (!stlDbDrivers.contains("QPSQL"))
+    if (!QSqlDatabase::isDriverAvailable(strAppLogDriverName))
     {
         SendWarningMessage("PostgreSql driver", "not found");
         return false;
@@ -80,7 +81,7 @@ bool ApplicationLogging::ConnectDB(QString *strDatabaseName, QString *strHostNam
     //
     //  Open database
     //
-    sdbAppLogDB = QSqlDatabase::addDatabase("QPSQL","ApplicationLog");
+    sdbAppLogDB = QSqlDatabase::addDatabase(strAppLogDriverName,"ApplicationLog");
     sdbAppLogDB.setHostName(*strHostName);
     sdbAppLogDB.setDatabaseName(*strDatabaseName);
     sdbAppLogDB.setPort(-1);

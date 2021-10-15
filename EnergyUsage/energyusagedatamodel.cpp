@@ -106,13 +106,13 @@ bool EnergyUsageDataModel::dbDriveInstalled()
     if (!stlDbDrivers.contains(strDbDriverName))
     {
         strSeverity = "Error";
-        strLogMessage = "No Postgresql driver found";
+        strLogMessage = "No " + strDbDriverName + " driver found";
         dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
         return false;
     }
 
     strSeverity = "Info";
-    strLogMessage = "Postgresql driver found";
+    strLogMessage = strDbDriverName + " driver found";
     dbApplicationLog->WriteLogRecord(&strSeverity,&strLogMessage);
     return true;
 }
