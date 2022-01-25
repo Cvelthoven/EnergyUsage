@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI verified="false" xmi.version="1.2" timestamp="2021-04-27T15:01:56" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
+<XMI verified="false" xmi.version="1.2" timestamp="2021-11-13T14:18:19" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://umbrello.kde.org</XMI.exporter>
@@ -504,6 +504,43 @@
          </assocwidget>
         </associations>
        </diagram>
+       <diagram showopsig="1" linecolor="#ff0000" snapx="25" showattribassocs="1" snapy="25" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="EnergyUsage - startup" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="381" canvaswidth="315" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#f6f6f6" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffffc0" zoom="100" xmi.id="ulnvYgsTSDJ7x" documentation="" showscope="1" snapgrid="0" showatts="1" type="6">
+        <widgets>
+         <activitywidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-902" showstereotype="1" y="-465" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="u4SVdGO0Jj0XB" width="15" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" activityname="" xmi.id="u8ydAmYPuZA9p" postcondition="" documentation="" activitytype="0" autoresize="1" height="15" precondition=""/>
+         <activitywidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-954" showstereotype="1" y="-402" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="u92mqDiuUQqpd" width="187" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" activityname="Read application configuration" xmi.id="uf98jQKIxeQGq" postcondition="" documentation="" activitytype="1" autoresize="1" height="25" precondition=""/>
+         <activitywidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-872" showstereotype="1" y="-294" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="uEIs9BfMARwD2" width="20" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" activityname="" xmi.id="uxbYrKPzYEeGe" postcondition="" documentation="" activitytype="4" autoresize="1" height="20" precondition=""/>
+         <activitywidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-869" showstereotype="1" y="-218" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="uMJVQbBiI0JdG" width="157" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" activityname="Open application logging" xmi.id="ui9K9BWiY1uxO" postcondition="" documentation="" activitytype="1" autoresize="1" height="25" precondition=""/>
+         <activitywidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-807" showstereotype="1" y="-109" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="uhIijc0fVWJQs" width="168" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" activityname="Open application database" xmi.id="uZN86nV2RWNG6" postcondition="" documentation="" activitytype="1" autoresize="1" height="25" precondition=""/>
+         <forkjoin linecolor="#000000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-872" showstereotype="1" y="-386" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="uCsyANSQ7cc07" width="40" isinstance="0" usefillcolor="1" fillcolor="#000000" xmi.id="uqYLJPoDijpJw" drawvertical="0" autoresize="1" height="10"/>
+        </widgets>
+        <messages/>
+        <associations>
+         <assocwidget linecolor="#ff0000" roleBdoc="" indexa="1" usesdiagramfillcolor="1" widgetbid="uxbYrKPzYEeGe" indexb="1" linewidth="0" seqnum="" textcolor="none" usesdiagramusefillcolor="1" totalcounta="2" totalcountb="2" roleAdoc="" widgetaid="uf98jQKIxeQGq" font="Sans Serif,9,-1,0,50,0,0,0,0,0" visibilityA="0" visibilityB="0" localid="uTCaOdzS5eexN" usefillcolor="1" fillcolor="none" changeabilityA="900" xmi.id="uKMpuMys1Hdyf" changeabilityB="900" documentation="" autoresize="1" type="515">
+          <linepath layout="Direct">
+           <startpoint startx="-862" starty="-377"/>
+           <endpoint endx="-862" endy="-294"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget linecolor="#ff0000" roleBdoc="" indexa="1" usesdiagramfillcolor="1" widgetbid="ui9K9BWiY1uxO" indexb="1" linewidth="0" seqnum="" textcolor="none" usesdiagramusefillcolor="1" totalcounta="2" totalcountb="2" roleAdoc="" widgetaid="uxbYrKPzYEeGe" font="Sans Serif,9,-1,0,50,0,0,0,0,0" visibilityA="0" visibilityB="0" localid="uf3ph2wqGzC4s" usefillcolor="1" fillcolor="none" changeabilityA="900" xmi.id="uQ9sZgOV9zpzw" changeabilityB="900" documentation="" autoresize="1" type="515">
+          <linepath layout="Direct">
+           <startpoint startx="-852" starty="-274"/>
+           <endpoint endx="-852" endy="-218"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget linecolor="#ff0000" roleBdoc="" indexa="1" usesdiagramfillcolor="1" widgetbid="uZN86nV2RWNG6" indexb="1" linewidth="0" seqnum="" textcolor="none" usesdiagramusefillcolor="1" totalcounta="2" totalcountb="2" roleAdoc="" widgetaid="ui9K9BWiY1uxO" font="Sans Serif,9,-1,0,50,0,0,0,0,0" visibilityA="0" visibilityB="0" localid="uVAKJMml7zURl" usefillcolor="1" fillcolor="none" changeabilityA="900" xmi.id="u1Yun44XBpYMu" changeabilityB="900" documentation="" autoresize="1" type="515">
+          <linepath layout="Direct">
+           <startpoint startx="-723" starty="-193"/>
+           <endpoint endx="-723" endy="-109"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget linecolor="#ff0000" roleBdoc="" indexa="1" usesdiagramfillcolor="1" widgetbid="uf98jQKIxeQGq" indexb="1" linewidth="0" seqnum="" textcolor="none" usesdiagramusefillcolor="1" totalcounta="2" totalcountb="2" roleAdoc="" widgetaid="u8ydAmYPuZA9p" font="Sans Serif,9,-1,0,50,0,0,0,0,0" visibilityA="0" visibilityB="0" localid="u9M6yePlKvv4I" usefillcolor="1" fillcolor="none" changeabilityA="900" xmi.id="uG1Yi3tbrBxnr" changeabilityB="900" documentation="" autoresize="1" type="515">
+          <linepath layout="Direct">
+           <startpoint startx="-887" starty="-450"/>
+           <endpoint endx="-887" endy="-402"/>
+          </linepath>
+         </assocwidget>
+        </associations>
+       </diagram>
       </diagrams>
      </XMI.extension>
     </UML:Model>
@@ -591,7 +628,7 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello">
-  <docsettings viewid="um79D5STMRt5q" uniqueid="uWbGsuSYVNkAQ" documentation=""/>
+  <docsettings viewid="uyJbWhI0nCFIj" uniqueid="udPBipbxHP9Du" documentation=""/>
   <listview>
    <listitem open="1" type="800" id="Views">
     <listitem open="1" type="821" id="Component_View">
@@ -764,6 +801,7 @@
       <listitem open="0" type="829" id="ui3O7EIkzOMhD"/>
       <listitem open="0" type="829" id="uARG1ONdER6bx"/>
      </listitem>
+     <listitem open="0" type="809" id="ulnvYgsTSDJ7x" label="EnergyUsage - startup"/>
      <listitem open="0" type="813" id="u0vWEUOMgwGfn">
       <listitem open="0" type="815" id="uBXmbWX2ecK3a"/>
       <listitem open="0" type="815" id="uPPzi5d63cyxt"/>
