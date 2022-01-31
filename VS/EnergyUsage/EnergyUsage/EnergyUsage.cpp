@@ -3,9 +3,16 @@
 // EnergyUsage.cpp : Defines the entry point for the application.
 //
 //---------------------------------------------------------------------------------------
-
+//
+//  Default header files
+//
 #include "framework.h"
 #include "EnergyUsage.h"
+
+//---------------------------------------------------------------------------------------
+//
+//  Extra header files
+#include "MainWindow.h"
 
 #define MAX_LOADSTRING 100
 
@@ -28,7 +35,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    // TODO: Place code here.
+    //-----------------------------------------------------------------------------------
+    //
+    //  Actual program code before showing window: start
+    //
+    MainWindow* m =  new MainWindow();
+
+    //
+    // Actual program code before showing window: end
+    //
+    //-----------------------------------------------------------------------------------
 
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
