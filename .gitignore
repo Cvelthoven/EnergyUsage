@@ -58,7 +58,9 @@ Thumbs.db
 *.opensdf
 *.vcxproj
 *vcxproj.*
+# Visual Studio extra file ignore
 *.VC.db
+VS/EnergyUsage/.vs
 
 # MinGW generated files
 *.Debug
