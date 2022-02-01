@@ -1,4 +1,5 @@
 ﻿  EnergyUsage.cpp
+  LibRegistry.cpp
   MainWindow.cpp
   Generating Code...
   EnergyUsage.vcxproj -> E:\GitHub\Cvelthoven\EnergyUsage\VS\EnergyUsage\x64\Debug\EnergyUsage.exe
