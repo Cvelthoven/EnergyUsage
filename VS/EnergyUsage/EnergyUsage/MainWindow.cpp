@@ -20,5 +20,5 @@ MainWindow::MainWindow()
 //---------------------------------------------------------------------------------------
 void MainWindow::InitProgram()
 {
-
+	LibRegistry* appSettings = new LibRegistry();
 }
