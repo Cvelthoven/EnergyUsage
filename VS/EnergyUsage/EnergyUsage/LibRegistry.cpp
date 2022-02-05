@@ -26,17 +26,7 @@
 LibRegistry::LibRegistry()
 {
 
-	HKEY hTestKey;
-	
-	if (RegOpenKeyEx(HKEY_CURRENT_USER,
-	    TEXT("SOFTWARE\\CVelthoven.com\\EnergyUsage"),
-	    0,
-	    KEY_READ,
-	    &hTestKey) == ERROR_SUCCESS
-	    )
-	{
-	    QueryKey(hTestKey);
-	}
+		GetRegistryKeyValue();
 }
 
 //-----------------------------------------------------------------------------
@@ -44,8 +34,28 @@ LibRegistry::LibRegistry()
 //	Public class methodes
 //
 //-----------------------------------------------------------------------------
-void LibRegistry::GetRegistryKeyValue(HKEY hKey)
+void LibRegistry::GetRegistryKeyValue()
 {
+	HKEY hTestKey;
+	wchar_t KeyValue[255];
+	DWORD KeyValueLen = sizeof(KeyValue);
+
+	if (RegGetValue(
+		HKEY_CURRENT_USER,
+		TEXT("SOFTWARE\\CVelthoven.com\\EnergyUsage"),
+		TEXT("Test01"),
+		RRF_RT_ANY,
+		NULL,
+		(PVOID)&KeyValue,
+		&KeyValueLen
+	) == ERROR_SUCCESS)
+	{
+		printf("\nNumber of subkeys: %d\n", 1);
+	}
+	else
+	{
+		printf("error");
+	}
 
 }
 
@@ -117,29 +127,29 @@ void LibRegistry::QueryKey(HKEY hKey)
 	
 	    // Enumerate the key values. 
 	
-	    if (cValues)
-	    {
-	        printf("\nNumber of values: %d\n", cValues);
-	
-	        for (i = 0, retCode = ERROR_SUCCESS; i < cValues; i++)
-	        {
-	            cchValue = MAX_VALUE_NAME;
-	            achValue[0] = '\0';
-	            retCode = RegEnumValue(hKey, i,
-	                achValue,
-	                &cchValue,
-	                NULL,
-	                NULL,
-	                NULL,
-	                NULL);
-	
-	            if (retCode == ERROR_SUCCESS)
-	            {
-	                _tprintf(TEXT("(%d) %s\n"), i + 1, achValue);
+		if (cValues)
+		{
+			printf("\nNumber of values: %d\n", cValues);
 
-	            }
-	        }
-	    }
+			for (i = 0, retCode = ERROR_SUCCESS; i < cValues; i++)
+			{
+				cchValue = MAX_VALUE_NAME;
+				achValue[0] = '\0';
+				retCode = RegEnumValue(hKey, i,
+					achValue,
+					&cchValue,
+					NULL,
+					NULL,
+					NULL,
+					NULL);
+
+				if (retCode == ERROR_SUCCESS)
+				{
+					_tprintf(TEXT("(%d) %s\n"), i + 1, achValue);
+
+				}
+			}
+		}
 
 }
 

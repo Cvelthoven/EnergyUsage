@@ -20,7 +20,8 @@ class LibRegistry
 {
 public:
 	LibRegistry();
-	void GetRegistryKeyValue(HKEY hKey);
+	void GetRegistryKeyValue();
+//	void GetRegistryKeyValue(HKEY hKey);
 	void QueryKey(HKEY hKey);
 
 };
