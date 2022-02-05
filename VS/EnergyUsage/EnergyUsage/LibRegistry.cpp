@@ -10,10 +10,11 @@
 //
 //---------------------------------------------------------------------------------------
 #include "LibRegistry.h"
-
+#include <string>
+#include <Windows.h>
 //---------------------------------------------------------------------------------------
 //	Example header files and defines
-#include <Windows.h>
+
 #include <stdio.h>
 #include <tchar.h>
 
@@ -25,38 +26,96 @@
 //	Constructors
 LibRegistry::LibRegistry()
 {
+	const string strDomain	= "CVelthoven.com",
+				 strAppl	= "EnergyUsage",
+				 strSection = "",
+				 strKey     = "Test01";
+	string temp;
 
-		GetRegistryKeyValue();
+		temp = GetRegistryKeyValue(strDomain, strAppl,strSection,strKey);
 }
 
-//-----------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
 //
 //	Public class methodes
 //
-//-----------------------------------------------------------------------------
-void LibRegistry::GetRegistryKeyValue()
+//---------------------------------------------------------------------------------------
+//
+//	GetRegistryKeyValue
+//	- input:
+//		- strAppDomain
+//		- strAppName
+//		- strSection
+//		- strKey
+//
+//---------------------------------------------------------------------------------------
+string LibRegistry::GetRegistryKeyValue(const string strAppDomain, 
+									  const string strAppName,
+									  const string strSection,
+									  const string strKey)
 {
-	HKEY hTestKey;
+	//-----------------------------------------------------------------------------------
+	//
+	//	Local variables
 	wchar_t KeyValue[255];
 	DWORD KeyValueLen = sizeof(KeyValue);
+	string 
+		strSubKey,
+		strKeyValue;
+	LPCWSTR 
+		lpSubKey,
+		lpKey;
 
-	if (RegGetValue(
-		HKEY_CURRENT_USER,
-		TEXT("SOFTWARE\\CVelthoven.com\\EnergyUsage"),
-		TEXT("Test01"),
-		RRF_RT_ANY,
-		NULL,
-		(PVOID)&KeyValue,
-		&KeyValueLen
-	) == ERROR_SUCCESS)
+	//-----------------------------------------------------------------------------------
+	//
+	//	Convert input strings to LPCSTR required in RegGetValue
+	//
+	strSubKey = "SOFTWARE\\" + strAppDomain + "\\" + strAppName;
+	if (strSection.length() > 0)
 	{
-		printf("\nNumber of subkeys: %d\n", 1);
+		strSubKey = strSubKey + "\\" + strSection;
 	}
+
+	std::wstring temp = std::wstring(strSubKey.begin(), strSubKey.end());
+	lpSubKey = temp.c_str();
+	std::wstring temp2 = std::wstring(strKey.begin(), strKey.end());
+	lpKey = temp2.c_str();
+
+	//-----------------------------------------------------------------------------------
+	//
+	//	Retrieve key value
+	//
+	if (RegGetValue(
+				HKEY_CURRENT_USER,
+				lpSubKey,
+				lpKey,
+				RRF_RT_ANY,
+				NULL,
+				(PVOID)&KeyValue,
+				&KeyValueLen
+	)	 == ERROR_SUCCESS)
+
+	//-----------------------------------------------------------------------------------
+	//
+	//	Return value of key
+    //
+	{
+		char strTemp[255];
+		char DefChar = ' ';
+		WideCharToMultiByte(CP_ACP, 0, KeyValue, -1, strTemp, 255, &DefChar, NULL);
+		std::string strTemp2(strTemp);
+		strKeyValue = strTemp2;
+
+	}
+	//-----------------------------------------------------------------------------------
+	//
+	//	Return empty string as error result
+	//
 	else
 	{
-		printf("error");
+		strKeyValue = "";
 	}
-
+	return(strKeyValue);
 }
 
 //-----------------------------------------------------------------------------

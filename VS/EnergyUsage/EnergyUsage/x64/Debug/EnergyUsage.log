@@ -1,6 +1,5 @@
 ﻿  EnergyUsage.cpp
   LibRegistry.cpp
-E:\GitHub\Cvelthoven\EnergyUsage\VS\EnergyUsage\EnergyUsage\LibRegistry.cpp(39,7): warning C4101: 'hTestKey': unreferenced local variable
   MainWindow.cpp
   Generating Code...
   EnergyUsage.vcxproj -> E:\GitHub\Cvelthoven\EnergyUsage\VS\EnergyUsage\x64\Debug\EnergyUsage.exe

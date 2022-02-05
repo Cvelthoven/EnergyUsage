@@ -10,7 +10,8 @@
 //	Header files
 //
 //---------------------------------------------------------------------------------------
-//using namespace std;// needed for default header files
+using namespace std;// needed for default header files
+#include <string>
 #include <Windows.h>
 //#include <stdio.h>
 //#include <tchar.h>
@@ -20,8 +21,11 @@ class LibRegistry
 {
 public:
 	LibRegistry();
-	void GetRegistryKeyValue();
-//	void GetRegistryKeyValue(HKEY hKey);
+	string GetRegistryKeyValue(const string strAppDomain,
+							 const string strAppName,
+							 const string strSection,
+							 const string strKey);
+
 	void QueryKey(HKEY hKey);
 
 };
