@@ -24,16 +24,27 @@
 //---------------------------------------------------------------------------------------
 //
 //	Constructors
-LibRegistry::LibRegistry()
+//
+//	Input:
+//		- strAplicationDomain: Domain name of the application
+//		- strAplicationName  : Application name
+//
+LibRegistry::LibRegistry(string &strAplicationDomain, string &strAplicationName)
 {
-	const string strDomain	= "CVelthoven.com",
-				 strAppl	= "EnergyUsage",
+	const string 
 				 strSection = "",
 				 strKey     = "Test01";
 	string temp;
 	int iRC;
 
-	iRC = GetRegistryKeyValue(strDomain, strAppl,strSection,strKey,temp);
+	//-----------------------------------------------------------------------------------
+	//
+	//	Initialize variables
+	//
+	strAplDomain = strAplicationDomain;
+	strAplName = strAplicationName;
+
+	iRC = GetRegistryKeyValue(strSection,strKey,temp);
 }
 
 //---------------------------------------------------------------------------------------
@@ -53,8 +64,7 @@ LibRegistry::LibRegistry()
 //		- strRegistryKevValue
 //
 //---------------------------------------------------------------------------------------
-int LibRegistry::GetRegistryKeyValue(const string &strAppDomain,
-	const string &strAppName,
+int LibRegistry::GetRegistryKeyValue(
 	const string &strSection,
 	const string &strKey,
 	string &strRegistryKeyValue)
@@ -65,13 +75,12 @@ int LibRegistry::GetRegistryKeyValue(const string &strAppDomain,
 	int 
 		iRegValue = 0,
 		iRC;
-	string strTemp1;
-
+	
 	//-----------------------------------------------------------------------------------
 	//
 	//Retrieve key value
 	//
-	iRC = GetRegistryKeyValue(strAppDomain, strAppName, strSection, strKey, strTemp1, iRegValue);
+	iRC = GetRegistryKeyValue(strSection, strKey, strRegistryKeyValue, iRegValue);
 	return iRC;
 }
 
@@ -89,8 +98,7 @@ int LibRegistry::GetRegistryKeyValue(const string &strAppDomain,
 //		- strKey
 //
 //---------------------------------------------------------------------------------------
-int LibRegistry::GetRegistryKeyValue(const string &strAppDomain, 
-	const string &strAppName,
+int LibRegistry::GetRegistryKeyValue(
 	const string &strSection,
 	const string &strKey,
 	string &strRegistryKeyValue,
@@ -118,7 +126,7 @@ int LibRegistry::GetRegistryKeyValue(const string &strAppDomain,
 	//
 	//	Convert input strings to LPCSTR required in RegGetValue
 	//
-	strSubKey = "SOFTWARE\\" + strAppDomain + "\\" + strAppName;
+	strSubKey = "SOFTWARE\\" + strAplDomain + "\\" + strAplName;
 	if (strSection.length() > 0)
 	{
 		strSubKey = strSubKey + "\\" + strSection;

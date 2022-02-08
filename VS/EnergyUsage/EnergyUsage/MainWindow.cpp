@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "LibRegistry.h"
+#include <string>
 
 //---------------------------------------------------------------------------------------
 //
@@ -20,5 +21,9 @@ MainWindow::MainWindow()
 //---------------------------------------------------------------------------------------
 void MainWindow::InitProgram()
 {
-	LibRegistry* appSettings = new LibRegistry();
+	string
+		strDomain = "CVelthoven.com",
+		strApplicantion = "EnergyUsage";
+
+	LibRegistry* appSettings = new LibRegistry(strDomain, strApplicantion);
 }

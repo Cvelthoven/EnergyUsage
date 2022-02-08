@@ -20,20 +20,23 @@ using namespace std;// needed for default header files
 class LibRegistry
 {
 public:
-	LibRegistry();
-	int GetRegistryKeyValue(const string &strAppDomain,
-		const string &strAppName,
+	LibRegistry(string &strAplicationDomain, string &strAplicationName);
+	int GetRegistryKeyValue(
 		const string &strSection,
 		const string &strKey,
 		string &strRegistryKeyValue);
 
 private:
-	int GetRegistryKeyValue(const string &strAppDomain,
-		const string &strAppName,
+	int GetRegistryKeyValue(
 		const string &strSection,
 		const string &strKey,
 		string &strRegistryKeyValue,
 		int &iRegistryValue);
+
+	string
+		strAplDomain,
+		strAplName;
+
 
 	void QueryKey(HKEY hKey);
 
