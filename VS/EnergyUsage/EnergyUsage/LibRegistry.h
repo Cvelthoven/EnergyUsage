@@ -21,10 +21,19 @@ class LibRegistry
 {
 public:
 	LibRegistry();
-	string GetRegistryKeyValue(const string strAppDomain,
-							 const string strAppName,
-							 const string strSection,
-							 const string strKey);
+	int GetRegistryKeyValue(const string &strAppDomain,
+		const string &strAppName,
+		const string &strSection,
+		const string &strKey,
+		string &strRegistryKeyValue);
+
+private:
+	int GetRegistryKeyValue(const string &strAppDomain,
+		const string &strAppName,
+		const string &strSection,
+		const string &strKey,
+		string &strRegistryKeyValue,
+		int &iRegistryValue);
 
 	void QueryKey(HKEY hKey);
 
