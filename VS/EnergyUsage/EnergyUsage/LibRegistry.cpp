@@ -67,7 +67,7 @@ LibRegistry::LibRegistry(string &strAplicationDomain, string &strAplicationName)
 int LibRegistry::GetRegistryKeyValue(
 	const string &strSection,
 	const string &strKey,
-	string &strRegistryKeyValue)
+	string &strRegKeyValue)
 {
 	//-----------------------------------------------------------------------------------
 	//
@@ -75,12 +75,14 @@ int LibRegistry::GetRegistryKeyValue(
 	int 
 		iRegValue = 0,
 		iRC;
+	string temp;
 	
 	//-----------------------------------------------------------------------------------
 	//
 	//Retrieve key value
 	//
-	iRC = GetRegistryKeyValue(strSection, strKey, strRegistryKeyValue, iRegValue);
+	iRC = GetRegistryKeyValue(strSection, strKey);
+	strRegKeyValue = strRegistryKeyValue;
 	return iRC;
 }
 
@@ -100,9 +102,7 @@ int LibRegistry::GetRegistryKeyValue(
 //---------------------------------------------------------------------------------------
 int LibRegistry::GetRegistryKeyValue(
 	const string &strSection,
-	const string &strKey,
-	string &strRegistryKeyValue,
-	int &iRegistryValue)
+	const string &strKey)
 {
 	//-----------------------------------------------------------------------------------
 	//
@@ -164,15 +164,20 @@ int LibRegistry::GetRegistryKeyValue(
 		//-------------------------------------------------------------------------------
 		//
 		//	Return value only when value is a string
-		if (KeyValueDataType == REG_SZ)
+		char strTemp[255];
+		char DefChar = ' ';
+		std::string strTemp2;
+		switch(KeyValueDataType)
 		{
-			char strTemp[255];
-			char DefChar = ' ';
+		case 1:
 			WideCharToMultiByte(CP_ACP, 0, KeyValue, -1, strTemp, 255, &DefChar, NULL);
-			std::string strTemp2(strTemp);
+			strTemp2 = strTemp;
 			strRegistryKeyValue = strTemp2;
-			iRegistryValue = 0;
+			iRegistryKeyValue = 0;
 			return 0;
+			break;
+		default:
+			break;
 		}
 	}
 	//-----------------------------------------------------------------------------------
@@ -180,7 +185,7 @@ int LibRegistry::GetRegistryKeyValue(
 	//	Return empty string as error result
 	//
 
-	iRegistryValue = 0;
+	iRegistryKeyValue = 0;
 	return 1;
 }
 

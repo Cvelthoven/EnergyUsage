@@ -24,18 +24,24 @@ public:
 	int GetRegistryKeyValue(
 		const string &strSection,
 		const string &strKey,
-		string &strRegistryKeyValue);
+		string &strRegKeyValue);
 
 private:
 	int GetRegistryKeyValue(
 		const string &strSection,
-		const string &strKey,
-		string &strRegistryKeyValue,
-		int &iRegistryValue);
+		const string &strKey);
+
+	//-----------------------------------------------------------------------------------
+	//
+	//	Application registry variables
+	//
+	int
+		iRegistryKeyValue;	// Possible value of the key
 
 	string
-		strAplDomain,
-		strAplName;
+		strAplDomain,		// Application domain name
+		strAplName,			// Application name
+		strRegistryKeyValue;// Possible value of the key
 
 
 	void QueryKey(HKEY hKey);
