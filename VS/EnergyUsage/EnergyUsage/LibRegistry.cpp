@@ -33,7 +33,7 @@ LibRegistry::LibRegistry(string &strAplicationDomain, string &strAplicationName)
 {
 	const string 
 				 strSection = "",
-				 strKey     = "Test01";
+				 strKey     = "Test02";
 	string temp;
 	int iRC;
 
@@ -107,7 +107,7 @@ int LibRegistry::GetRegistryKeyValue(
 	//-----------------------------------------------------------------------------------
 	//
 	//	Local variables
-	wchar_t 
+	wchar_t
 		KeyValue[255];
 	DWORD 
 		KeyValueLen = sizeof(KeyValue),
@@ -163,20 +163,31 @@ int LibRegistry::GetRegistryKeyValue(
 	{
 		//-------------------------------------------------------------------------------
 		//
-		//	Return value only when value is a string
+		//	Return the value based on type
 		char strTemp[255];
 		char DefChar = ' ';
-		std::string strTemp2;
 		switch(KeyValueDataType)
 		{
-		case 1:
+		//-------------------------------------------------------------------------------
+		//
+		//	Return string value
+		case REG_SZ:
 			WideCharToMultiByte(CP_ACP, 0, KeyValue, -1, strTemp, 255, &DefChar, NULL);
-			strTemp2 = strTemp;
-			strRegistryKeyValue = strTemp2;
+			strRegistryKeyValue = strTemp;
 			iRegistryKeyValue = 0;
 			return 0;
 			break;
+		//-------------------------------------------------------------------------------
+		//
+		//	Return long value
+		case REG_DWORD:
+			iRegistryKeyValue = KeyValue[0];
+			strRegistryKeyValue = "";
+			return 0;
+			break;
 		default:
+			iRegistryKeyValue = 0;
+			strRegistryKeyValue = "";
 			break;
 		}
 	}
@@ -185,7 +196,6 @@ int LibRegistry::GetRegistryKeyValue(
 	//	Return empty string as error result
 	//
 
-	iRegistryKeyValue = 0;
 	return 1;
 }
 

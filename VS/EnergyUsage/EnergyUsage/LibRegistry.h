@@ -35,7 +35,7 @@ private:
 	//
 	//	Application registry variables
 	//
-	int
+	long
 		iRegistryKeyValue;	// Possible value of the key
 
 	string
