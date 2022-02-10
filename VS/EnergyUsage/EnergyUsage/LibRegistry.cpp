@@ -120,7 +120,11 @@ int LibRegistry::GetRegistryKeyValue(
 		lpSubKey,
 		lpKey;
 
+	//-----------------------------------------------------------------------------------
+	//
+	//	Set default value when key is not found
 	strRegistryKeyValue = strRC;
+	iRegistryKeyValue = 0;
 
 	//-----------------------------------------------------------------------------------
 	//
@@ -174,7 +178,6 @@ int LibRegistry::GetRegistryKeyValue(
 		case REG_SZ:
 			WideCharToMultiByte(CP_ACP, 0, KeyValue, -1, strTemp, 255, &DefChar, NULL);
 			strRegistryKeyValue = strTemp;
-			iRegistryKeyValue = 0;
 			return 0;
 			break;
 		//-------------------------------------------------------------------------------
@@ -182,12 +185,9 @@ int LibRegistry::GetRegistryKeyValue(
 		//	Return long value
 		case REG_DWORD:
 			iRegistryKeyValue = KeyValue[0];
-			strRegistryKeyValue = "";
 			return 0;
 			break;
 		default:
-			iRegistryKeyValue = 0;
-			strRegistryKeyValue = "";
 			break;
 		}
 	}
